@@ -17,7 +17,7 @@ from chi2analysis.chi2analysis import Chi2Analysis
 class Seq2Tax(object):
 
     def __init__(self):
-        self.seq2tax=FileUtility.load_obj('../data_config/seq2tax.pickle')
+        self.seq2tax=FileUtility.load_obj('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/GG/to_be_checked/seq2tax.pickle')
 
 
     def extract_markers(self, path, X, Y, features):
@@ -33,8 +33,20 @@ class Seq2Tax(object):
         res_med=CA.extract_features_fdr(path+'_chi2_median.txt',1000,direction=True,binarization='median')
         pos_bin,neg_bin=self.extract_top_but_n(res_bin,1000)
         pos_med,neg_med=self.extract_top_but_n(res_med,1000)
+        Seq2Tax.write_in_fastafile(path+'_chi2_binary.fasta',res_bin)
+        Seq2Tax.write_in_fastafile(path+'_chi2_relative.fasta',res_med)
         Seq2Tax.write_in_file(path+'_chi2_binary_taxa.txt',pos_bin,neg_bin)
         Seq2Tax.write_in_file(path+'_chi2_median_taxa.txt',pos_med,neg_med)
+
+    @staticmethod
+    def write_in_fastafile(filename,res, min_length=50):
+        corpus=[]
+        labels=[]
+        for seq, score, pval, _, _ in res:
+            if len(seq)>min_length:
+                corpus.append(seq)
+                labels.append(' '.join(['+' if score>0 else '-','p-val:'+str(pval)]))
+        FileUtility.create_fasta_file(filename,corpus,labels)
 
     @staticmethod
     def write_in_file(filename,pos,neg):
