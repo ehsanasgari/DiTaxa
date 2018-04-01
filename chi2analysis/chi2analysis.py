@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.feature_selection import SelectFdr
 from sklearn.feature_selection import chi2
 from scipy.sparse import csr_matrix
+from utility.math_utility import get_kl_rows
 
 __author__ = "Ehsaneddin Asgari"
 __license__ = "GPL"
@@ -27,7 +28,7 @@ class Chi2Analysis(object):
 
 
 
-    def extract_features_fdr(self, file_name, N=-1, alpha=5e-2, direction=False, allow_subseq=True, binarization=True):
+    def extract_features_fdr(self, file_name, N=-1, alpha=5e-2, direction=False, allow_subseq=True, binarization=True, remove_redundant_markers=True):
         '''
             Feature extraction with fdr-correction
         '''
@@ -35,6 +36,7 @@ class Chi2Analysis(object):
         # Filter: Select the p-values for an estimated false discovery rate
         # This uses the Benjamini-Hochberg procedure. alpha is an upper bound on the expected false discovery rate.
         selector = SelectFdr(chi2, alpha=alpha)
+
         
         if binarization=='median':
             median_vec=np.median(self.X.toarray(),axis=0)
@@ -47,7 +49,12 @@ class Chi2Analysis(object):
             X=csr_matrix(X)
         else:
             X=self.X
-        
+
+        #if remove_redundant_markers:
+        #    dist=get_kl_rows(X.T)
+        #    dist=dist+dist.T
+
+
         selector.fit_transform(X, self.Y)
         scores = {self.feature_names[i]: (s, selector.pvalues_[i]) for i, s in enumerate(list(selector.scores_)) if
                   not math.isnan(s)}

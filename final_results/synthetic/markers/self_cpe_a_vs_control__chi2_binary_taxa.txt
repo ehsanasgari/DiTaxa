@@ -1,0 +1,2 @@
+direction	marker	p-value	genus
+-	ctataa	0.00534567687265	g__Staphylococcus;

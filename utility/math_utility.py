@@ -8,14 +8,15 @@ __website__ = "https://llp.berkeley.edu/"
 
 from scipy import stats
 from sklearn.preprocessing import normalize
-
+import numpy as np
 from sklearn.preprocessing import  normalize
+
 def get_kl_rows(A):
     '''
     :param A: matrix A
     :return: Efficient implementation to calculate kl-divergence between rows in A
     '''
-    norm_A=normalize(A+1e-100, norm='l1')
+    norm_A=normalize(A+np.finfo(np.float64).eps, norm='l1')
     return stats.entropy(norm_A.T[:,:,None], norm_A.T[:,None,:])
 
 def normalize_mat(A,norm ='l1', axis=1):
