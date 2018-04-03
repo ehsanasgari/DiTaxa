@@ -130,7 +130,7 @@ class BootStrapping(object):
         else:
             resamples=[]
             for i in range(number_of_samples):
-                resamples.append(resample(corpus, replace=True, n_samples=sample_size))
+                resamples.append(resample(corpus, replace=True, n_samples=min(len(corpus),sample_size)))
         vect=[]
         for rs in resamples:
             rs=[CPE_Applier.segment(x) for x in rs]
@@ -273,7 +273,7 @@ class BootStrapping(object):
         plt.savefig((self.output_dir + file_name + '.pdf').replace('.pickle',''))
         self.save(file_name.replace('.pickle.pickle','.pickle'))
 
-    def plotting_cpe(self, file_name, dataset_name, ylimv=100, xlimv=20000, ratio=10):
+    def plotting_cpe(self, file_name, dataset_name):
         '''
         Plotting
         :param file_name:
@@ -302,8 +302,8 @@ class BootStrapping(object):
         ax.legend(legend_vals, loc='upper right', prop={'size': 30}, ncol=1)
         xlabel('Resample size (N)', fontsize=24)
         ylabel(r'$\bar{D_S}(N,\# cpe)$', fontsize=24)
-        xlim([0, xlimv])
-        ylim([0, ylimv])
+        xlim([0, 20000])
+        ylim([0, 100])
         title(
             r'(i) \textbf{Self-inconsistency $\bar{D_S}$,} with respect to sample size (N)\\ demonstrated for different \#cpe in the '+dataset_name+' dataset',
             fontsize=24, y=1.01)
@@ -319,8 +319,8 @@ class BootStrapping(object):
                             linestyle='dashdot', antialiased=True)
             legend_vals.append('\#cpe = ' + str(k))
         ax.legend(legend_vals, loc='upper right', prop={'size': 30}, ncol=1)
-        xlim([0, xlimv])
-        ylim([0, ylimv/ratio])
+        xlim([0, 20000])
+        ylim([0, 1])
         xlabel('Resample size (N)', fontsize=24)
         ylabel(r'$\bar{D_R}(N,\# cpe)$', fontsize=24)
         title(

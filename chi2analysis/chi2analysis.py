@@ -72,35 +72,36 @@ class Chi2Analysis(object):
 
         extracted_features=[]
         for w, score in scores:
-            feature_array = X[:, self.feature_names.index(w)]
-            pos = [feature_array[idx] for idx, x in enumerate(self.Y) if x == 1]
-            neg = [feature_array[idx] for idx, x in enumerate(self.Y) if x == 0]
-            m_pos=np.mean(pos)
-            s_pos=np.std(pos)
-            m_neg=np.mean(neg)
-            s_neg=np.std(neg)
-            
-            c11 = np.sum(pos)
-            c01 = c_1 - c11
-            c10 = np.sum(neg)
-            c00 = c_0 - c10
-            s=score[0]
-            if direction and c11 > ((1.0 * c11) * c00 - (c10 * 1.0) * c01):
-                s=-s
-            s=np.round(s,2)
+            if score[1] < 0.05:
+                feature_array = X[:, self.feature_names.index(w)]
+                pos = [feature_array[idx] for idx, x in enumerate(self.Y) if x == 1]
+                neg = [feature_array[idx] for idx, x in enumerate(self.Y) if x == 0]
+                m_pos=np.mean(pos)
+                s_pos=np.std(pos)
+                m_neg=np.mean(neg)
+                s_neg=np.std(neg)
 
-            if allow_subseq:
-                pos_scores.append([str(w), s, score[1], m_pos, m_neg])
-                #if m_pos> m_neg:
-                f.write('\t'.join([str(w), str(s), str(score[1])] + [str(x) for x in [m_pos, s_pos, m_neg, s_neg]]) + '\n')
-            else:
-                flag=False
-                for feature in extracted_features:
-                    if w in feature:
-                        flag=True
-                if not flag:
+                c11 = np.sum(pos)
+                c01 = c_1 - c11
+                c10 = np.sum(neg)
+                c00 = c_0 - c10
+                s=score[0]
+                if direction and c11 > ((1.0 * c11) * c00 - (c10 * 1.0) * c01):
+                    s=-s
+                s=np.round(s,2)
+
+                if allow_subseq:
                     pos_scores.append([str(w), s, score[1], m_pos, m_neg])
+                    #if m_pos> m_neg:
                     f.write('\t'.join([str(w), str(s), str(score[1])] + [str(x) for x in [m_pos, s_pos, m_neg, s_neg]]) + '\n')
+                else:
+                    flag=False
+                    for feature in extracted_features:
+                        if w in feature:
+                            flag=True
+                    if not flag:
+                        pos_scores.append([str(w), s, score[1], m_pos, m_neg])
+                        f.write('\t'.join([str(w), str(s), str(score[1])] + [str(x) for x in [m_pos, s_pos, m_neg, s_neg]]) + '\n')
 
         f.close()
         return pos_scores

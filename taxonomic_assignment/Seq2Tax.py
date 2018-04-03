@@ -29,10 +29,10 @@ class Seq2Tax(object):
         :return:
         '''
         CA=Chi2Analysis(X, Y, features)
-        res_bin=CA.extract_features_fdr(path+'_chi2_binary.txt',1000,direction=True,binarization=True, allow_subseq=False)
-        res_med=CA.extract_features_fdr(path+'_chi2_median.txt',1000,direction=True,binarization='median', allow_subseq=False)
-        pos_bin,neg_bin=self.extract_top_but_n(res_bin,1000)
-        pos_med,neg_med=self.extract_top_but_n(res_med,1000)
+        res_bin=CA.extract_features_fdr(path+'_chi2_binary.txt',50000,direction=True,binarization=True, allow_subseq=False)
+        res_med=CA.extract_features_fdr(path+'_chi2_median.txt',50000,direction=True,binarization='median', allow_subseq=False)
+        pos_bin,neg_bin=self.extract_top_but_n(res_bin,50000)
+        pos_med,neg_med=self.extract_top_but_n(res_med,50000)
         Seq2Tax.write_in_fastafile(path+'_chi2_binary.fasta',res_bin)
         Seq2Tax.write_in_fastafile(path+'_chi2_relative.fasta',res_med)
         Seq2Tax.write_in_file(path+'_chi2_binary_taxa.txt',pos_bin,neg_bin)
