@@ -79,6 +79,27 @@ class CPE(object):
 
         return ' '.join(output)
 
+    def segment_with_keys(self, key_sentence):
+        """segment single sentence (whitespace-tokenized string) with BPE encoding"""
+        key, sentence=key_sentence
+        output = []
+        for word in sentence.split():
+            new_word = [out for segment in self._isolate_glossaries(word)
+                        for out in encode(segment,
+                                          self.bpe_codes,
+                                          self.bpe_codes_reverse,
+                                          self.vocab,
+                                          self.separator,
+                                          self.version,
+                                          self.cache,
+                                          self.glossaries)]
+
+            for item in new_word[:-1]:
+                output.append(item + self.separator)
+            output.append(new_word[-1])
+
+        return key, ' '.join(output)
+
     def segment_idx(self, sentence_id):
         """segment single sentence (whitespace-tokenized string) with BPE encoding"""
         idx,sentence=sentence_id
