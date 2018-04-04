@@ -1,1 +1,0 @@
-direction	marker	p-value	genus

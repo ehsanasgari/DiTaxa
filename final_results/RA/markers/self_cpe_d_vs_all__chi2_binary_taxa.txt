@@ -1,2 +1,0 @@
-direction	marker	p-value	genus
-+	actcgatcgt	0.00167983650682	f__Halobacteriaceae;
