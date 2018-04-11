@@ -66,6 +66,15 @@ class FastaTaxa(object):
             lines.append(['-',marker, str(pval),genus])
         FileUtility.save_list(filename, ['\t'.join(line) for line in lines])
 
+    @staticmethod
+    def fasta_(filename,pos,neg):
+        lines=[['direction','marker','p-value','genus']]
+        for marker, pval,genus in pos:
+            lines.append(['+',marker, str(pval),genus])
+        for marker, pval,genus in neg:
+            lines.append(['-',marker, str(pval),genus])
+        FileUtility.save_list(filename, ['\t'.join(line) for line in lines])
+
     def table_top_but_n(self, chi2_res, n, max_level=100):
         final_table_pos=[]
         final_table_neg=[]
