@@ -11,6 +11,16 @@ from sklearn.preprocessing import normalize
 import numpy as np
 from sklearn.preprocessing import  normalize
 
+
+def get_sym_kl_rows(A):
+    '''
+    :param A: matrix A
+    :return: Efficient implementation to calculate kl-divergence between rows in A
+    '''
+    norm_A=normalize(A+np.finfo(np.float64).eps, norm='l1')
+    a=stats.entropy(norm_A.T[:,:,None], norm_A.T[:,None,:])
+    return a+a.T
+
 def get_kl_rows(A):
     '''
     :param A: matrix A
