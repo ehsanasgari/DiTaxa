@@ -10,8 +10,9 @@ from scipy import stats
 from sklearn.preprocessing import normalize
 import numpy as np
 from sklearn.preprocessing import  normalize
-
-
+import matplotlib
+import matplotlib.pyplot as plt
+from scipy.sparse import csr_matrix
 def get_sym_kl_rows(A):
     '''
     :param A: matrix A
@@ -39,3 +40,9 @@ def normalize_mat(A,norm ='l1', axis=1):
     '''
 
     return normalize(A, norm=norm, axis=axis)
+
+def plot_histogram(A):
+    A=A.flatten()
+    plt.hist(A, bins=100)  # arguments are passed to np.histogram
+    plt.title("Histogram with 'auto' bins")
+    plt.show()
