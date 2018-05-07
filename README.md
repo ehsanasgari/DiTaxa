@@ -1,3 +1,1 @@
-# 16Seq2Seg
-
-Hi Alice, may I ask if this would be ok to clean up the code after finishing the draft and fork it in the hzi repo then?
+# 16SCPE: Character-pair encoding processing of 16S rRNA for host disease phenotype and biomarker detection: do not cluster genes, but divide and conquer
