@@ -6,13 +6,14 @@ import numpy as np
 from sklearn.feature_selection import SelectFdr
 from sklearn.feature_selection import chi2
 from scipy.sparse import csr_matrix
-from utility.math_utility import get_kl_rows
 
 __author__ = "Ehsaneddin Asgari"
-__license__ = "GPL"
+__license__ = "Apache 2"
 __version__ = "1.0.0"
 __maintainer__ = "Ehsaneddin Asgari"
-__email__ = "asgari@berkeley.edu ehsaneddin.asgari@helmholtz-hzi.de"
+__email__ = "asgari@berkeley.edu"
+__project__ = "LLP - BioCPE"
+__website__ = "https://llp.berkeley.edu/16scpe/"
 
 class Chi2Analysis(object):
     # X^2 is statistically significant at the p-value level
@@ -27,8 +28,7 @@ class Chi2Analysis(object):
         self.feature_names = feature_names
 
 
-
-    def extract_features_fdr(self, file_name, N=-1, alpha=5e-2, direction=False, allow_subseq=True, binarization=True, remove_redundant_markers=True):
+    def extract_features_fdr(self, file_name, N=-1, alpha=5e-2, direction=False, allow_subseq=True, binarization=True):
         '''
             Feature extraction with fdr-correction
         '''
@@ -36,7 +36,6 @@ class Chi2Analysis(object):
         # Filter: Select the p-values for an estimated false discovery rate
         # This uses the Benjamini-Hochberg procedure. alpha is an upper bound on the expected false discovery rate.
         selector = SelectFdr(chi2, alpha=alpha)
-
         
         if binarization=='median':
             median_vec=np.median(self.X.toarray(),axis=0)
@@ -49,12 +48,7 @@ class Chi2Analysis(object):
             X=csr_matrix(X)
         else:
             X=self.X
-
-        #if remove_redundant_markers:
-        #    dist=get_kl_rows(X.T)
-        #    dist=dist+dist.T
-
-
+        
         selector.fit_transform(X, self.Y)
         scores = {self.feature_names[i]: (s, selector.pvalues_[i]) for i, s in enumerate(list(selector.scores_)) if
                   not math.isnan(s)}
@@ -72,36 +66,35 @@ class Chi2Analysis(object):
 
         extracted_features=[]
         for w, score in scores:
-            if score[1] < 0.05:
-                feature_array = X[:, self.feature_names.index(w)]
-                pos = [feature_array[idx] for idx, x in enumerate(self.Y) if x == 1]
-                neg = [feature_array[idx] for idx, x in enumerate(self.Y) if x == 0]
-                m_pos=np.mean(pos)
-                s_pos=np.std(pos)
-                m_neg=np.mean(neg)
-                s_neg=np.std(neg)
+            feature_array = X[:, self.feature_names.index(w)]
+            pos = [feature_array[idx] for idx, x in enumerate(self.Y) if x == 1]
+            neg = [feature_array[idx] for idx, x in enumerate(self.Y) if x == 0]
+            m_pos=np.mean(pos)
+            s_pos=np.std(pos)
+            m_neg=np.mean(neg)
+            s_neg=np.std(neg)
+            
+            c11 = np.sum(pos)
+            c01 = c_1 - c11
+            c10 = np.sum(neg)
+            c00 = c_0 - c10
+            s=score[0]
+            if direction and c11 > ((1.0 * c11) * c00 - (c10 * 1.0) * c01):
+                s=-s
+            s=np.round(s,2)
 
-                c11 = np.sum(pos)
-                c01 = c_1 - c11
-                c10 = np.sum(neg)
-                c00 = c_0 - c10
-                s=score[0]
-                if direction and c11 > ((1.0 * c11) * c00 - (c10 * 1.0) * c01):
-                    s=-s
-                s=np.round(s,2)
-
-                if allow_subseq:
+            if allow_subseq:
+                pos_scores.append([str(w), s, score[1], m_pos, m_neg])
+                #if m_pos> m_neg:
+                f.write('\t'.join([str(w), str(s), str(score[1])] + [str(x) for x in [m_pos, s_pos, m_neg, s_neg]]) + '\n')
+            else:
+                flag=False
+                for feature in extracted_features:
+                    if w in feature:
+                        flag=True
+                if not flag:
                     pos_scores.append([str(w), s, score[1], m_pos, m_neg])
-                    #if m_pos> m_neg:
                     f.write('\t'.join([str(w), str(s), str(score[1])] + [str(x) for x in [m_pos, s_pos, m_neg, s_neg]]) + '\n')
-                else:
-                    flag=False
-                    for feature in extracted_features:
-                        if w in feature:
-                            flag=True
-                    if not flag:
-                        pos_scores.append([str(w), s, score[1], m_pos, m_neg])
-                        f.write('\t'.join([str(w), str(s), str(score[1])] + [str(x) for x in [m_pos, s_pos, m_neg, s_neg]]) + '\n')
 
         f.close()
         return pos_scores
