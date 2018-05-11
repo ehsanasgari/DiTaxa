@@ -120,7 +120,7 @@ class BioCPEMarkerAnlaysis:
         #    print(k,map_y[k])
         rows_reverted=column_sorted[::-1,]
 
-        fig, ax = plt.subplots(figsize=(50,90))
+        fig, ax = plt.subplots(figsize=(40,110))
         try:
             plt.set_style({'axes.facecolor': 'black','grid.color': 'black','axes.facecolor': 'black','figure.facecolor': 'black'})
         except:
@@ -136,15 +136,15 @@ class BioCPEMarkerAnlaysis:
             plt.text(x+0.4,rows_reverted.shape[0]+1,labels[x].replace('_','-'), color='purple', fontsize=20, fontweight='bold')
 
         for x,y in single_hits:
-            plt.text(y+0.2,map_y[x]-0.2,'*', color='white', fontsize=15, fontweight='bold')
+            plt.text(y+0.2,map_y[x]-0.2,'*', color='white', fontsize=12, fontweight='bold')
 
         if 'ZZZ' in taxonomy[0]:
-            plt.text(0.5,0.1,taxonomy[0].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=12,fontweight='bold')
+            plt.text(0.5,0.1,taxonomy[0].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=10,fontweight='bold')
         else:
             plt.text(0.5,0.1,taxonomy[0].replace('_','-'), rotation=0, color='white', fontsize=10, fontweight='bold')
         for x in y_borders:
             if 'ZZZ' in taxonomy[x]:
-                plt.text(0.5,x+0.1,taxonomy[x].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=12,fontweight='bold')
+                plt.text(0.5,x+0.1,taxonomy[x].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=10,fontweight='bold')
             else:
                 plt.text(0.5,x+0.1,taxonomy[x].replace('_','-'), rotation=0, color='white', fontsize=10, fontweight='bold')
 
@@ -161,7 +161,7 @@ class BioCPEMarkerAnlaysis:
         plt.xticks([])
         plt.tight_layout()
         #plt.yticks([])
-        plt.savefig(filename+'.pdf', dpi=500 , bbox_inches='tight',pad_inches=1)
+        plt.savefig(filename+'.pdf', dpi=400 , bbox_inches='tight',pad_inches=1)
         plt.show()
         #https://seaborn.pydata.org/tutorial/aesthetics.html
 
@@ -248,18 +248,18 @@ class BioCPEMarkerAnlaysis:
         new_dict_color=dict()
         for tax,colors in dict_color.items():
             freq=FreqDist(colors)
-            if freq['r']/(freq['r']+freq['b'])>0.8:
+            if freq['r']/(freq['r']+freq['b'])>0.70:
                 new_dict_color[tax]='r'
-            elif freq['b']/(freq['r']+freq['b'])>0.8:
+            elif freq['b']/(freq['r']+freq['b'])>0.70:
                 new_dict_color[tax]='b'
             else:
                 new_dict_color[tax]='w'
         return new_dict_color
 
-    def generate_tree_comparative(self, pos_file, neg_file, path, name):
+    def generate_tree_comparative(self, pos_file, neg_file, path, name, highlight_up=None, highlight_down=None):
 
 
-        font_map={1:15,2:14,3:13,4:12, 5:8,6:7,7:4}
+        font_map={-2:30,-1:25,1:15,2:14,3:13,4:12, 5:8,6:7,7:4}
         taxonomy=self.get_pandas_df()['taxonomy'].tolist()
         direction=self.get_pandas_df()['direction'].tolist()
         taxlev=self.get_pandas_df()['taxonomylevel'].tolist()
@@ -327,6 +327,42 @@ class BioCPEMarkerAnlaysis:
                     final_dict[taxa]='w'
 
 
+        if highlight_up and highlight_down:
+            correct=[]
+            wrong_dir=[]
+            for x in highlight_up:
+                if x in final_dict:
+                    if final_dict[x]=='r' or final_dict[x]=='orange':
+                        correct.append(x)
+                    elif not final_dict[x]=='w':
+                        wrong_dir.append(x)
+                # else:
+                #     for y,res in final_dict.items():
+                #         if x.lower() in y.lower():
+                #             if final_dict[y]=='r' or final_dict[y]=='orange':
+                #                 correct.append(x)
+                #             elif not final_dict[y]=='w':
+                #                 wrong_dir.append(x)
+
+            for x in highlight_down:
+                if x in final_dict:
+                    if final_dict[x]=='b' or final_dict[x]=='cyan':
+                        correct.append(x)
+                    elif not final_dict[x]=='w':
+                        wrong_dir.append(x)
+            for i,j in final_dict.items():
+                if j=='cyan' or j=='orange':
+                    correct.append(i)
+            correct=list(set(correct))
+                # else:
+                #     for y,res in final_dict.items():
+                #         if x.lower() in y.lower():
+                #             if final_dict[y]=='b' or final_dict[y]=='cyan':
+                #                 correct.append(x)
+                #             elif not final_dict[y]=='w':
+                #                 wrong_dir.append(x)
+
+
         taxonomy=['.'.join(self.refine_ez_taxonomy(x).split(';')) for x in taxonomy]
         tax_freq=dict(FreqDist(taxonomy).most_common())
         logpval_frq=[tax_freq[x] for idx,x in enumerate(taxonomy)]
@@ -358,6 +394,14 @@ class BioCPEMarkerAnlaysis:
 
         annot=annot+['\t'.join([taxonomy[idx].split('.')[-1],'annotation_rotation',str(1)])  for idx, x in enumerate(direction)  if len(taxonomy[idx].split('.'))>5]
         annot=annot+['\t'.join([taxonomy[idx].split('.')[-1],'annotation_font_size',str(font_map[taxlev[idx]])])  for idx, x in enumerate(direction) if len(taxonomy[idx].split('.'))>5 ]
+
+        if highlight_up and highlight_down:
+                for taxon in correct:
+                    if '_' in taxon:
+                        annot=annot+['\t'.join([taxon,'annotation_font_size','25'])]
+                    else:
+                        annot=annot+['\t'.join([taxon,'annotation_font_size','30'])]
+
         annot=annot+['annotation_background_offset\t0.5']
         annot=annot+['clade_marker_edge_color\t#4f1a49']
         annot=annot+['branch_color\t#4f1a49']
