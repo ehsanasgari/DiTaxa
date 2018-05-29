@@ -38,7 +38,7 @@ from multiprocessing import Pool
 #import subprocess # just to call an arbitrary command e.g. 'ls'
 
 
-class BioCPEMarkerAnlaysis:
+class NPEMarkerAnlaysis:
 
     def __init__(self,fasta_file, matrix_path, feature_file_path, phenotypes, phenotype_mapping,selected_samples, p_value_threshold=0.01, remove_redundants=False, num_p=4):
         self.num_p=num_p
@@ -277,15 +277,15 @@ class BioCPEMarkerAnlaysis:
         tax_freq=dict(FreqDist(taxonomy).most_common())
         logpval_frq=[tax_freq[x] for idx,x in enumerate(taxonomy)]
 
-        dict_color_16scpe=dict()
+        dict_color_ditaxa=dict()
         for idx, x in enumerate(direction):
             if len(taxonomy[idx].split('.'))>=5:
                 coloring=('r' if x=='+' else ('b' if x=='-' else 'g'))
-                if taxonomy[idx].split('.')[-1] in dict_color_16scpe:
-                    dict_color_16scpe[taxonomy[idx].split('.')[-1]].append(coloring)
+                if taxonomy[idx].split('.')[-1] in dict_color_ditaxa:
+                    dict_color_ditaxa[taxonomy[idx].split('.')[-1]].append(coloring)
                 else:
-                    dict_color_16scpe[taxonomy[idx].split('.')[-1]]=[coloring]
-        dict_color_16scpe=self.purify_tax_color(dict_color_16scpe)
+                    dict_color_ditaxa[taxonomy[idx].split('.')[-1]]=[coloring]
+        dict_color_ditaxa=self.purify_tax_color(dict_color_ditaxa)
 
         pos_tax=FileUtility.load_list(pos_file)
         neg_tax=FileUtility.load_list(neg_file)
@@ -308,25 +308,25 @@ class BioCPEMarkerAnlaysis:
 
         final_dict=dict()
 
-        for taxa, color in dict_color_16scpe.items():
+        for taxa, color in dict_color_ditaxa.items():
             if taxa in dict_color_lefse:
-                if dict_color_16scpe[taxa]==dict_color_lefse[taxa] and dict_color_lefse[taxa]=='r':
+                if dict_color_ditaxa[taxa]==dict_color_lefse[taxa] and dict_color_lefse[taxa]=='r':
                     final_dict[taxa]='orange'
-                elif dict_color_16scpe[taxa]==dict_color_lefse[taxa] and dict_color_lefse[taxa]=='b':
+                elif dict_color_ditaxa[taxa]==dict_color_lefse[taxa] and dict_color_lefse[taxa]=='b':
                     final_dict[taxa]='cyan'
-                elif dict_color_16scpe[taxa]==dict_color_lefse[taxa]:
+                elif dict_color_ditaxa[taxa]==dict_color_lefse[taxa]:
                     final_dict[taxa]='w'
-                elif dict_color_16scpe[taxa]=='w':
+                elif dict_color_ditaxa[taxa]=='w':
                     final_dict[taxa]=dict_color_lefse[taxa]
                 elif dict_color_lefse[taxa]=='w':
-                    final_dict[taxa]=dict_color_16scpe[taxa]
+                    final_dict[taxa]=dict_color_ditaxa[taxa]
                 else:
                     final_dict[taxa]='black'
             else:
-                final_dict[taxa]=dict_color_16scpe[taxa]
+                final_dict[taxa]=dict_color_ditaxa[taxa]
 
         for taxa, color in dict_color_lefse.items():
-            if taxa not in dict_color_16scpe:
+            if taxa not in dict_color_ditaxa:
                 if color =='r':
                     final_dict[taxa]='yellow'
                 elif color =='b':
@@ -436,7 +436,7 @@ class BioCPEMarkerAnlaysis:
         record=record.split(';')
         new_list=[]
         for z in record:
-            if not BioCPEMarkerAnlaysis.isGenomeName(z):
+            if not NPEMarkerAnlaysis.isGenomeName(z):
                 new_list.append(z)
             else:
                 return ';'.join(new_list)
@@ -456,13 +456,13 @@ class BioCPEMarkerAnlaysis:
         final_results=[]
         for x in results:
             if len(x)>1:
-                final_results.append(BioCPEMarkerAnlaysis.find_best_record(x))
+                final_results.append(NPEMarkerAnlaysis.find_best_record(x))
             else:
                 x=x[0]
                 taxa=x[1][0:-1]
                 seq=x[0]
                 d=x[1][-1]
-                length=len(taxa.split(';'))-np.sum([1 if BioCPEMarkerAnlaysis.isGenomeName(name) else 0 for name in taxa.split(';')])
+                length=len(taxa.split(';'))-np.sum([1 if NPEMarkerAnlaysis.isGenomeName(name) else 0 for name in taxa.split(';')])
                 final_results.append([taxa,seq,d,length,1,x[2]])
         candidates=sorted(final_results, key=lambda element: (element[2],-element[3],element[5],element[4]))
         return candidates
@@ -494,7 +494,7 @@ class BioCPEMarkerAnlaysis:
             rep_marker=[rec[0] for rec in records if rec[1]==taxa][min_idx]
             pval=np.median([rec[2] for rec in records if rec[1]==taxa])
             direction=taxa[-1]
-            taxlevel=len(taxa[0:-1].split(';'))-np.sum([1 if BioCPEMarkerAnlaysis.isGenomeName(name) else 0 for name in taxa[0:-1].split(';')])
+            taxlevel=len(taxa[0:-1].split(';'))-np.sum([1 if NPEMarkerAnlaysis.isGenomeName(name) else 0 for name in taxa[0:-1].split(';')])
             final.append([taxa[0:-1],rep_marker,direction, taxlevel, freq,pval])
         candidates=sorted(final, key=lambda element: (-element[3],element[5],element[4]))
         return candidates[0]
@@ -561,10 +561,10 @@ class BioCPEMarkerAnlaysis:
             distances=get_sym_kl_rows(self.update_matrix)
             flatten_distances=distances.flatten()
             self.list_of_pairs=np.argwhere(distances==0).tolist()
-            self.equiv_classes=BioCPEMarkerAnlaysis.find_equiv_classes(self.list_of_pairs)
+            self.equiv_classes=NPEMarkerAnlaysis.find_equiv_classes(self.list_of_pairs)
         else:
             self.list_of_pairs=[(i,i) for i in range(self.update_matrix.shape[0])]
-            self.equiv_classes=BioCPEMarkerAnlaysis.find_equiv_classes(self.list_of_pairs)
+            self.equiv_classes=NPEMarkerAnlaysis.find_equiv_classes(self.list_of_pairs)
 
 
     def align_markers(self,p_value_threshold):

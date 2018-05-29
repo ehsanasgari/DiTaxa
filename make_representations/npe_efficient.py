@@ -169,7 +169,7 @@ def prune_stats(stats, big_stats, threshold):
                 big_stats[item] = freq
 
 
-def train_cpe(sentenses, outfile, num_symbols, frequency_file, min_frequency=2, verbose=False, is_dict=False):
+def train_npe(sentenses, outfile, num_symbols, frequency_file, min_frequency=2, verbose=False, is_dict=False):
     """Learn num_symbols BPE operations from vocabulary, and write to outfile.
     """
     outfile_name=outfile
@@ -225,7 +225,7 @@ def train_cpe(sentenses, outfile, num_symbols, frequency_file, min_frequency=2, 
     f.close()
 
 
-def train_resampling_cpe(sentenses, outfile, num_symbols, frequency_file, min_frequency=2, verbose=False, is_dict=False, resample_size=10000, N=10):
+def train_resampling_npe(sentenses, outfile, num_symbols, frequency_file, min_frequency=2, verbose=False, is_dict=False, resample_size=10000, N=10):
     """Learn num_symbols BPE operations from vocabulary, and write to outfile.
     """
     outfile_name=outfile

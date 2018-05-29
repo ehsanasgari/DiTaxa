@@ -11,10 +11,10 @@ sys.path.append('../')
 from utility.file_utility import FileUtility
 from utility.list_set_util import get_max_of_dict
 import numpy as np
-from chi2analysis.chi2analysis import Chi2Analysis
+from feature_selection.chi2analysis import Chi2Analysis
 from scipy.sparse import csr_matrix
 
-class BioCPEMarkerDetection(object):
+class NPEMarkerDetection(object):
     '''
     Class to extract markers to fasta files
     '''
@@ -47,10 +47,10 @@ class BioCPEMarkerDetection(object):
         res_med=CA.extract_features_fdr(self.path+'_chi2_median.txt',topn,direction=True,binarization='median', allow_subseq=False)
         pos_bin,neg_bin=self.extract_top_but_n(res_bin,topn,threshold)
         pos_med,neg_med=self.extract_top_but_n(res_med,topn,threshold)
-        BioCPEMarkerDetection.write_in_fastafile(self.path+'_chi2_binary.fasta',res_bin)
-        BioCPEMarkerDetection.write_in_fastafile(self.path+'_chi2_relative.fasta',res_med)
-        BioCPEMarkerDetection.write_in_file(self.path+'_chi2_binary_taxa.txt',pos_bin,neg_bin)
-        BioCPEMarkerDetection.write_in_file(self.path+'_chi2_median_taxa.txt',pos_med,neg_med)
+        NPEMarkerDetection.write_in_fastafile(self.path+'_chi2_binary.fasta',res_bin)
+        NPEMarkerDetection.write_in_fastafile(self.path+'_chi2_relative.fasta',res_med)
+        NPEMarkerDetection.write_in_file(self.path+'_chi2_binary_taxa.txt',pos_bin,neg_bin)
+        NPEMarkerDetection.write_in_file(self.path+'_chi2_median_taxa.txt',pos_med,neg_med)
 
     @staticmethod
     def write_in_fastafile(filename,res, min_length=50):
@@ -88,5 +88,5 @@ class BioCPEMarkerDetection(object):
         return pos, neg
 
 if __name__=='__main__':
-    G16s = BioCPEMarkerDetection('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/new_cpe_piece/dental_uniqe_seqpiece.npz','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/new_cpe_piece/dental_label.txt','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/new_cpe_piece/dental_uniqe_seqpiece_features','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/new_cpe_piece/dental')
+    G16s = NPEMarkerDetection('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/new_cpe_piece/dental_uniqe_seqpiece.npz','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/new_cpe_piece/dental_label.txt','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/new_cpe_piece/dental_uniqe_seqpiece_features','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/new_cpe_piece/dental')
     G16s.extract_markers()

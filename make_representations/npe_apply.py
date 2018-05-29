@@ -35,7 +35,7 @@ from collections import defaultdict
 from io import open
 argparse.open = open
 
-class CPE(object):
+class NPE(object):
 
     def __init__(self, codes, separator='@@', merge_size=-1 ,vocab=None, glossaries=None):
 

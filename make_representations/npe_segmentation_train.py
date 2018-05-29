@@ -15,14 +15,14 @@ from utility.file_utility import FileUtility
 from Bio import SeqIO
 from multiprocessing import Pool
 import tqdm
-from make_representations.cpe_efficient import train_cpe
+from make_representations.npe_efficient import train_npe
 import sentencepiece as spm
 import timeit
 
 
-class BioCPESegmentTrainMetagenomics:
+class NPESegmentTrainMetagenomics:
     '''
-        Training the BioCPE segmentation
+        Training the NPE segmentation
     '''
 
     def __init__(self, file_directory, file_extenstion, onlyfiles=[]):
@@ -56,14 +56,14 @@ class BioCPESegmentTrainMetagenomics:
                                total=len(fasta_files)):
             corpus = corpus + v
         pool.close()
-        print('Corpus size for training CPE is ', len(corpus))
+        print('Corpus size for training NPE is ', len(corpus))
         if backend == 'Sentencepiece':
             FileUtility.save_list('../tmp/tmp_txt', corpus)
             spm.SentencePieceTrainer.Train(
                 '--input=../tmp/tmp_txt --model_prefix=' + output_dir + ' --add_dummy_prefix false --max_sentencepiece_length=512 --model_type=bpe --mining_sentence_size=5000000 --input_sentence_size=10000000 --vocab_size=50000')
             FileUtility.save_list('../tmp/tmp_txt', corpus[0:10])
         elif backend == 'normalbpe':
-            train_cpe(corpus, output_dir, vocab_size, output_dir + '_freq')
+            train_npe(corpus, output_dir, vocab_size, output_dir + '_freq')
         print(' The segmentation training took ', timeit.default_timer() - start, ' ms.')
 
     def _get_corpus(self, file_name_sample, unqiue_reads=True):
@@ -90,7 +90,7 @@ class BioCPESegmentTrainMetagenomics:
 
 
 if __name__ == '__main__':
-    G16s = BioCPESegmentTrainMetagenomics('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/',
+    G16s = NPESegmentTrainMetagenomics('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/',
                                           'fastq')
     G16s.generate(50000, 5000,
                   '/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dental/test/dental_unique_50000v_5000s',
