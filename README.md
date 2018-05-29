@@ -3,25 +3,24 @@
 <table style="width: 802px;">
 <tbody>
 <tr>
-<td style="width: 450px;" colspan="2"><span style="font-size: 30pt; font-family: helvetica,arial,sans-serif;"><span style="color: #0000ff;"><strong>Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection</strong></span></span></td>
+<td style="width: 450px;" colspan="2"><span style="font-size: 40pt; font-family: helvetica,arial,sans-serif;"><span style="color: #0000ff;"><strong>Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection</strong></span></span></td>
 </tr>
 <tr>
-<td style="width: 450px;" colspan="2"><img src="https://user-images.githubusercontent.com/8551117/40687526-355d0516-639b-11e8-894c-d843a1699433.png"/></td>
+<td style="width: 450px;background-color: white;" colspan="2"><img src="https://user-images.githubusercontent.com/8551117/40687526-355d0516-639b-11e8-894c-d843a1699433.png"/></td>
 </tr>
 </tbody>
 </table>
 
-<span style="color: #800000;"><strong>MicroPheno's paper is accepted at ISMB 2018 to be published in Bioinformatics Journal. Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content/early/2018/01/28/255018">bioarXiv</a> version  <a href="https://www.biorxiv.org/highwire/citation/78275/bibtext"><img class="alignnone wp-image-142" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/bibtex-icon.png" alt="" width="44" height="44" /></a> <a href="https://www.biorxiv.org/highwire/citation/78275/mendeley"><img class="alignnone wp-image-143" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Apps-Mendeley-icon-150x150.png" alt="" width="47" height="41" /></a>:
- 
-Asgari E, Garakani K, McHardy AC and Mofrad MRK, MicroPheno: Predicting environments and host phenotypes from 16S rRNA gene sequencing using a k-mer based representation of shallow sub-samples. bioRxiv, 2018. Available at: https://www.biorxiv.org/content/early/2018/01/31/255018.
+
+Asgari E., Muench P., Lesker T.R., McHardy A.C. and Mofrad M.R.K., Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection. bioRxiv, 2018. Available at: ======
 
 
  
- The datasets </strong> are also available for download <a href='http://llp.berkeley.edu/micropheno'><img class="alignnone wp-image-36" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/zip.png" alt="" width="33" height="33" /></a>.
+The datasets </strong> are also available for download <a href='http://llp.berkeley.edu/ditaxa'><img class="alignnone wp-image-36" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/zip.png" alt="" width="33" height="33" /></a>.
 
 <strong>Contact</strong>: Ehsaneddin Asgari (<span style="color: #0000ff;">asgari [at] berkeley [dot] edu</span>)
 <br/>
-<strong>Project page:</strong>: <a href="http://llp.berkeley.edu/micropheno">http://llp.berkeley.edu/micropheno</a>
+<strong>Project page:</strong>: <a href="http://llp.berkeley.edu/ditaxa">http://llp.berkeley.edu/ditaxa</a>
 <hr />
 
 <span style="font-family: helvetica,arial,sans-serif; font-size: 24pt;"><strong>Summary</strong></span>
