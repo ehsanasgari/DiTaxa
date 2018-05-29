@@ -1,34 +1,42 @@
-import codecs
-import math
-import operator
-
-import numpy as np
-from sklearn.feature_selection import SelectFdr
-from sklearn.feature_selection import chi2
-from scipy.sparse import csr_matrix
-
 __author__ = "Ehsaneddin Asgari"
 __license__ = "Apache 2"
 __version__ = "1.0.0"
 __maintainer__ = "Ehsaneddin Asgari"
 __email__ = "asgari@berkeley.edu"
-__project__ = "LLP - BioCPE"
-__website__ = "https://llp.berkeley.edu/16scpe/"
+__project__ = "LLP - DiTaxa"
+__website__ = "https://llp.berkeley.edu/ditaxa/"
+
+import codecs
+import math
+import operator
+import numpy as np
+from sklearn.feature_selection import SelectFdr
+from sklearn.feature_selection import chi2
+from scipy.sparse import csr_matrix
 
 class Chi2Analysis(object):
     # X^2 is statistically significant at the p-value level
     def __init__(self, X, Y, feature_names):
         '''
-        :param X:
-        :param Y:
-        :param feature_names:
+        :param X: data matrix
+        :param Y: 1 or 0
+        :param feature_names: list of X columns
         '''
         self.X = X
         self.Y = Y
         self.feature_names = feature_names
 
 
-    def extract_features_fdr(self, file_name, N=-1, alpha=5e-2, direction=False, allow_subseq=True, binarization=True):
+    def extract_features_fdr(self, file_name, N=-1, alpha=5e-2, direction=True, allow_subseq=True, binarization=True):
+        '''
+        :param file_name: output Chi2
+        :param N: Top-N significant features
+        :param alpha: the min p-value
+        :param direction: if true the score would have sign
+        :param allow_subseq:
+        :param binarization: if the data is not binary ==> 'binary','median'
+        :return:
+        '''
         '''
             Feature extraction with fdr-correction
         '''
