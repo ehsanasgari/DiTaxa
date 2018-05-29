@@ -3,12 +3,10 @@
 <table style="width: 802px;">
 <tbody>
 <tr>
-<td style="width: 450px;" colspan="2"><span style="font-size: 14pt; font-family: helvetica,arial,sans-serif;"><span style="color: #0000ff;"><strong>Predicting environments and host phenotypes from 16S rRNA gene sequencing using a k-mer based representation of shallow sub-samples</strong></span></span></td>
+<td style="width: 450px;" colspan="2"><span style="font-size: 14pt; font-family: helvetica,arial,sans-serif;"><span style="color: #0000ff;"><strong>Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection</strong></span></span></td>
 </tr>
 <tr>
-<td style="width: 450px;"><img class="alignnone size-medium wp-image-82" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Micropheno_v2-226x300.png" alt="" width="450" height="300" /></td>
-<td style="width: 500px;"><img src="https://user-images.githubusercontent.com/8551117/40687526-355d0516-639b-11e8-894c-d843a1699433.png"/>
-</td>
+<td style="width: 450px;" colspan="2">><img src="https://user-images.githubusercontent.com/8551117/40687526-355d0516-639b-11e8-894c-d843a1699433.png"/></td>
 </tr>
 </tbody>
 </table>
