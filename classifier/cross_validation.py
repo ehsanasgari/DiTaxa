@@ -3,12 +3,12 @@ __license__ = "Apache 2"
 __version__ = "1.0.0"
 __maintainer__ = "Ehsaneddin Asgari"
 __email__ = "asgari@berkeley.edu"
-__project__ = "LLP - BioCPE"
-__website__ = "https://llp.berkeley.edu/16scpe/"
+__project__ = "LLP - DiTaxa"
+__website__ = "https://llp.berkeley.edu/ditaxa/"
+
 
 
 import sys
-
 sys.path.append('../')
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_val_predict, cross_val_score
 from utility.file_utility import FileUtility
@@ -154,12 +154,18 @@ class KFoldCrossVal(CrossValidator):
         label_set = list(set(self.Y))
         # fitting
         self.greed_search.fit(X=self.X, y=self.Y)
-        y_predicted = cross_val_predict(self.greed_search.best_estimator_, self.X, self.Y,  cv=self.cv)
-        conf = confusion_matrix(self.Y, y_predicted, labels=label_set)
-        # save in file
-        FileUtility.save_obj(file_name,
-                             [label_set, conf, self.greed_search.best_score_, self.greed_search.best_estimator_,
-                              self.greed_search.cv_results_, self.greed_search.best_params_,  (y_predicted, self.Y,label_set )])
+
+        try:
+            y_predicted = cross_val_predict(self.greed_search.best_estimator_, self.X, self.Y,  cv=self.cv)
+            conf = confusion_matrix(self.Y, y_predicted, labels=label_set)
+            # save in file
+            FileUtility.save_obj(file_name,
+                                 [label_set, conf, self.greed_search.best_score_, self.greed_search.best_estimator_,
+                                  self.greed_search.cv_results_, self.greed_search.best_params_,  (y_predicted, self.Y,label_set )])
+        except:
+            FileUtility.save_obj(file_name,
+                                 [label_set, self.greed_search.best_score_, self.greed_search.best_estimator_,
+                                  self.greed_search.cv_results_, self.greed_search.best_params_,  (self.Y,label_set )])
 
 
 class NestedCrossVal(CrossValidator):
@@ -240,9 +246,14 @@ class PredefinedFoldCrossVal(CrossValidator):
         label_set = list(set(self.Y))
         # fitting
         self.greed_search.fit(X=self.X, y=self.Y)
-        y_predicted = cross_val_predict(self.greed_search.best_estimator_, self.X, self.Y,  cv=self.cv)
-        conf = confusion_matrix(self.Y, y_predicted, labels=label_set)
-        # save in file
-        FileUtility.save_obj(file_name,
-                             [label_set, conf, self.greed_search.best_score_, self.greed_search.best_estimator_,
-                              self.greed_search.cv_results_, self.greed_search.best_params_, (y_predicted, self.Y,label_set )])
+        try:
+            y_predicted = cross_val_predict(self.greed_search.best_estimator_, self.X, self.Y,  cv=self.cv)
+            conf = confusion_matrix(self.Y, y_predicted, labels=label_set)
+            # save in file
+            FileUtility.save_obj(file_name,
+                                 [label_set, conf, self.greed_search.best_score_, self.greed_search.best_estimator_,
+                                  self.greed_search.cv_results_, self.greed_search.best_params_,  (y_predicted, self.Y,label_set )])
+        except:
+            FileUtility.save_obj(file_name,
+                                 [label_set, self.greed_search.best_score_, self.greed_search.best_estimator_,
+                                  self.greed_search.cv_results_, self.greed_search.best_params_,  (self.Y,label_set )])
