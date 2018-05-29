@@ -39,7 +39,7 @@ We compared the performance of DiTaxa to the state-of-the-art methods in disease
 
 <h1>Installation</h1>
 
-MicroPheno is implemented in Python3.x and uses ScikitLearn and Keras frameworks for machine learning. To install the dependencies use the following command:
+DiTaxa is implemented in Python3.x and uses ScikitLearn and Keras frameworks for machine learning. To install the dependencies use the following command:
 ```
 pip install -r requirements.txt
 ```
@@ -48,27 +48,25 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 ```
 @article {Asgari255018,
-	author = {Asgari, Ehsaneddin and Garakani, Kiavash and McHardy, Alice Carolyn and Mofrad, Mohammad R.K.},
-	title = {MicroPheno: Predicting environments and host phenotypes from 16S rRNA gene sequencing using a k-mer based representation of shallow sub-samples},
+	author = {Asgari, Ehsaneddin and Muench, Philipp C. and Lesker T.R and McHardy A.C. and Mofrad, Mohammad R.K.},
+	title = {Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection},
 	year = {2018},
-	doi = {10.1101/255018},
+	doi = {----},
 	publisher = {Cold Spring Harbor Laboratory},
-	URL = {https://www.biorxiv.org/content/early/2018/01/31/255018},
-	eprint = {https://www.biorxiv.org/content/early/2018/01/31/255018.full.pdf},
+	URL = {https://www.biorxiv.org/content/---},
+	eprint = {https://www.biorxiv.org/content/early/----},
 	journal = {bioRxiv}
 }
 
 ```
 
 <h1> User Manual </h1>
-MicroPheno can be used either via the templates provided in the <a href="https://github.com/ehsanasgari/MicroPheno/tree/master/notebooks">ipython notebooks</a> or the command-line interface.
 
 <h2>Bootstrapping</h2>
-An example of bootstrapping provided in the <a href="https://github.com/ehsanasgari/MicroPheno/blob/master/notebooks/1.Bootstrapping.ipynb">notebooks</a>.
 
 <b>Command line use:</b> Argument to be used are the input/output directories, the sequence filetype, the k-mers and the sample size. Use argument '-h' to see the helpers.
 ```
-python3 micropheno.py --bootstrap --indir /path/to/16srRNAsamples/ --out output_dir/ --filetype fastq --kvals 3,4,5,6 --nvals 10,100,200,500,1000 --name crohs
+python3 ditaxa.py --bootstrap --indir /path/to/16srRNAsamples/ --out output_dir/ --filetype fastq --kvals 3,4,5,6 --nvals 10,100,200,500,1000 --name crohs
 ```
 The output would be generating the following plot in the specified output directory. See the related <a href="https://github.com/ehsanasgari/MicroPheno/blob/master/notebooks/1.Bootstrapping.ipynb">notebook</a> for more details.
 <img src="https://user-images.githubusercontent.com/8551117/35446008-af953ad6-02b3-11e8-9b33-06d1f4b429f3.png" alt="bootstrapping" />
