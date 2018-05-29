@@ -3,8 +3,8 @@ __license__ = "Apache 2"
 __version__ = "1.0.0"
 __maintainer__ = "Ehsaneddin Asgari"
 __email__ = "asgari@berkeley.edu"
-__project__ = "LLP - BioCPE"
-__website__ = "https://llp.berkeley.edu/16scpe/"
+__project__ = "LLP - DiTaxa"
+__website__ = "https://llp.berkeley.edu/ditaxa/"
 
 import sys
 
@@ -14,7 +14,7 @@ from utility.file_utility import FileUtility
 from Bio import SeqIO
 from multiprocessing import Pool
 import tqdm
-from make_representations.cpe_efficient import train_cpe
+from make_representations.npe_efficient import train_npe
 import sentencepiece as spm
 import time
 import os
@@ -26,9 +26,9 @@ import sys, os
 
 
 
-class Bio16SCPEPipeline:
+class DiTaxaWorkflow:
     '''
-        16SCPE_pipleline
+        DiTaxaWorkflow
     '''
 
     def __init__(self, file_directory, file_extenstion, output_directory, dbname, vocab_size, seg_train_depth ,rep_sampling_depth, num_p=1,onlyfiles=[]):

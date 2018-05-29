@@ -1,3 +1,11 @@
+__author__ = "Ehsaneddin Asgari"
+__license__ = "Apache 2"
+__version__ = "1.0.0"
+__maintainer__ = "Ehsaneddin Asgari"
+__email__ = "asgari@berkeley.edu"
+__project__ = "LLP - DiTaxa"
+__website__ = "https://llp.berkeley.edu/ditaxa/"
+
 import sys
 sys.path.append('../')
 from utility.file_utility import FileUtility

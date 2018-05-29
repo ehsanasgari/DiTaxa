@@ -2,7 +2,13 @@
 # -*- coding: utf-8 -*-
 
 # Modified by Ehsaneddin Asgari
-
+__author__ = "Ehsaneddin Asgari"
+__license__ = "Apache 2"
+__version__ = "1.0.0"
+__maintainer__ = "Ehsaneddin Asgari"
+__email__ = "asgari@berkeley.edu"
+__project__ = "LLP - DiTaxa"
+__website__ = "https://llp.berkeley.edu/ditaxa/"
 ### Adapted from Rico's code for machine translation
 # Author: Rico Sennrich
 """Use byte pair encoding (BPE) to learn a variable-length encoding of the vocabulary in a text.

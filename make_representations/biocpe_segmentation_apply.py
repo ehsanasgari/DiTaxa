@@ -3,8 +3,9 @@ __license__ = "Apache 2"
 __version__ = "1.0.0"
 __maintainer__ = "Ehsaneddin Asgari"
 __email__ = "asgari@berkeley.edu"
-__project__ = "LLP - BioCPE"
-__website__ = "https://llp.berkeley.edu/16scpe/"
+__project__ = "LLP - DiTaxa"
+__website__ = "https://llp.berkeley.edu/ditaxa/"
+
 
 import sys
 sys.path.append('../')
@@ -19,10 +20,10 @@ from scipy import sparse
 from utility.file_utility import FileUtility
 from Bio import SeqIO
 import timeit
-from make_representations.cpe_apply import CPE
+from make_representations.cpe_apply import NPE
 import sentencepiece as spm
 
-class BioCPESegmentApplyMetagenomics:
+class NPESegmentApplyMetagenomics:
     '''
         Make k-mer from directory of fasta files
     '''
