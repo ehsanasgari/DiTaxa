@@ -7,7 +7,7 @@
 </tr>
 <tr>
 <td style="width: 450px;"><img class="alignnone size-medium wp-image-82" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Micropheno_v2-226x300.png" alt="" width="450" height="300" /></td>
-<td style="width: 500px;">![screen shot 2018-05-29 at 11 51 23 pm](https://user-images.githubusercontent.com/8551117/40687526-355d0516-639b-11e8-894c-d843a1699433.png)
+<td style="width: 500px;"><img src="https://user-images.githubusercontent.com/8551117/40687526-355d0516-639b-11e8-894c-d843a1699433.png"/>
 </td>
 </tr>
 </tbody>
