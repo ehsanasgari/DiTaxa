@@ -60,17 +60,17 @@ class DiTaxaWorkflow:
             self.log_file=FileUtility.load_list(self.output_directory+'logfile.txt')
         print('pipeline started')
 
-    def train_cpe(self):
+    def train_npe(self):
         '''
         :return:
         '''
-        print('cpe training started.. it might take more than 1 hour for more than 1000 samples')
+        print('npe training started.. it might take more than 1 hour for more than 1000 samples')
         DiTaxaWorkflow.blockPrint()
         start = time.time()
-        G16s = BioCPESegmentTrainMetagenomics(self.file_directory, self.file_extenstion)
-        DiTaxaWorkflow.ensure_dir(self.output_directory+'biocpe_segmentatation/')
+        G16s = NPESegmentTrainMetagenomics(self.file_directory, self.file_extenstion)
+        DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_segmentatation/')
         G16s.generate(self.vocab_size, self.seg_train_depth,
-                      self.output_directory+'biocpe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s']),
+                      self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s']),
                       backend='Sentencepiece',num_p=self.num_p)
         end = time.time()
         spent = (end - start)
@@ -78,18 +78,18 @@ class DiTaxaWorkflow:
         DiTaxaWorkflow.enablePrint()
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
 
-    def representation_cpe(self):
+    def representation_npe(self):
         '''
         :return:
         '''
-        print('cpe generation started..')
+        print('npe generation started..')
         start = time.time()
-        G16s = BioCPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory+'biocpe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
-        DiTaxaWorkflow.ensure_dir(self.output_directory+'biocpe_representation/')
-        G16s.generate_cpes_all(save=self.output_directory+'biocpe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
+        G16s = BioCPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
+        DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_representation/')
+        G16s.generate_npes_all(save=self.output_directory+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
         end = time.time()
         spent = end-start
-        self.log_file.append('generating the representations biocpe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
+        self.log_file.append('generating the representations npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
 
 
@@ -98,10 +98,10 @@ class DiTaxaWorkflow:
 
         :return:
         '''
-        print('cpe marker detection started')
+        print('npe marker detection started')
         DiTaxaWorkflow.blockPrint()
         start = time.time()
-        rep_base_path=self.output_directory+'biocpe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)
+        rep_base_path=self.output_directory+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)
         filenames=[x.split('/')[-1] for x in FileUtility.load_list(rep_base_path+'_meta')]
 
         # CHECK EXISTING LABELS
@@ -117,15 +117,15 @@ class DiTaxaWorkflow:
             Y=[str(label_mapper[labeler[filenames[sample_id]]]) for sample_id in selected_samples]
 
         FileUtility.save_list(rep_base_path+'_'+name_setting+'_Y.txt', Y)
-        DiTaxaWorkflow.ensure_dir(self.output_directory+'biocpe_marker_files/')
-        G16s = BioCPEMarkerDetection(rep_base_path+'.npz',rep_base_path+'_'+name_setting+'_Y.txt',rep_base_path+'_features',self.output_directory+'biocpe_marker_files/'+name_setting, selected_samples)
+        DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_marker_files/')
+        G16s = BioCPEMarkerDetection(rep_base_path+'.npz',rep_base_path+'_'+name_setting+'_Y.txt',rep_base_path+'_features',self.output_directory+'npe_marker_files/'+name_setting, selected_samples)
         G16s.extract_markers()
         end = time.time()
         spent = end-start
         self.log_file.append('biomarker extraction '+name_setting+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
         DiTaxaWorkflow.enablePrint()
-        print('cpe marker taxonomic detection started')
+        print('npe marker taxonomic detection started')
         start = time.time()
 
         if callable(labeler):
@@ -133,7 +133,7 @@ class DiTaxaWorkflow:
         else:
             phenotypes=[labeler[filenames[sample_id]] for sample_id in selected_samples]
 
-        fasta_file=self.output_directory+'biocpe_marker_files/'+name_setting+'_chi2_relative.fasta'
+        fasta_file=self.output_directory+'npe_marker_files/'+name_setting+'_chi2_relative.fasta'
         matrix_path=rep_base_path+'.npz'
         feature_file_path=rep_base_path+'_features'
 
@@ -172,68 +172,68 @@ class DiTaxaWorkflow:
 def dental():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/',
                                           'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dentaloutput_new/','periodontal',50000,5000,-1,num_p=20)
-    Pipeline.train_cpe()
-    Pipeline.representation_cpe()
+    Pipeline.train_npe()
+    Pipeline.representation_npe()
     f=(lambda x: 'Periodental' if 'd' in x else 'Healthy')
     Pipeline.biomarker_extraction(f,{'Periodental':1,'Healthy':0},'Periodontal', p_value_threshold=0.05, pos_label='Periodontal',neg_label='Healthy')
 
 def dental_tree():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/',
                                           'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dentaloutput/','periodontal',50000,5000,-1,num_p=20)
-    #Pipeline.train_cpe()
-    #Pipeline.representation_cpe()
+    #Pipeline.train_npe()
+    #Pipeline.representation_npe()
     f=(lambda x: 'Periodental' if 'd' in x else 'Healthy')
     Pipeline.biomarker_extraction(f,{'Periodental':1,'Healthy':0},'Periodontal')
 
 def RA():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/RA/',
                                           'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/RAoutput/','RA',50000,5000,-1,num_p=20)
-    Pipeline.train_cpe()
-    Pipeline.representation_cpe()
+    Pipeline.train_npe()
+    Pipeline.representation_npe()
     labels=FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/ra/rep/labels.txt')
-    labels={x.split('/')[-1]:labels[idx] for idx,x in enumerate(FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/ra/rep/ra_selfposcpe_10000_cpe_5000_meta'))}
+    labels={x.split('/')[-1]:labels[idx] for idx,x in enumerate(FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/ra/rep/ra_selfposnpe_10000_npe_5000_meta'))}
     Pipeline.biomarker_extraction(labels,{'untreated_RA':1,'healthy':0,'treated_RA':0,'psoriatic':0},'RA_vs_all')
 
 
 def RA_healthy():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/RA/',
                                           'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/RAoutput/','RA',50000,5000,-1,num_p=20)
-    #Pipeline.train_cpe()
-    #Pipeline.representation_cpe()
+    #Pipeline.train_npe()
+    #Pipeline.representation_npe()
     labels=FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/ra/rep/labels.txt')
-    labels={x.split('/')[-1]:labels[idx] for idx,x in enumerate(FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/ra/rep/ra_selfposcpe_10000_cpe_5000_meta'))}
+    labels={x.split('/')[-1]:labels[idx] for idx,x in enumerate(FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/ra/rep/ra_selfposnpe_10000_npe_5000_meta'))}
     Pipeline.biomarker_extraction(labels,{'untreated_RA':1,'treated_RA':0},'untreated_vs_treated')
 
 
 def IBD():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/crohn/',
                                           'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/IBDout/','IBD',50000,5000,-1,num_p=20)
-    Pipeline.train_cpe()
-    Pipeline.representation_cpe()
+    Pipeline.train_npe()
+    Pipeline.representation_npe()
     labels=dict([(x.split()[0]+'.fastq',x.split()[1]) for x in FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/crohns/rep/Crohns_lables.txt')])
     Pipeline.biomarker_extraction(labels,{'CD':1,'no':0,'control':0},'CD_vs_healthy')
 
 def IBD_rep():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/crohn/',
                                           'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/IBDout/','IBD',50000,5000,-1,num_p=20)
-    #Pipeline.train_cpe()
-    #Pipeline.representation_cpe()
+    #Pipeline.train_npe()
+    #Pipeline.representation_npe()
     labels=dict([(x.split()[0]+'.fastq',x.split()[1]) for x in FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/crohns/rep/Crohns_lables.txt')])
     Pipeline.biomarker_extraction(labels,{'IC':1,'no':0,'control':0},'IC_vs_healthy')
 
 def synthetic():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/synthetic/16S_evalutaion_1000/',
                                           'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/SyntheticOUT/','synthetic',50000,5000,-1,num_p=20)
-    Pipeline.train_cpe()
-    Pipeline.representation_cpe()
+    Pipeline.train_npe()
+    Pipeline.representation_npe()
     f=(lambda x: 'Case' if 'case' in x else 'control')
     Pipeline.biomarker_extraction(f,{'case':1,'control':0},'case_vs_control')
 
 def synthetic_test():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/synthetic/16S_evalutaion_1000/',
                                           'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/SyntheticOUT/','synthetic',50000,5000,-1,num_p=20)
-    #Pipeline.train_cpe()
-    #Pipeline.representation_cpe()
+    #Pipeline.train_npe()
+    #Pipeline.representation_npe()
     f=(lambda x: 'case' if 'case' in x else 'control')
     Pipeline.biomarker_extraction(f,{'case':1,'control':0},'case_vs_control')
 
