@@ -20,7 +20,7 @@ The datasets </strong> are also available for download <a href='http://llp.berke
 
 <strong>Contact/Developer</strong>: Ehsaneddin Asgari (<span style="color: #0000ff;">asgari [at] berkeley [dot] edu</span>)
 <br/>
-<strong>Project page:</strong>: <a href="http://llp.berkeley.edu/ditaxa">http://llp.berkeley.edu/ditaxa</a>
+<strong>Project page:</strong> <a href="http://llp.berkeley.edu/ditaxa">http://llp.berkeley.edu/ditaxa</a>
 <br/>
 <strong>PIs</strong>: Prof. Alice McHardy* and Prof. Mohammad Mofrad*
 <br/>
