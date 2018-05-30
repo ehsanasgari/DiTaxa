@@ -18,10 +18,10 @@ from make_representations.npe_efficient import train_npe
 import sentencepiece as spm
 import time
 import os
-from make_representations.biocpe_segmentation_train import NPESegmentTrainMetagenomics
-from make_representations.biocpe_segmentation_apply import NPESegmentApplyMetagenomics
-from marker_detection.biocpe_biomarker_extraction import NPEMarkerDetection
-from marker_detection.biocpe_generate_taxa_tree import NPEMarkerAnlaysis
+from make_representations.npe_segmentation_train import NPESegmentTrainMetagenomics
+from make_representations.npe_segmentation_apply import NPESegmentApplyMetagenomics
+from marker_detection.npe_biomarker_extraction import NPEMarkerDetection
+from marker_detection.npe_generate_taxa_tree import NPEMarkerAnlaysis
 import sys, os
 
 
