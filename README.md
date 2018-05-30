@@ -78,7 +78,7 @@ Supporting Random Forest, SVM, Cross-entropy classifier, Neural netwrok
 
 <h2>Biomarker detection</h2>
 
-<img src="https://user-images.githubusercontent.com/8551117/40691993-7b6e0014-63af-11e8-9289-c3b842aff9f6.png"/>
+<img src="https://user-images.githubusercontent.com/8551117/40692994-568c1960-63b5-11e8-999d-ee69917943f5.png"/>
 
 
 <h2>Heatmap creation</h2>
