@@ -84,7 +84,7 @@ class DiTaxaWorkflow:
         '''
         print('npe generation started..')
         start = time.time()
-        G16s = BioCPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
+        G16s = NPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
         DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_representation/')
         G16s.generate_npes_all(save=self.output_directory+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
         end = time.time()
@@ -118,7 +118,7 @@ class DiTaxaWorkflow:
 
         FileUtility.save_list(rep_base_path+'_'+name_setting+'_Y.txt', Y)
         DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_marker_files/')
-        G16s = BioCPEMarkerDetection(rep_base_path+'.npz',rep_base_path+'_'+name_setting+'_Y.txt',rep_base_path+'_features',self.output_directory+'npe_marker_files/'+name_setting, selected_samples)
+        G16s = NPEMarkerDetection(rep_base_path+'.npz',rep_base_path+'_'+name_setting+'_Y.txt',rep_base_path+'_features',self.output_directory+'npe_marker_files/'+name_setting, selected_samples)
         G16s.extract_markers()
         end = time.time()
         spent = end-start
@@ -142,7 +142,7 @@ class DiTaxaWorkflow:
         else:
             remove_redundants=True
 
-        Final_OBJ=BioCPEMarkerAnlaysis(fasta_file, matrix_path, feature_file_path, phenotypes, label_mapper, selected_samples, p_value_threshold=p_value_threshold, remove_redundants=remove_redundants,num_p=self.num_p)
+        Final_OBJ=NPEMarkerAnlaysis(fasta_file, matrix_path, feature_file_path, phenotypes, label_mapper, selected_samples, p_value_threshold=p_value_threshold, remove_redundants=remove_redundants,num_p=self.num_p)
         end = time.time()
         spent = end-start
         DiTaxaWorkflow.ensure_dir(self.output_directory+'final_outputs/')
