@@ -171,11 +171,11 @@ class DiTaxaWorkflow:
 
 def dental():
     Pipeline = Bio16SCPEPipeline('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/',
-                                          'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dentaloutput_p01/','periodontal',50000,5000,-1,num_p=20)
-    #Pipeline.train_cpe()
-    #Pipeline.representation_cpe()
+                                          'fastq','/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/dentaloutput_new/','periodontal',50000,5000,-1,num_p=20)
+    Pipeline.train_cpe()
+    Pipeline.representation_cpe()
     f=(lambda x: 'Periodental' if 'd' in x else 'Healthy')
-    Pipeline.biomarker_extraction(f,{'Periodental':1,'Healthy':0},'Periodontal', p_value_threshold=0.03, pos_label='Periodontal',neg_label='Healthy')
+    Pipeline.biomarker_extraction(f,{'Periodental':1,'Healthy':0},'Periodontal', p_value_threshold=0.05, pos_label='Periodontal',neg_label='Healthy')
 
 def dental_tree():
     Pipeline = Bio16SCPEPipeline('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/',
