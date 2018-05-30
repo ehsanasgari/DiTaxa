@@ -12,7 +12,7 @@
 </table>
 
 
-Asgari E., Münch P.C., Lesker T.R., McHardy A.C.(*) and Mofrad M.R.K.(*), Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection. bioRxiv, 2018. Available at: ======
+Asgari E., Münch P.C., Lesker T.R., McHardy A.C.&#9733; and Mofrad M.R.K.&#9733;, Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection. bioRxiv, 2018. Available at: ======
 
 
  
