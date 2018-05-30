@@ -67,9 +67,19 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 <h1> User Manual </h1>
 
-A detailed manual is in progress. You may reuse the sample runs in main/DiTaxa.py in the meanwhile.
+```
+python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --filelis list_of_files_in_a_file --label label_files --label_vals mapping_between_labels_to_1_or_0
+```
+
+Using the above mentioned command all the steps will be done sequentially and output will be organized in subdirectories.
+A detailed manual is in progress. You may reuse the sample runs in main/DiTaxa.py or the provided command example.
 
 <h2>Local ezCloud blast and GraPhlAn setup</h2>
+
+On line 27 of marker_detection/npe_generate_taxa_tree.py specify your blastn address. <br/>
+On line 252,253 please provide the GraPhlAn paths.
+On line 576 please provide a path to your local blast.
+
 
 <h2>Bootstrapping for sample size selection</h2>
 <img src="https://user-images.githubusercontent.com/8551117/40692939-f8b2785c-63b4-11e8-9194-c944775bbdf6.png">

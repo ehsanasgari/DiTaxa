@@ -44,7 +44,7 @@ class NPEMarkerAnlaysis:
         self.num_p=num_p
         self.seq_IDS=FileUtility.read_fasta_sequences_ids(fasta_file)
         self.remove_redundants=remove_redundants
-        self.ez_taxa_dict={x.split()[0]:x.split()[1].split(';') for x in FileUtility.load_list('/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/EZ/raw/eztaxon_id_taxonomy.txt')}
+        self.ez_taxa_dict={x.split()[0]:x.split()[1].split(';') for x in FileUtility.load_list('../db/ez_idx_taxonomy.txt')}
         self.mat=FileUtility.load_sparse_csr(matrix_path)
         self.mat=self.mat.toarray()
         self.mat=self.mat[selected_samples,:]
