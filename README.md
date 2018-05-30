@@ -18,9 +18,12 @@ Asgari E., Muench P., Lesker T.R., McHardy A.C. and Mofrad M.R.K., Nucleotide-pa
  
 The datasets </strong> are also available for download <a href='http://llp.berkeley.edu/ditaxa'><img class="alignnone wp-image-36" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/zip.png" alt="" width="33" height="33" /></a>.
 
-<strong>Contact</strong>: Ehsaneddin Asgari (<span style="color: #0000ff;">asgari [at] berkeley [dot] edu</span>)
+<strong>Contact/Developer</strong>: Ehsaneddin Asgari (<span style="color: #0000ff;">asgari [at] berkeley [dot] edu</span>)
 <br/>
 <strong>Project page:</strong>: <a href="http://llp.berkeley.edu/ditaxa">http://llp.berkeley.edu/ditaxa</a>
+<strong>PIs</strong>: Prof. Alice McHardy and Prof. Mohammad Mofrad
+<br/>
+
 <hr />
 
 <span style="font-family: helvetica,arial,sans-serif; font-size: 24pt;"><strong>Summary</strong></span>
