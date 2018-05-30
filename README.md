@@ -71,16 +71,19 @@ A detailed manual is in progress. You may reuse the sample runs in main/DiTaxa.p
 <h2>Local ezCloud blast and GraPhlAn setup</h2>
 
 <h2>Bootstrapping for sample size selection</h2>
-
+<img src="https://user-images.githubusercontent.com/8551117/40692939-f8b2785c-63b4-11e8-9194-c944775bbdf6.png">
 
 <h2>Phenotype classification</h2>
-
+Supporting Random Forest, SVM, Cross-entropy classifier, Neural netwrok
 
 <h2>Biomarker detection</h2>
+
+<img src="https://user-images.githubusercontent.com/8551117/40691993-7b6e0014-63af-11e8-9289-c3b842aff9f6.png"/>
 
 
 <h2>Heatmap creation</h2>
 
+<img src="https://user-images.githubusercontent.com/8551117/40692895-b01a2a68-63b4-11e8-95d2-fc3727471bca.png"/>
 
 
 
