@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals, division
 
 # Modified by Ehsaneddin Asgari
 __author__ = "Ehsaneddin Asgari"
@@ -20,8 +21,6 @@ Reference:
 Rico Sennrich, Barry Haddow and Alexandra Birch (2015). Neural Machine Translation of Rare Words with Subword Units.
 Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (ACL 2016). Berlin, Germany.
 """
-
-from __future__ import unicode_literals, division
 
 import sys
 import codecs
