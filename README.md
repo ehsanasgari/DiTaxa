@@ -24,7 +24,7 @@ The datasets </strong> are also available for download <a href='http://llp.berke
 <br/>
 <strong>PIs</strong>: Prof. Alice McHardy* and Prof. Mohammad Mofrad*
 <br/>
-<img class="alignnone size-full wp-image-9" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/logo_ucb2-e1516672757796.png" alt="" width="100" height="97" />        <img class="alignnone wp-image-125" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Logo_HZI_2x1-300x129.png" alt="" width="202" height="87" />
+ <img class="alignnone wp-image-125" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Logo_HZI_2x1-300x129.png" alt="" width="202" height="87" /> <img class="alignnone size-full wp-image-9" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/logo_ucb2-e1516672757796.png" alt="" width="100" height="97" />       
 
 <hr />
 
