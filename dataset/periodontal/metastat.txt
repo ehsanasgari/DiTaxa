@@ -1,0 +1,7 @@
+BIOCPE AUTO GENERATED STATISTICS
+number of  diseased : 10
+average number of sequences in  diseased : 34745.3
+std of number of sequences in  diseased : 7488.20465866
+number of  healthy : 10
+average number of sequences in  healthy : 13940.9
+std of number of sequences in  healthy : 6327.16820466
