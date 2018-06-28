@@ -157,7 +157,14 @@ class FileUtility(object):
         return pickle.load(open(filename, "rb"))
 
     @staticmethod
+    def ensure_dir(file_path):
+        directory = os.path.dirname(file_path)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+    @staticmethod
     def save_list(filename, list_names):
+        FileUtility.ensure_dir(filename)
         f = codecs.open(filename, 'w', 'utf-8')
         for x in list_names:
             f.write(x + '\n')

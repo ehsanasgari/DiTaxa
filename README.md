@@ -68,10 +68,31 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 <h1> User Manual </h1>
 
 ```
-python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --filelist list_of_files_in_a_file --label label_files --label_vals mapping_between_labels_to_1_or_0
+python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --fast2label mapping_file_from_name_to_phenotype --phenomap mapping_labels_to_binary_1_or_0_phenotype
 ```
 
 Using the above mentioned command all the steps will be done sequentially and output will be organized in subdirectories.
+
+--indir: The input directory containing all fasta or fastq files. (e.g.: datasets/periodontal/)
+--ext: Sequence file extensions (fasta or fastq) (e.g.: fastq)
+--outdir: The output directory (e.g.: /mounts/data/ditaxa/results/test_dental_out/)
+--cores: Number of cores (e.g.: 40)
+--fast2label: tabular mapping file between file names and the labels
+--phenomap: mapping from label to binary phenotypes
+
+```
+python3 ditaxa.py --indir /mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/
+ --ext fastq
+ --outdir /mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/test_dental/
+ --dbname new_periodontal
+ --cores 20
+ --fast2label /mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/mapping.txt
+ --phenomap diseased:1,healthy:0
+
+```
+
+
+
 A detailed manual is in progress. You may reuse the sample runs in main/DiTaxa.py or the provided command example.
 
 <h2>Local ezCloud blast and GraPhlAn setup</h2>

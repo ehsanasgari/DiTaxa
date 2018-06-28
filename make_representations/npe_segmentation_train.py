@@ -58,10 +58,10 @@ class NPESegmentTrainMetagenomics:
         pool.close()
         print('Corpus size for training NPE is ', len(corpus))
         if backend == 'Sentencepiece':
-            FileUtility.save_list('../tmp/tmp_txt', corpus)
+            FileUtility.save_list('tmp/tmp_txt', corpus)
             spm.SentencePieceTrainer.Train(
-                '--input=../tmp/tmp_txt --model_prefix=' + output_dir + ' --add_dummy_prefix false --max_sentencepiece_length=512 --model_type=bpe --mining_sentence_size=5000000 --input_sentence_size=10000000 --vocab_size=50000')
-            FileUtility.save_list('../tmp/tmp_txt', corpus[0:10])
+                '--input=tmp/tmp_txt --model_prefix=' + output_dir + ' --add_dummy_prefix false --max_sentencepiece_length=512 --model_type=bpe --mining_sentence_size=5000000 --input_sentence_size=10000000 --vocab_size=50000')
+            FileUtility.save_list('tmp/tmp_txt', corpus[0:10])
         elif backend == 'normalbpe':
             train_npe(corpus, output_dir, vocab_size, output_dir + '_freq')
         print(' The segmentation training took ', timeit.default_timer() - start, ' ms.')

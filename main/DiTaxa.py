@@ -23,7 +23,7 @@ from make_representations.npe_segmentation_apply import NPESegmentApplyMetagenom
 from marker_detection.npe_biomarker_extraction import NPEMarkerDetection
 from marker_detection.npe_generate_taxa_tree import NPEMarkerAnlaysis
 import sys, os
-
+import shutil
 
 
 class DiTaxaWorkflow:
@@ -75,7 +75,7 @@ class DiTaxaWorkflow:
                       backend='Sentencepiece',num_p=self.num_p)
         end = time.time()
         spent = (end - start)
-        self.log_file.append('training segmentation '+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s '])+str(spent)+' seconds , using '+str(self.num_p)+'cores')
+        self.log_file.append('training segmentation '+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s '])+str(spent)+' seconds , using '+str(self.num_p)+' cores')
         DiTaxaWorkflow.enablePrint()
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
 
@@ -92,7 +92,7 @@ class DiTaxaWorkflow:
         spent = end-start
         self.log_file.append('generating the representations npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
-
+        DiTaxaWorkflow.temp_cleanup()
 
     def biomarker_extraction(self, labeler, label_mapper, name_setting,p_value_threshold=0.05, pos_label=None,neg_label=None):
         '''
@@ -153,8 +153,18 @@ class DiTaxaWorkflow:
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
         if pos_label and neg_label:
             Final_OBJ.generate_heatmap(self.output_directory+'final_outputs/'+name_setting+'_heatmap', pos_label=pos_label, neg_label=neg_label)
+        DiTaxaWorkflow.temp_cleanup()
 
 
+    @staticmethod
+    def temp_cleanup():
+        for the_file in os.listdir('tmp/'):
+            file_path = os.path.join('tmp/', the_file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+            except Exception as e:
+                print(e)
 
     @staticmethod
     def ensure_dir(file_path):

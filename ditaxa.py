@@ -11,6 +11,7 @@ import os
 import os.path
 import sys
 from main.DiTaxa import DiTaxaWorkflow
+from utility.file_utility import FileUtility
 
 
 def checkArgs(args):
@@ -48,15 +49,12 @@ def checkArgs(args):
                         help='Number of cores to be used, default is 4')
 
     # label filename #################################################################################################
-    parser.add_argument('--fastlist', action='store', dest='filelist', default=False, type=str,
-                        help='fasta file names, the same order should be used in the label file')
+    parser.add_argument('--fast2label', action='store', dest='fast2label', default=False, type=str,
+                        help='tabular mapping between fatsa/fastq file names and their labels')
 
-    # label file #################################################################################################
-    parser.add_argument('--label', action='store', dest='label', default=False, type=str,
-                        help='labels with the same order as the files in --fastlist')
 
     # label values ##################################################################################
-    parser.add_argument('--label_vals', action='store', dest='label_value', default=None, type=str,
+    parser.add_argument('--phenomap', action='store', dest='phenomap', default=None, type=str,
                         help='pair of comma separated label:[0 or 1]. e.g., untreated_disease:1, treated_diesease:0, healthy:0, ..')
 
 
@@ -65,15 +63,12 @@ def checkArgs(args):
     if (not os.access(parsedArgs.input_dir, os.F_OK)):
         err = err + "\nError: Permission denied or could not find the directory!"
         return err
-    if (not os.access(parsedArgs.label, os.F_OK)):
-        err = err + "\nError: Permission to the label file is denied!"
-        return err
-    if (not os.access(parsedArgs.filelist, os.F_OK)):
+    if (not os.access(parsedArgs.fast2label, os.F_OK)):
         err = err + "\nError: Permission to the label file is denied!"
         return err
     try:
         label_dict = dict()
-        for x in parsedArgs.label_value.split(','):
+        for x in parsedArgs.phenomap.split(','):
             k, n = x.split(':')
             k = k
             n = int(n)
@@ -86,8 +81,7 @@ def checkArgs(args):
                                           parsedArgs.filetype,parsedArgs.output_dir,parsedArgs.dbname,50000,5000,-1,num_p=parsedArgs.cores, override=parsedArgs.override)
     Pipeline.train_npe()
     Pipeline.representation_npe()
-    labels=FileUtility.load_list(parsedArgs.label)
-    labels={x.split('/')[-1]:labels[idx] for idx,x in enumerate(FileUtility.load_list(parsedArgs.filelist))}
+    labels={line.split()[0].split('/')[-1]:line.split()[1] for line in FileUtility.load_list(parsedArgs.fast2label)}
     Pipeline.biomarker_extraction(labels,label_dict,parsedArgs.dbname)
 
 
