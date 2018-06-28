@@ -67,15 +67,18 @@ class DiTaxaWorkflow:
         '''
         print('npe training started.. ')
         DiTaxaWorkflow.blockPrint()
-        start = time.time()
-        G16s = NPESegmentTrainMetagenomics(self.file_directory, self.file_extenstion)
-        DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_segmentatation/')
-        G16s.generate(self.vocab_size, self.seg_train_depth,
-                      self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s']),
-                      backend='Sentencepiece',num_p=self.num_p)
-        end = time.time()
-        spent = (end - start)
-        self.log_file.append('training segmentation '+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s '])+str(spent)+' seconds , using '+str(self.num_p)+' cores')
+        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory+'npe_segmentatation/'):
+            start = time.time()
+            G16s = NPESegmentTrainMetagenomics(self.file_directory, self.file_extenstion)
+            DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_segmentatation/')
+            G16s.generate(self.vocab_size, self.seg_train_depth,
+                          self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s']),
+                          backend='Sentencepiece',num_p=self.num_p)
+            end = time.time()
+            spent = (end - start)
+            self.log_file.append('training segmentation '+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s '])+str(spent)+' seconds , using '+str(self.num_p)+' cores')
+        else:
+            self.log_file.append('segmentation directory already exists and the training was bypassed')
         DiTaxaWorkflow.enablePrint()
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
 
@@ -84,13 +87,17 @@ class DiTaxaWorkflow:
         :return:
         '''
         print('npe generation started..')
-        start = time.time()
-        G16s = NPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
-        DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_representation/')
-        G16s.generate_npes_all(save=self.output_directory+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
-        end = time.time()
-        spent = end-start
-        self.log_file.append('generating the representations npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
+
+        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory+'npe_representation/'):
+            start = time.time()
+            G16s = NPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
+            DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_representation/')
+            G16s.generate_npes_all(save=self.output_directory+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
+            end = time.time()
+            spent = end-start
+            self.log_file.append('generating the representations npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
+        else:
+            self.log_file.append('representation directory already exists and the step was bypassed')
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
         DiTaxaWorkflow.temp_cleanup()
 
@@ -165,6 +172,10 @@ class DiTaxaWorkflow:
                     os.unlink(file_path)
             except Exception as e:
                 print(e)
+
+    @staticmethod
+    def exists(file_path):
+        return os.path.exists(file_path)
 
     @staticmethod
     def ensure_dir(file_path):
