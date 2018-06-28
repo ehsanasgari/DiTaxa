@@ -31,13 +31,14 @@ class DiTaxaWorkflow:
         DiTaxaWorkflow
     '''
 
-    def __init__(self, file_directory, file_extenstion, output_directory, dbname, vocab_size, seg_train_depth ,rep_sampling_depth, num_p=1,onlyfiles=[]):
+    def __init__(self, file_directory, file_extenstion, output_directory, dbname, vocab_size, seg_train_depth ,rep_sampling_depth, num_p=1,onlyfiles=[], override=1):
         '''
         :param file_directory: the samples directory
         :param file_extenstion: the file extension fastq or fasta
         :param onlyfiles: filter a list of files
         :param backend: which backend to use
         '''
+        self.override=override
         print('Segmentation training')
         self.file_directory = file_directory
         self.file_extenstion = file_extenstion
@@ -64,7 +65,7 @@ class DiTaxaWorkflow:
         '''
         :return:
         '''
-        print('npe training started.. it might take more than 1 hour for more than 1000 samples')
+        print('npe training started.. ')
         DiTaxaWorkflow.blockPrint()
         start = time.time()
         G16s = NPESegmentTrainMetagenomics(self.file_directory, self.file_extenstion)
