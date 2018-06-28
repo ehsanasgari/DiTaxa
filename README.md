@@ -68,7 +68,7 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 <h1> User Manual </h1>
 
 ```
-python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --filelis list_of_files_in_a_file --label label_files --label_vals mapping_between_labels_to_1_or_0
+python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --filelist list_of_files_in_a_file --label label_files --label_vals mapping_between_labels_to_1_or_0
 ```
 
 Using the above mentioned command all the steps will be done sequentially and output will be organized in subdirectories.
