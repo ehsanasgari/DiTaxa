@@ -71,6 +71,7 @@ class NPESegmentTrainMetagenomics:
         :param file_name_sample:
         :return:
         '''
+        random.seed(a=0)
         file_name = file_name_sample[0]
         sample_size = file_name_sample[1]
         corpus = []

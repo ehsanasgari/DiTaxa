@@ -24,8 +24,6 @@ sys.path.append('../')
 from scipy.sparse import csr_matrix
 import os
 import tqdm
-path = '/mounts/data/proj/asgari/dissertation/datasets/deepbio/taxonomy/ncbi-blast-2.5.0+/bin/'
-os.environ['PATH'] += ':'+path
 from Bio.Blast.Applications import NcbiblastnCommandline
 from Bio.Blast import NCBIXML
 from utility.math_utility import get_sym_kl_rows, get_borders, normalize_mat, compute_serial_matrix
@@ -41,6 +39,9 @@ from multiprocessing import Pool
 class NPEMarkerAnlaysis:
 
     def __init__(self,fasta_file, matrix_path, feature_file_path, phenotypes, phenotype_mapping,selected_samples, p_value_threshold=0.01, remove_redundants=False, num_p=4):
+        path=FileUtility.load_list('db/blastn_config.txt')[0]
+        if len(path)>0:
+            os.environ['PATH'] += ':'+path
         self.num_p=num_p
         self.seq_IDS=FileUtility.read_fasta_sequences_ids(fasta_file)
         self.remove_redundants=remove_redundants
@@ -429,8 +430,8 @@ class NPEMarkerAnlaysis:
         FileUtility.save_list(path+name+'_taxonomy.txt',taxonomy)
         FileUtility.save_list(path+name+'_annot.txt',annot)
 
-        subprocess.call("python /mounts/data/proj/asgari/dissertation/libraries/graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
-        subprocess.call("python /mounts/data/proj/asgari/dissertation/libraries/graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
+        subprocess.call("python2.7 graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
+        subprocess.call("python2.7 graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
 
     def refine_ez_taxonomy(self, record):
         record=record.split(';')
@@ -636,8 +637,6 @@ class NPEMarkerAnlaysis:
                     final_results=(seq,'ZZZNOVEL'+idx[-1],pval)
             else:
                 final_results=(seq,'ZZZNOVEL'+idx[-1],pval)
-
-        NPEMarkerAnlaysis.temp_cleanup()
         return final_results
 
     def align_markers_parallel(self,p_value_threshold):
@@ -650,6 +649,7 @@ class NPEMarkerAnlaysis:
             if res:
                 final_results.append(res)
         pool.close()
+        NPEMarkerAnlaysis.temp_cleanup()
         # sorted markers by the taxonomy information of the last certain level
         self.aligned_markers=sorted(final_results, key=operator.itemgetter(1), reverse=False)
         self.min_p_value=p_value_threshold

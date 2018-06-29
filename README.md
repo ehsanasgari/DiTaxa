@@ -97,9 +97,10 @@ A detailed manual is in progress. You may reuse the sample runs in main/DiTaxa.p
 
 <h2>Local ezCloud blast and GraPhlAn setup</h2>
 
-On line 27 of marker_detection/npe_generate_taxa_tree.py specify your blastn address. <br/>
-On line 576 please provide a path to your local blast.
-
+The local blast files are already compiled and exist in directory "db".
+Please make sure that NCBI BLASTN is already installed in your system.
+If blastn is not added to the path, you can alternatively add the path to
+"db/blastn_config.txt" file.
 
 <h2>Bootstrapping for sample size selection</h2>
 <img src="https://user-images.githubusercontent.com/8551117/40692939-f8b2785c-63b4-11e8-9194-c944775bbdf6.png">
