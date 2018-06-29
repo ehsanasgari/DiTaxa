@@ -98,7 +98,6 @@ A detailed manual is in progress. You may reuse the sample runs in main/DiTaxa.p
 <h2>Local ezCloud blast and GraPhlAn setup</h2>
 
 On line 27 of marker_detection/npe_generate_taxa_tree.py specify your blastn address. <br/>
-On line 252,253 please provide the GraPhlAn paths.
 On line 576 please provide a path to your local blast.
 
 

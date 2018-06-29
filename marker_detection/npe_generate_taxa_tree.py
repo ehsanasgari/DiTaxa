@@ -249,8 +249,8 @@ class NPEMarkerAnlaysis:
         FileUtility.save_list(path+name+'_taxonomy.txt',taxonomy)
         FileUtility.save_list(path+name+'_annot.txt',annot)
 
-        subprocess.call("python /mounts/data/proj/asgari/dissertation/libraries/graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
-        subprocess.call("python /mounts/data/proj/asgari/dissertation/libraries/graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
+        subprocess.call("python graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
+        subprocess.call("python graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
 
     def purify_tax_color(self, dict_color):
         new_dict_color=dict()
