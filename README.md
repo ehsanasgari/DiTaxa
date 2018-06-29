@@ -12,11 +12,10 @@
 </table>
 
 
-Asgari E., Münch P.C., Lesker T.R., McHardy A.C.&#9733; and Mofrad M.R.K.&#9733;, Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection. bioRxiv, 2018. Available at: ======
+Asgari E., Münch P.C., Lesker T.R., McHardy A.C.&#9733; and Mofrad M.R.K.&#9733;,<br/>
+<b>Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection.</b>
+bioRxiv (2018): 334722.
 
-
- 
-The datasets </strong> are also available for download <a href='http://llp.berkeley.edu/ditaxa'><img class="alignnone wp-image-36" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/zip.png" alt="" width="33" height="33" /></a>.
 
 <strong>Contact/Developer</strong>: Ehsaneddin Asgari (<span style="color: #0000ff;">asgari [at] berkeley [dot] edu</span>)
 <br/>
@@ -31,39 +30,44 @@ The datasets </strong> are also available for download <a href='http://llp.berke
 <span style="font-family: helvetica,arial,sans-serif; font-size: 24pt;"><strong>Summary</strong></span>
 
 &nbsp;
-
-We propose subsequence based 16S rRNA data processing, as a new paradigm for sequence phenotype classification and biomarker detection. This method and software called DiTaxa substitutes standard OTU-clustering or sequence-level analysis by segmenting 16S rRNA reads into the most frequent variable-length subsequences. These subsequences are then used as data representation for downstream phenotype prediction, biomarker detection and taxonomic analysis. Our proposed sequence segmentation called nucleotide-pair encoding (NPE) is an unsupervised data-driven segmentation inspired by Byte-pair encoding, a data compression algorithm. The identified subsequences represent commonly occurring sequence portions, which we found to be distinctive for taxa at varying evolutionary distances and highly informative for predicting host phenotypes.
-We compared the performance of DiTaxa to the state-of-the-art methods in disease phenotype prediction and biomarker detection, using human-associated 16S rRNA samples for periodontal disease, rheumatoid arthritis and inflammatory bowel diseases, as well as a synthetic benchmark dataset. DiTaxa identified 13 out of 21 taxa with confirmed links to periodontitis (recall=0.62), relative to 3 out of 21 taxa (recall=0.14) by the state-of-the-art method. On synthetic benchmark data, DiTaxa obtained full precision and recall in biomarker detection, compared to 0.91 and 0.90, respectively. In addition, machine-learning classifiers trained to predict host disease phenotypes based on the NPE representation performed competitively to the state-of-the art using OTUs or k-mers. For the rheumatoid arthritis dataset, DiTaxa substantially outperformed OTU features with a macro-F1 score of 0.76 compared to 0.65. Due to the alignment- and reference free nature, DiTaxa can efficiently run on large datasets. The full analysis of a large 16S rRNA dataset of 1359 samples required ~1.5 hours on 20 cores, while the standard pipeline needed ~6.5 hours in the same setting.
-
+Identifying combinations of taxa distinctive for microbiome-associated diseases is considered key to the establishment of diagnosis and therapy options in precision medicine and imposes high demands on accuracy of microbiome analysis techniques. We propose subsequence based 16S rRNA data analysis, as a new paradigm for microbiome phenotype classification and biomarker detection. This method and software called DiTaxa substitutes standard OTU-clustering or sequence-level analysis by segmenting 16S rRNA reads into the most frequent variable-length subsequences. These subsequences are then used as data representation for downstream phenotype prediction, biomarker detection and taxonomic analysis. Our proposed sequence segmentation called nucleotide-pair encoding (NPE) is an unsupervised data-driven segmentation inspired by Byte-pair encoding, a data compression algorithm. The identified subsequences represent commonly occurring sequence portions, which we found to be distinctive for taxa at varying evolutionary distances and highly informative for predicting host phenotypes.
+We compared the performance of DiTaxa to the state-of-the-art methods in disease phenotype prediction and biomarker detection, using human-associated 16S rRNA samples for periodontal disease, rheumatoid arthritis and inflammatory bowel diseases, as well as a synthetic benchmark dataset. DiTaxa identified 17 out of 29 taxa with confirmed links to periodontitis (recall=0.59), relative to 3 out of 29 taxa (recall=0.10) by the state-of-the-art method. On synthetic benchmark data, DiTaxa obtained full precision and recall in biomarker detection, compared to 0.91 and 0.90, respectively. In addition, machine-learning classifiers trained to predict host disease phenotypes based on the NPE representation performed competitively to the state-of-the art using OTUs or k-mers. For the rheumatoid arthritis dataset, DiTaxa substantially outperformed OTU features with a macro-F1 score of 0.76 compared to 0.65. Due to the alignment- and reference free nature, DiTaxa can efficiently run on large datasets. The full analysis of a large 16S rRNA dataset of 1359 samples required ~1.5 hours on 20 cores, while the standard pipeline needed ~6.5 hours in the same setting.
 &nbsp;</td>
 </tr>
 </tbody>
 
 </table>
 
+Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content/early/2018/01/31/255018">bioarXiv</a> version  <a href="https://www.biorxiv.org/highwire/citation/78275/bibtext"><img class="alignnone wp-image-142" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/bibtex-icon.png" alt="" width="44" height="44" /></a> <a href="https://www.biorxiv.org/highwire/citation/78275/mendeley"><img class="alignnone wp-image-143" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Apps-Mendeley-icon-150x150.png" alt="" width="47" height="41" /></a>
+
+```
+@article{asgari2018nucleotide,
+  title={Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection},
+  author={Asgari, Ehsaneddin and M{\"u}nch, Philipp C and Lesker, Till R and McHardy, Alice Carolyn and Mofrad, Mohammad RK},
+  journal={bioRxiv},
+  pages={334722},
+  year={2018},
+  publisher={Cold Spring Harbor Laboratory}
+}
+
+```
+
+
 
 <h1>Installation</h1>
 
-DiTaxa is implemented in Python3.x and uses ScikitLearn and Keras frameworks for machine learning. To install the dependencies use the following command:
+DiTaxa is implemented in Python3.x and uses Scikit-Learn and Keras frameworks for machine learning. To install the dependencies use the following command:
 ```
 pip install -r requirements.txt
 ```
 
-Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content/early/2018/01/31/255018">bioarXiv</a> version  <a href="https://www.biorxiv.org/highwire/citation/78275/bibtext"><img class="alignnone wp-image-142" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/bibtex-icon.png" alt="" width="44" height="44" /></a> <a href="https://www.biorxiv.org/highwire/citation/78275/mendeley"><img class="alignnone wp-image-143" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Apps-Mendeley-icon-150x150.png" alt="" width="47" height="41" /></a>
 
-```
-@article {Asgari255018,
-	author = {Asgari, Ehsaneddin and Muench, Philipp C. and Lesker T.R and McHardy A.C. and Mofrad, Mohammad R.K.},
-	title = {Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection},
-	year = {2018},
-	doi = {----},
-	publisher = {Cold Spring Harbor Laboratory},
-	URL = {https://www.biorxiv.org/content/---},
-	eprint = {https://www.biorxiv.org/content/early/----},
-	journal = {bioRxiv}
-}
+<h2>Local ezCloud blast and GraPhlAn setup</h2>
 
-```
+The local blast files are already compiled and exist in directory "db".
+Please make sure that NCBI BLASTN is already installed in your system.
+If blastn is not added to the path, you can alternatively add the path to
+"db/blastn_config.txt" file.
 
 <h1> User Manual </h1>
 
@@ -73,20 +77,25 @@ python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outd
 
 Using the above mentioned command all the steps will be done sequentially and output will be organized in subdirectories.
 
---indir: The input directory containing all fasta or fastq files. (e.g.: datasets/periodontal/)
---ext: Sequence file extensions (fasta or fastq) (e.g.: fastq)
---outdir: The output directory (e.g.: /mounts/data/ditaxa/results/test_dental_out/)
---cores: Number of cores (e.g.: 40)
---fast2label: tabular mapping file between file names and the labels
---phenomap: mapping from label to binary phenotypes
---phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0
---override: 1 to override the existing files, 0 to only generate the missing files
+--indir: The input directory containing all fasta or fastq files. (e.g.: datasets/periodontal/)<br/>
+--ext: Sequence file extensions (fasta or fastq) (e.g.: fastq)<br/>
+--outdir: The output directory (e.g.: /mounts/data/ditaxa/results/test_dental_out/)<br/>
+--cores: Number of cores (e.g.: 40)<br/>
+--fast2label: tabular mapping file between file names and the labels<br/>
+--phenomap: mapping from label to binary phenotypes<br/>
+--phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0<br/>
+--override: 1 to override the existing files, 0 to only generate the missing files<br/>
+--heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<b/>
+--excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<b/>
 
+<h1> Example </h1>
+
+For the test purpose we provided the use of periodontal disease dataset. You may run the following command after installation:
 
 ```
 python3 ditaxa.py --indir dataset/periodontal/
  --ext fastq
- --outdir /mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/test_dental/
+ --outdir ../results_dental/
  --dbname periodontal
  --cores 20
  --fast2label dataset/periodontal/mapping.txt
@@ -96,15 +105,6 @@ python3 ditaxa.py --indir dataset/periodontal/
 ```
 
 
-
-A detailed manual is in progress. You may reuse the sample runs in main/DiTaxa.py or the provided command example.
-
-<h2>Local ezCloud blast and GraPhlAn setup</h2>
-
-The local blast files are already compiled and exist in directory "db".
-Please make sure that NCBI BLASTN is already installed in your system.
-If blastn is not added to the path, you can alternatively add the path to
-"db/blastn_config.txt" file.
 
 <h2>Bootstrapping for sample size selection</h2>
 <img src="https://user-images.githubusercontent.com/8551117/40692939-f8b2785c-63b4-11e8-9194-c944775bbdf6.png">
