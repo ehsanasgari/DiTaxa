@@ -62,6 +62,16 @@ def checkArgs(args):
     parser.add_argument('--phenoname', action='store', dest='phenoname', default=None, type=str,
                         help='Phenotype setting name, if not given the labeling scheme will be used.')
 
+    # generate heatmap ###############################################################################
+    parser.add_argument('--heatmap', action='store', dest='heatmap', default=None, type=str,
+                        help='to generate heatmap of top 100 markers: positive_title:negative_title')
+
+    # generate excel file  ###############################################################################
+    parser.add_argument('--excel', action='store', dest='excel', default=1, type=int,
+                        help='to generate excel output')
+
+    #:(max pvalue or number of markers) diseases:healthy:100
+
 
     parsedArgs = parser.parse_args()
 
@@ -88,13 +98,23 @@ def checkArgs(args):
     except:
         err = err + "\nWrong format for labels!"
         return err
+    if parsedArgs.heatmap:
+        if not len(parsedArgs.heatmap.split(':'))==2:
+            return err + "\nThe heatmap inputs is incorrect!"
 
     Pipeline = DiTaxaWorkflow(parsedArgs.input_dir,
                                           parsedArgs.filetype,parsedArgs.output_dir,parsedArgs.dbname,50000,5000,-1,num_p=parsedArgs.cores, override=parsedArgs.override)
     Pipeline.train_npe()
     Pipeline.representation_npe()
     labels={line.split()[0].split('/')[-1]:line.split()[1] for line in FileUtility.load_list(parsedArgs.fast2label)}
-    Pipeline.biomarker_extraction(labels,label_dict,phenoname)
+
+    num_markers=None
+    pvalue=None
+    if parsedArgs.heatmap:
+        pos_label, neg_label =parsedArgs.heatmap.split(':')
+        Pipeline.biomarker_extraction(labels,label_dict,phenoname,pos_label=pos_label,neg_label=neg_label)
+    else:
+        Pipeline.biomarker_extraction(labels,label_dict,phenoname)
 
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ import operator
 import numpy as np
 from utility.list_set_util import argsort
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from utility.visualization_utility import create_mat_plot
 import seaborn as sns; sns.set()
@@ -33,7 +33,6 @@ import pandas as pd
 from scipy.spatial.distance import pdist, squareform
 import subprocess
 from multiprocessing import Pool
-#import subprocess # just to call an arbitrary command e.g. 'ls'
 
 
 class NPEMarkerAnlaysis:
@@ -130,32 +129,29 @@ class NPEMarkerAnlaysis:
         rows_reverted=column_sorted[::-1,]
 
         fig, ax = plt.subplots(figsize=(40,110))
-        try:
-            plt.set_style({'axes.facecolor': 'black','grid.color': 'black','axes.facecolor': 'black','figure.facecolor': 'black'})
-        except:
-            print('')
+        sheat=sns.heatmap(rows_reverted, cbar=True, ax=ax, cmap='coolwarm',yticklabels=y_labels[::-1], linecolor='black')
+        sheat.set_facecolor('black')
         sns.set_style({'axes.facecolor': 'black','grid.color': 'black','axes.facecolor': 'black','figure.facecolor': 'black'})
-        sns.heatmap(rows_reverted, cbar=True, ax=ax, cmap='coolwarm',yticklabels=y_labels[::-1])
-        #sns.heatmap(rows_reverted, mask=(rows_reverted==-1), cbar=False, linecolor="black")
+
         ax.hlines(y_borders, *ax.get_xlim(), colors=['black'],linewidth=2)
         ax.vlines(get_borders(labels), *ax.get_ylim(), label=['u','h'], color='black',linewidth=5)
 
-        plt.text(0.4,rows_reverted.shape[0]+1,labels[0].replace('_','-'), color='purple', fontsize=20, fontweight='bold')
+        plt.text(0.4,rows_reverted.shape[0]+1,labels[0].replace('_','-'), color='purple', fontsize=30, fontweight='bold')
         for x in get_borders(labels):
-            plt.text(x+0.4,rows_reverted.shape[0]+1,labels[x].replace('_','-'), color='purple', fontsize=20, fontweight='bold')
+            plt.text(x+0.4,rows_reverted.shape[0]+1,labels[x].replace('_','-'), color='purple', fontsize=30, fontweight='bold')
 
         for x,y in single_hits:
-            plt.text(y+0.2,map_y[x]-0.2,'*', color='white', fontsize=12, fontweight='bold')
+            plt.text(y+0.2,map_y[x]+0.2,'*', color='white', fontsize=40, fontweight='bold')
 
         if 'ZZZ' in taxonomy[0]:
-            plt.text(0.5,0.1,taxonomy[0].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=10,fontweight='bold')
+            plt.text(0.5,0.1,taxonomy[0].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=25,fontweight='bold')
         else:
-            plt.text(0.5,0.1,taxonomy[0].replace('_','-'), rotation=0, color='white', fontsize=10, fontweight='bold')
+            plt.text(0.5,0.1,taxonomy[0].replace('_','-'), rotation=0, color='white', fontsize=18, fontweight='bold')
         for x in y_borders:
             if 'ZZZ' in taxonomy[x]:
-                plt.text(0.5,x+0.1,taxonomy[x].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=10,fontweight='bold')
+                plt.text(0.5,x+0.1,taxonomy[x].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=25,fontweight='bold')
             else:
-                plt.text(0.5,x+0.1,taxonomy[x].replace('_','-'), rotation=0, color='white', fontsize=10, fontweight='bold')
+                plt.text(0.5,x+0.1,taxonomy[x].replace('_','-'), rotation=0, color='white', fontsize=18, fontweight='bold')
 
         ax.axhline(y=0, color='black',linewidth=5)
         ax.axvline(x=0, color='black',linewidth=5)
@@ -485,6 +481,20 @@ class NPEMarkerAnlaysis:
         new_matrix=np.array(new_matrix)
         self.update_matrix=new_matrix
 
+    def update_matrix_by_markers_N(self):
+        '''
+            called by align_markers
+        '''
+        self.aligned_markers=sorted(self.aligned_markers, key=operator.itemgetter(2), reverse=False)
+        self.aligned_markers=self.aligned_markers[0:100]
+        self.aligned_markers=sorted(self.aligned_markers, key=operator.itemgetter(1), reverse=False)
+
+        new_matrix=[]
+        for feature, taxnomy, pvalue in self.aligned_markers:
+            column=self.features.index(feature)
+            new_matrix.append(self.mat[:,column].toarray().T[0].tolist())
+        new_matrix=np.array(new_matrix)
+        self.update_matrix=new_matrix
     @staticmethod
     def find_best_record(records):
         candiates=[(x[0],x[1],x[2],-len(x[1].split(';'))) for x in records]

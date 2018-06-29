@@ -172,7 +172,12 @@ class DiTaxaWorkflow:
 
         # generating the tree
         Final_OBJ.generate_tree(self.output_directory +'final_outputs/', phenoname)
+
+
+
         if pos_label and neg_label:
+            print('Creating marker heatmap..')
+            Final_OBJ.update_matrix_by_markers_N()
             Final_OBJ.generate_heatmap(self.output_directory +'final_outputs/' + phenoname + '_heatmap', pos_label=pos_label, neg_label=neg_label)
         DiTaxaWorkflow.temp_cleanup()
 
