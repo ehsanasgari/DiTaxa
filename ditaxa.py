@@ -24,6 +24,8 @@ def checkArgs(args):
     # will be prompted
     parser = argparse.ArgumentParser()
 
+    ## to do : chi2 print, intermediate ones,  hard coded,
+
     # input directory #################################################################################################
     parser.add_argument('--indir', action='store', dest='input_dir', default=False, type=str,
                         help='directory of 16S rRNA samples')
@@ -52,10 +54,13 @@ def checkArgs(args):
     parser.add_argument('--fast2label', action='store', dest='fast2label', default=False, type=str,
                         help='tabular mapping between fatsa/fastq file names and their labels')
 
-
     # label values ##################################################################################
     parser.add_argument('--phenomap', action='store', dest='phenomap', default=None, type=str,
                         help='pair of comma separated label:[0 or 1]. e.g., untreated_disease:1, treated_diesease:0, healthy:0, ..')
+
+    # label values ##################################################################################
+    parser.add_argument('--phenoname', action='store', dest='phenoname', default=None, type=str,
+                        help='Phenotype setting name, if not given the labeling scheme will be used.')
 
 
     parsedArgs = parser.parse_args()
@@ -68,11 +73,18 @@ def checkArgs(args):
         return err
     try:
         label_dict = dict()
+        pheno_temp=[]
         for x in parsedArgs.phenomap.split(','):
             k, n = x.split(':')
             k = k
             n = int(n)
             label_dict[k]=n
+            pheno_temp.append('@'.join([k,str(n)]))
+        pheno_temp='#'.join(pheno_temp)
+        if not parsedArgs.phenoname:
+            phenoname=pheno_temp
+        else:
+            phenoname=parsedArgs.phenoname
     except:
         err = err + "\nWrong format for labels!"
         return err
@@ -82,7 +94,7 @@ def checkArgs(args):
     Pipeline.train_npe()
     Pipeline.representation_npe()
     labels={line.split()[0].split('/')[-1]:line.split()[1] for line in FileUtility.load_list(parsedArgs.fast2label)}
-    Pipeline.biomarker_extraction(labels,label_dict,parsedArgs.dbname)
+    Pipeline.biomarker_extraction(labels,label_dict,phenoname)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,8 @@
+syntax: glob
+.hgignore
+*.pyc
+*.DS_Store
+*.log
+examples/caritro_fig6/
+examples/andrew_crc_cutc/
+examples/test/
