@@ -12,8 +12,8 @@
 </table>
 
 
-Asgari E., Münch P.C., Lesker T.R., McHardy A.C.&#9733; and Mofrad M.R.K.&#9733;,<br/>
-<b>Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection.</b>
+Asgari E., Münch P. C., Lesker T. R., McHardy A. C. &#9733;, and Mofrad M. R. K. &#9733;,<br/>
+<b>Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection.</b><br/>
 bioRxiv (2018): 334722.
 
 
@@ -83,7 +83,7 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --cores: Number of cores (e.g.: 40)<br/>
 --fast2label: tabular mapping file between file names and the labels<br/>
 --phenomap: mapping from label to binary phenotypes<br/>
---phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0<br/>
+--phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0. Please note that a single project may have several phenotype mapping schemes (untreated diseased versus all or untreated versus healthy or etc.)<br/>
 --override: 1 to override the existing files, 0 to only generate the missing files<br/>
 --heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<b/>
 --excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<b/>
@@ -103,7 +103,6 @@ python3 ditaxa.py --indir dataset/periodontal/
  --override 1
 
 ```
-
 
 
 <h2>Bootstrapping for sample size selection</h2>
