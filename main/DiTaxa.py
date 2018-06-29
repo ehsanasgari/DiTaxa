@@ -52,6 +52,8 @@ class DiTaxaWorkflow:
         self.rep_sampling_depth=rep_sampling_depth
         self.num_p=num_p
         self.output_directory=output_directory
+        self.output_directory_inter=(output_directory[0:-1] if output_directory[-1]=='/' else output_directory)+'/intermediate_files/'
+
 
         DiTaxaWorkflow.ensure_dir(self.output_directory)
         if not os.path.exists(self.output_directory+'logfile.txt'):
@@ -64,14 +66,14 @@ class DiTaxaWorkflow:
         '''
         :return:
         '''
-        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory+'npe_segmentatation/'):
+        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory_inter+'npe_segmentatation/'):
             print('npe training started.. ')
             DiTaxaWorkflow.blockPrint()
             start = time.time()
             G16s = NPESegmentTrainMetagenomics(self.file_directory, self.file_extenstion)
-            DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_segmentatation/')
+            DiTaxaWorkflow.ensure_dir(self.output_directory_inter+'npe_segmentatation/')
             G16s.generate(self.vocab_size, self.seg_train_depth,
-                          self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s']),
+                          self.output_directory_inter+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s']),
                           backend='Sentencepiece',num_p=self.num_p)
             end = time.time()
             spent = (end - start)
@@ -86,12 +88,12 @@ class DiTaxaWorkflow:
         '''
         :return:
         '''
-        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory+'npe_representation/'):
+        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory_inter+'npe_representation/'):
             print('npe generation started..')
             start = time.time()
-            G16s = NPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
-            DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_representation/')
-            G16s.generate_npes_all(save=self.output_directory+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
+            G16s = NPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory_inter+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
+            DiTaxaWorkflow.ensure_dir(self.output_directory_inter+'npe_representation/')
+            G16s.generate_npes_all(save=self.output_directory_inter+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
             end = time.time()
             spent = end-start
             self.log_file.append('generating the representations npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
@@ -108,7 +110,7 @@ class DiTaxaWorkflow:
         '''
         print('npe marker detection started')
         start = time.time()
-        rep_base_path=self.output_directory+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)
+        rep_base_path=self.output_directory_inter+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)
         filenames=[x.split('/')[-1] for x in FileUtility.load_list(rep_base_path+'_meta')]
 
         # CHECK EXISTING LABELS
@@ -124,11 +126,11 @@ class DiTaxaWorkflow:
             Y=[str(label_mapper[labeler[filenames[sample_id]]]) for sample_id in selected_samples]
 
         FileUtility.save_list(rep_base_path +'_' + phenoname + '_Y.txt', Y)
-        DiTaxaWorkflow.ensure_dir(self.output_directory+'npe_marker_files/')
+        DiTaxaWorkflow.ensure_dir(self.output_directory_inter+'npe_marker_files/')
 
-        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory+'npe_marker_files/'+'_'.join([phenoname,'chi2_relative.fasta'])):
+        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory_inter+'npe_marker_files/'+'_'.join([phenoname,'chi2_relative.fasta'])):
             DiTaxaWorkflow.blockPrint()
-            G16s = NPEMarkerDetection(rep_base_path +'.npz', rep_base_path +'_' + phenoname + '_Y.txt', rep_base_path + '_features', self.output_directory + 'npe_marker_files/' + phenoname, selected_samples)
+            G16s = NPEMarkerDetection(rep_base_path +'.npz', rep_base_path +'_' + phenoname + '_Y.txt', rep_base_path + '_features', self.output_directory_inter + 'npe_marker_files/' + phenoname, selected_samples)
             G16s.extract_markers()
             DiTaxaWorkflow.enablePrint()
             end = time.time()
@@ -147,7 +149,7 @@ class DiTaxaWorkflow:
         else:
             phenotypes=[labeler[filenames[sample_id]] for sample_id in selected_samples]
 
-        fasta_file=self.output_directory+'npe_marker_files/' + phenoname + '_chi2_relative.fasta'
+        fasta_file=self.output_directory_inter+'npe_marker_files/' + phenoname + '_chi2_relative.fasta'
         matrix_path=rep_base_path+'.npz'
         feature_file_path=rep_base_path+'_features'
 
@@ -156,16 +158,17 @@ class DiTaxaWorkflow:
         else:
             remove_redundants=True
 
-        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory+'final_outputs/'+phenoname+'.pickle'):
+        FileUtility.ensure_dir(self.output_directory+'final_outputs/save_states/')
+        if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory+'final_outputs/save_states/'+phenoname+'.pickle'):
             start = time.time()
             Final_OBJ=NPEMarkerAnlaysis(fasta_file, matrix_path, feature_file_path, phenotypes, label_mapper, selected_samples, p_value_threshold=p_value_threshold, remove_redundants=remove_redundants,num_p=self.num_p)
             end = time.time()
             spent = end-start
             DiTaxaWorkflow.ensure_dir(self.output_directory+'final_outputs/')
-            FileUtility.save_obj(self.output_directory +'final_outputs/' + phenoname, Final_OBJ)
+            FileUtility.save_obj(self.output_directory+'final_outputs/save_states/' + phenoname, Final_OBJ)
             self.log_file.append('blasting extraction ' + phenoname + '  ' + str(spent) + ' seconds, using ' + str(self.num_p) + 'cores')
         else:
-            Final_OBJ=FileUtility.load_obj(self.output_directory+'final_outputs/'+phenoname+'.pickle')
+            Final_OBJ=FileUtility.load_obj(self.output_directory+'final_outputs/save_states/'+phenoname+'.pickle')
             print('The aligned markers already existed and are loaded!')
             self.log_file.append('The aligned markers already existed and are loaded!')
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
@@ -174,6 +177,7 @@ class DiTaxaWorkflow:
         Final_OBJ.generate_tree(self.output_directory +'final_outputs/', phenoname)
 
         if excel==1:
+            print('Creating marker excel file..')
             Final_OBJ.generate_excel(self.output_directory +'final_outputs/' + phenoname + '.xlsx',phenoname)
 
         if pos_label and neg_label:

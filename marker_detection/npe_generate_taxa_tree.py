@@ -182,7 +182,8 @@ class NPEMarkerAnlaysis:
 
     def generate_tree(self, path, name):
 
-
+        path_g=path+'/graphlan_files/'
+        FileUtility.ensure_dir(path_g)
         font_map={1:15,2:14,3:13,4:12, 5:8,6:7,7:4}
         taxonomy=self.get_pandas_df()['taxonomy'].tolist()
         direction=self.get_pandas_df()['direction'].tolist()
@@ -253,11 +254,12 @@ class NPEMarkerAnlaysis:
         taxonomy=[x for x in taxonomy if len(x.split('.'))>5 if not dict_color[x.split('.')[-1]]=='w']
 
 
-        FileUtility.save_list(path+name+'_taxonomy.txt',taxonomy)
-        FileUtility.save_list(path+name+'_annot.txt',annot)
+        FileUtility.save_list(path_g+name+'_taxonomy.txt',taxonomy)
+        FileUtility.save_list(path_g+name+'_annot.txt',annot)
 
-        subprocess.call("python2.7 graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
-        subprocess.call("python2.7 graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
+        subprocess.call("python2.7 graphlan/graphlan_annotate.py --annot "+path_g+name+'_annot.txt'+" "+path_g+name+'_taxonomy.txt'+"  "+path_g+name+'.xml', shell=True)
+        subprocess.call("python2.7 graphlan/graphlan.py "+path_g+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
+        FileUtility.remove(path+name+'_legend.pdf')
 
     def purify_tax_color(self, dict_color):
         new_dict_color=dict()
