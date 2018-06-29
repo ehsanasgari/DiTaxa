@@ -79,15 +79,19 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --cores: Number of cores (e.g.: 40)
 --fast2label: tabular mapping file between file names and the labels
 --phenomap: mapping from label to binary phenotypes
+--phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0
+--override: 1 to override the existing files, 0 to only generate the missing files
+
 
 ```
-python3 ditaxa.py --indir /mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/
+python3 ditaxa.py --indir dataset/periodontal/
  --ext fastq
  --outdir /mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/test_dental/
- --dbname new_periodontal
+ --dbname periodontal
  --cores 20
- --fast2label /mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/mapping.txt
+ --fast2label dataset/periodontal/mapping.txt
  --phenomap diseased:1,healthy:0
+ --override 1
 
 ```
 
