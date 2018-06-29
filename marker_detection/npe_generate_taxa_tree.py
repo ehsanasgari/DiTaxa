@@ -249,8 +249,8 @@ class NPEMarkerAnlaysis:
         FileUtility.save_list(path+name+'_taxonomy.txt',taxonomy)
         FileUtility.save_list(path+name+'_annot.txt',annot)
 
-        subprocess.call("python graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
-        subprocess.call("python graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
+        subprocess.call("python2.7 graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
+        subprocess.call("python2.7 graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
 
     def purify_tax_color(self, dict_color):
         new_dict_color=dict()
@@ -573,9 +573,9 @@ class NPEMarkerAnlaysis:
             pval=float(description.split(':')[1])
             if pval<=p_value_threshold:
                 FileUtility.create_fasta_file('temp.fasta',[seq],['temp'])
-                blastx_cline=NcbiblastnCommandline(query='temp.fasta', db="/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/EZ/raw/eztaxon_qiime_full.fasta", evalue=0.001, outfmt=5, out="temp.xml")
+                blastx_cline=NcbiblastnCommandline(query='temp.fasta', db="db/eztaxon_qiime_full.fasta", evalue=0.001, outfmt=5, out="tmp/temp.xml")
                 blastx_cline()
-                f=open("temp.xml",'r')
+                f=open("tmp/temp.xml",'r')
                 blast_records = NCBIXML.parse(f)
                 flag=False
                 score=-1
@@ -610,10 +610,10 @@ class NPEMarkerAnlaysis:
         pval=float(description.split(':')[1])
         final_results=[]
         if pval<=self.p_value_threshold:
-            FileUtility.create_fasta_file('../tmp/temp'+str(idx)+'.fasta',[seq],['temp'])
-            blastx_cline=NcbiblastnCommandline(query='../tmp/temp'+str(idx)+'.fasta', db="/mounts/data/proj/asgari/dissertation/git_repos/16S_datasets/EZ/raw/eztaxon_qiime_full.fasta", evalue=0.001, outfmt=5, out='../tmp/temp'+str(idx)+'.xml')
+            FileUtility.create_fasta_file('tmp/temp'+str(idx)+'.fasta',[seq],['temp'])
+            blastx_cline=NcbiblastnCommandline(query='tmp/temp'+str(idx)+'.fasta', db="db/eztaxon_qiime_full.fasta", evalue=0.001, outfmt=5, out='tmp/temp'+str(idx)+'.xml')
             blastx_cline()
-            f=open('../tmp/temp'+str(idx)+'.xml','r')
+            f=open('tmp/temp'+str(idx)+'.xml','r')
             blast_records = NCBIXML.parse(f)
             flag=False
             score=-1
@@ -636,6 +636,8 @@ class NPEMarkerAnlaysis:
                     final_results=(seq,'ZZZNOVEL'+idx[-1],pval)
             else:
                 final_results=(seq,'ZZZNOVEL'+idx[-1],pval)
+
+        NPEMarkerAnlaysis.temp_cleanup()
         return final_results
 
     def align_markers_parallel(self,p_value_threshold):
@@ -652,3 +654,13 @@ class NPEMarkerAnlaysis:
         self.aligned_markers=sorted(final_results, key=operator.itemgetter(1), reverse=False)
         self.min_p_value=p_value_threshold
         self.update_matrix_by_markers()
+
+    @staticmethod
+    def temp_cleanup():
+        for the_file in os.listdir('tmp/'):
+            file_path = os.path.join('tmp/', the_file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+            except Exception as e:
+                print(e)

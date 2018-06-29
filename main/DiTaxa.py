@@ -140,7 +140,7 @@ class DiTaxaWorkflow:
 
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
 
-        print('npe marker taxonomic detection started')
+        print('npe marker taxonomic detection is getting started..')
 
         if callable(labeler):
             phenotypes=[labeler(filenames[sample_id]) for sample_id in selected_samples]
