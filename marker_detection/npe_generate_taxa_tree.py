@@ -170,6 +170,16 @@ class NPEMarkerAnlaysis:
         plt.show()
         #https://seaborn.pydata.org/tutorial/aesthetics.html
 
+    def generate_excel(self,filename, settingname):
+        '''
+        :param filename:
+        :param settingname:
+        :return:
+        '''
+        df=self.get_pandas_df()
+        writer = pd.ExcelWriter(filename)
+        df.to_excel(writer,settingname)
+
     def generate_tree(self, path, name):
 
 

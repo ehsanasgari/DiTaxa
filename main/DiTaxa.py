@@ -101,7 +101,7 @@ class DiTaxaWorkflow:
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
         DiTaxaWorkflow.temp_cleanup()
 
-    def biomarker_extraction(self, labeler, label_mapper, phenoname, p_value_threshold=0.05, pos_label=None, neg_label=None):
+    def biomarker_extraction(self, labeler, label_mapper, phenoname, p_value_threshold=0.05, pos_label=None, neg_label=None, excel=0):
         '''
 
         :return:
@@ -173,7 +173,8 @@ class DiTaxaWorkflow:
         # generating the tree
         Final_OBJ.generate_tree(self.output_directory +'final_outputs/', phenoname)
 
-
+        if excel==1:
+            Final_OBJ.generate_excel(self.output_directory +'final_outputs/' + phenoname + '.xlsx',phenoname)
 
         if pos_label and neg_label:
             print('Creating marker heatmap..')

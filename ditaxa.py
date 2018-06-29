@@ -112,9 +112,9 @@ def checkArgs(args):
     pvalue=None
     if parsedArgs.heatmap:
         pos_label, neg_label =parsedArgs.heatmap.split(':')
-        Pipeline.biomarker_extraction(labels,label_dict,phenoname,pos_label=pos_label,neg_label=neg_label)
+        Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel, pos_label=pos_label,neg_label=neg_label)
     else:
-        Pipeline.biomarker_extraction(labels,label_dict,phenoname)
+        Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel)
 
 
 if __name__ == '__main__':
