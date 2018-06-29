@@ -24,7 +24,7 @@ from marker_detection.npe_biomarker_extraction import NPEMarkerDetection
 from marker_detection.npe_generate_taxa_tree import NPEMarkerAnlaysis
 import sys, os
 import shutil
-
+import warnings
 
 class DiTaxaWorkflow:
     '''
@@ -44,7 +44,7 @@ class DiTaxaWorkflow:
         self.fasta_files, self.filename_mapping = FileUtility.read_fasta_directory(self.file_directory,
                                                                                    self.file_extenstion,
                                                                                    only_files=onlyfiles)
-        print(str(len(self.fasta_files)), 'fasta files found in', self.file_directory)
+        print(str(len(self.fasta_files)), ' fasta files found in', self.file_directory)
 
         self.dbname=dbname
         self.vocab_size=vocab_size
@@ -67,7 +67,7 @@ class DiTaxaWorkflow:
         :return:
         '''
         if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory_inter+'npe_segmentatation/'):
-            print('npe training started.. ')
+            print('Segmentation inference started.. ')
             DiTaxaWorkflow.blockPrint()
             start = time.time()
             G16s = NPESegmentTrainMetagenomics(self.file_directory, self.file_extenstion)
@@ -77,11 +77,11 @@ class DiTaxaWorkflow:
                           backend='Sentencepiece',num_p=self.num_p)
             end = time.time()
             spent = (end - start)
-            self.log_file.append('training segmentation '+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s '])+str(spent)+' seconds , using '+str(self.num_p)+' cores')
+            self.log_file.append('Segmentation inference '+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s '])+str(spent)+' seconds , using '+str(self.num_p)+' cores')
             DiTaxaWorkflow.enablePrint()
         else:
-            print('segmentation directory already exists and the training was bypassed')
-            self.log_file.append('segmentation directory already exists and the training was bypassed')
+            print('Segmentation results directory exists. Thus, the step was bypassed')
+            self.log_file.append('Segmentation results directory exists. Thus, the step was bypassed')
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
 
     def representation_npe(self):
@@ -89,17 +89,17 @@ class DiTaxaWorkflow:
         :return:
         '''
         if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory_inter+'npe_representation/'):
-            print('npe generation started..')
+            print('Creating NPE representations ...')
             start = time.time()
             G16s = NPESegmentApplyMetagenomics(self.file_directory, self.file_extenstion,self.output_directory_inter+'npe_segmentatation/'+self.dbname+'_'+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s.model']),sampling_number=self.rep_sampling_depth,num_p=self.num_p)
             DiTaxaWorkflow.ensure_dir(self.output_directory_inter+'npe_representation/')
             G16s.generate_npes_all(save=self.output_directory_inter+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
             end = time.time()
             spent = end-start
-            self.log_file.append('generating the representations npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
+            self.log_file.append('Generating the NPE representations at npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
         else:
-            print('representation directory already exists and this was bypassed')
-            self.log_file.append('representation directory already exists and the step was bypassed')
+            print('Representation are already created. Thus, this is step is skipped!')
+            self.log_file.append('Representation are already created. Thus, this is step is skipped!')
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
         DiTaxaWorkflow.temp_cleanup()
 
@@ -108,7 +108,7 @@ class DiTaxaWorkflow:
 
         :return:
         '''
-        print('npe marker detection started')
+        print('NPE Marker detection is started..')
         start = time.time()
         rep_base_path=self.output_directory_inter+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)
         filenames=[x.split('/')[-1] for x in FileUtility.load_list(rep_base_path+'_meta')]
@@ -129,20 +129,21 @@ class DiTaxaWorkflow:
         DiTaxaWorkflow.ensure_dir(self.output_directory_inter+'npe_marker_files/')
 
         if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory_inter+'npe_marker_files/'+'_'.join([phenoname,'chi2_relative.fasta'])):
-            DiTaxaWorkflow.blockPrint()
-            G16s = NPEMarkerDetection(rep_base_path +'.npz', rep_base_path +'_' + phenoname + '_Y.txt', rep_base_path + '_features', self.output_directory_inter + 'npe_marker_files/' + phenoname, selected_samples)
-            G16s.extract_markers()
-            DiTaxaWorkflow.enablePrint()
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                G16s = NPEMarkerDetection(rep_base_path +'.npz', rep_base_path +'_' + phenoname + '_Y.txt', rep_base_path + '_features', self.output_directory_inter + 'npe_marker_files/' + phenoname, selected_samples)
+                G16s.extract_markers()
+
             end = time.time()
             spent = end-start
             self.log_file.append('biomarker extraction ' + phenoname + '  ' + str(spent) + ' seconds , using ' + str(self.num_p) + ' cores')
         else:
-            print('Biomarker file already exists and the statistical test was bypassed')
-            self.log_file.append('Biomarker file already exists and the statistical test was bypassed')
+            print('Biomarker are already extracted. Thus, the statistical test was bypassed')
+            self.log_file.append('Biomarker are already extracted. Thus, the statistical test was bypassed')
 
         FileUtility.save_list(self.output_directory+'logfile.txt',self.log_file)
 
-        print('npe marker taxonomic detection is getting started..')
+        print('Taxonomic assignment of the markers..')
 
         if callable(labeler):
             phenotypes=[labeler(filenames[sample_id]) for sample_id in selected_samples]
@@ -208,11 +209,12 @@ class DiTaxaWorkflow:
             os.makedirs(directory)
     @staticmethod
     def blockPrint():
-        sys.stdout = open(os.devnull, 'w')
+        sys.stdout = sys.__stdout__
+
 
     @staticmethod
     def enablePrint():
-        sys.stdout = sys.__stdout__
+        sys.stdout = open(os.devnull, 'w')
 
 
 def dental():

@@ -24,7 +24,7 @@ def checkArgs(args):
     # will be prompted
     parser = argparse.ArgumentParser()
 
-    ## to do : chi2 print, intermediate ones,  hard coded,
+    ## to do : chi2 print
 
     # input directory #################################################################################################
     parser.add_argument('--indir', action='store', dest='input_dir', default=False, type=str,
@@ -70,8 +70,6 @@ def checkArgs(args):
     parser.add_argument('--excel', action='store', dest='excel', default=1, type=int,
                         help='to generate excel output')
 
-    #:(max pvalue or number of markers) diseases:healthy:100
-
 
     parsedArgs = parser.parse_args()
 
@@ -108,8 +106,6 @@ def checkArgs(args):
     Pipeline.representation_npe()
     labels={line.split()[0].split('/')[-1]:line.split()[1] for line in FileUtility.load_list(parsedArgs.fast2label)}
 
-    num_markers=None
-    pvalue=None
     if parsedArgs.heatmap:
         pos_label, neg_label =parsedArgs.heatmap.split(':')
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel, pos_label=pos_label,neg_label=neg_label)
