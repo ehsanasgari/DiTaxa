@@ -85,8 +85,8 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --phenomap: mapping from label to binary phenotypes<br/>
 --phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0. Please note that a single project may have several phenotype mapping schemes (untreated diseased versus all or untreated versus healthy or etc.)<br/>
 --override: 1 to override the existing files, 0 to only generate the missing files<br/>
---heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<b/>
---excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<b/>
+--heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<br/>
+--excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
 
 <h1> Example </h1>
 
