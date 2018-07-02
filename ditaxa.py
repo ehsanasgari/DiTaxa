@@ -70,6 +70,25 @@ def checkArgs(args):
     parser.add_argument('--excel', action='store', dest='excel', default=1, type=int,
                         help='to generate excel output')
 
+
+    ######################################################################################################
+    parser.add_argument('--classify', action='store', dest='classify', type=str, default=False,
+                    choices=[False, 'RF', 'SVM', 'DNN'],
+                    help='train_predictor: choice of classifier from RF, SVM, DNN')
+
+    parser.add_argument('--batchsize', action='store', dest='batch_size', type=int, default=10,
+                        help='train_predictor-model/DNN: batch size for deep learning')
+
+    parser.add_argument('--gpu_id', action='store', dest='gpu_id', type=str, default='0',
+                        help='train_predictor-model/DNN: GPU id for deep learning')
+
+    parser.add_argument('--epochs', action='store', dest='epochs', type=int, default=100,
+                        help='train_predictor-model/DNN: number of epochs for deep learning')
+
+    parser.add_argument('--arch', action='store', dest='dnn_arch', type=str, default='1024,0.2,512',
+                        help='train_predictor-model/DNN: The comma separated definition of neural network layers connected to eahc other, you do not need to specify the input and output layers, values between 0 and 1 will be considered as dropouts')
+
+
     parsedArgs = parser.parse_args()
 
     if (not os.access(parsedArgs.input_dir, os.F_OK)):
@@ -111,6 +130,21 @@ def checkArgs(args):
     else:
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel)
 
+    if parsedArgs.classify:
+        if parsedArgs.classify=='DNN':
+            '''
+                Deep learning
+            '''
+            arch=[int(layer) if float(layer)>1 else float(layer) for layer in parsedArgs.dnn_arch.split(',')]
+            DiTaxaWorkflow.DNN_classifier(parsedArgs.X, parsedArgs.Y, arch, parsedArgs.output_addr, parsedArgs.data_name, parsedArgs.gpu_id,parsedArgs.epochs, parsedArgs.batch_size)
+        else:
+            '''
+                SVM and Random Forest
+            '''
+            if parsedArgs.model in ['SVM','RF']:
+                MicroPheno.classical_classifier( parsedArgs.X,  parsedArgs.Y, parsedArgs.model, parsedArgs.output_addr, parsedArgs.data_name, parsedArgs.cores)
+            else:
+                return  "\nNot able to recognize the model!"
 
 if __name__ == '__main__':
     err = checkArgs(sys.argv)
