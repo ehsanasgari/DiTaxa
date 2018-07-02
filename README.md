@@ -90,7 +90,11 @@ Using the above mentioned command all the steps will be done sequentially and ou
 
 <h1> Example </h1>
 
-For the test purpose we provided the use of periodontal disease dataset. You may run the following command after installation:
+We have provided periodontal disease dataset for the test purpose.
+
+
+
+You may run the following command after installation:
 
 ```
 python3 ditaxa.py --indir dataset/periodontal/
