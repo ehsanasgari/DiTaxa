@@ -35,7 +35,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from classifier.classical_classifiers import RFClassifier,SVM, LogRegression
-from classifier.DNN import DNNMutliclass16S
+from classifier.DNN import DNN
 
 class DiTaxaWorkflow:
     '''
@@ -314,22 +314,22 @@ class DiTaxaWorkflow:
         #
         X=FileUtility.load_sparse_csr(X_file)
         # labels
-        Y=FileUtility.load_list(Y_file)
+        Y=[int (y) for y in FileUtility.load_list(Y_file)]
 
         if model=='RF':
             #### Random Forest classifier
             MRF = RFClassifier(X, Y)
-            # results containing the best parameter, confusion metrix, best estimator, results on fold will be stored in this address
+            # results containing the best parameter, confusion matrix, best estimator, results on fold will be stored in this address
             MRF.tune_and_eval(out_dir, njobs=cores)
         elif model=='SVM':
             #### Support Vector Machine classifier
             MSVM = SVM(X, Y)
-            # results containing the best parameter, confusion metrix, best estimator, results on fold will be stored in this address
+            # results containing the best parameter, confusion matrix, best estimator, results on fold will be stored in this address
             MSVM.tune_and_eval(out_dir, njobs=cores)
         elif model=='LR':
             #### Logistic regression classifier
             MLR = LogRegression(X, Y)
-            # results containing the best parameter, confusion metrix, best estimator, results on fold will be stored in this address
+            # results containing the best parameter, confusion matrix, best estimator, results on fold will be stored in this address
             MLR.tune_and_eval(out_dir, njobs=cores)
 
     @staticmethod
@@ -337,12 +337,9 @@ class DiTaxaWorkflow:
         # k-mer data
         X=FileUtility.load_sparse_csr(X_file).toarray()
         # labels
-        Y=FileUtility.load_list(Y_file)
-        DNN=DNNMutliclass16S(X,Y,model_arch=arch)
-        DNN.cross_validation(out_dir, gpu_dev=gpu_id, n_fold=10, epochs=epochs, batch_size=batch_size, model_strct='mlp')
-
-
-
+        Y=[int (y) for y in FileUtility.load_list(Y_file)]
+        DeepNN=DNN(X,Y,model_arch=arch)
+        DeepNN.cross_validation(out_dir, gpu_dev=gpu_id, n_fold=10, epochs=epochs, batch_size=batch_size, model_strct='mlp')
 
 def dental():
     Pipeline = DiTaxaWorkflow('/mounts/data/proj/asgari/dissertation/datasets/deepbio/microbiome/dental/',

@@ -131,6 +131,7 @@ def checkArgs(args):
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel)
 
     if parsedArgs.classify:
+        print('Classification requested..')
         if parsedArgs.classify=='DNN':
             '''
                 Deep learning
@@ -141,8 +142,8 @@ def checkArgs(args):
             '''
                 SVM and Random Forest
             '''
-            if parsedArgs.model in ['SVM','RF','LR']:
-                Pipeline.classify_classic(phenoname, parsedArgs.model, parsedArgs.cores)
+            if parsedArgs.classify in ['SVM','RF','LR']:
+                Pipeline.classify_classic(phenoname, parsedArgs.classify, parsedArgs.cores)
             else:
                 return  "\nNot able to recognize the model!"
 
