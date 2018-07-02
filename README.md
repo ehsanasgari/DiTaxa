@@ -94,18 +94,22 @@ An example of periodontal disease dataset (Jorth et al, 2015) is provided. You m
 
 ```
 python3 ditaxa.py --indir dataset/periodontal/
+ --fast2label dataset/periodontal/mapping.txt
  --ext fastq
  --outdir ../results_dental/
  --dbname periodontal
  --cores 20
- --fast2label dataset/periodontal/mapping.txt
  --phenomap diseased:1,healthy:0
  --phenoname DvsH
  --override 1
 
 ```
 
-<h1> Output Example </h1>
+You can see that "dataset/periodontal/" contains fastq files for each sample, "dataset/periodontal/mapping.txt" provides a mapping from fastq files to their labels.
+"--phenomap diseased:1,healthy:0" determines which labels to be considered as positive class and which as negative class. "phenoname", i.e. DvsH defines the name of this
+labeling scheme (disease versus healthy).
+
+<h1> Output example </h1>
 
 
 
