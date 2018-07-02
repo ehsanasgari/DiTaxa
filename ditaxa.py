@@ -73,7 +73,7 @@ def checkArgs(args):
 
     ######################################################################################################
     parser.add_argument('--classify', action='store', dest='classify', type=str, default=False,
-                    choices=[False, 'RF', 'SVM', 'DNN'],
+                    choices=[False, 'RF', 'SVM', 'DNN', 'LR'],
                     help='train_predictor: choice of classifier from RF, SVM, DNN')
 
     parser.add_argument('--batchsize', action='store', dest='batch_size', type=int, default=10,
@@ -136,13 +136,13 @@ def checkArgs(args):
                 Deep learning
             '''
             arch=[int(layer) if float(layer)>1 else float(layer) for layer in parsedArgs.dnn_arch.split(',')]
-            DiTaxaWorkflow.DNN_classifier(parsedArgs.X, parsedArgs.Y, arch, parsedArgs.output_addr, parsedArgs.data_name, parsedArgs.gpu_id,parsedArgs.epochs, parsedArgs.batch_size)
+            Pipeline.classify_DNN(phenoname, arch, parsedArgs.gpu_id,parsedArgs.batch_size,parsedArgs.epochs)
         else:
             '''
                 SVM and Random Forest
             '''
-            if parsedArgs.model in ['SVM','RF']:
-                MicroPheno.classical_classifier( parsedArgs.X,  parsedArgs.Y, parsedArgs.model, parsedArgs.output_addr, parsedArgs.data_name, parsedArgs.cores)
+            if parsedArgs.model in ['SVM','RF','LR']:
+                Pipeline.classify_classic(phenoname, parsedArgs.model, parsedArgs.cores)
             else:
                 return  "\nNot able to recognize the model!"
 
@@ -151,4 +151,3 @@ if __name__ == '__main__':
     if err:
         print(err)
         exit()
-
