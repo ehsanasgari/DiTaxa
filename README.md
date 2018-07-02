@@ -124,7 +124,7 @@ labeling scheme (disease versus healthy).
 <h1> Output example </h1>
 The auotomatically generated output of the example is as follows:
 
-![micropheno-page-7](https://user-images.githubusercontent.com/8551117/42159879-9a05a634-7df5-11e8-97e3-9377b62f9a32.png)
+![ditaxaout](https://user-images.githubusercontent.com/8551117/42161908-1c2d9d72-7dfd-11e8-86eb-68af5055c5ab.png)
 
 
 <h2>Biomarker detection</h2>
