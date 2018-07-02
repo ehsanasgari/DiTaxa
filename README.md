@@ -102,7 +102,6 @@ python3 ditaxa.py --indir dataset/periodontal/
  --phenomap diseased:1,healthy:0
  --phenoname DvsH
  --override 1
-
 ```
 
 You can see that "dataset/periodontal/" contains fastq files for each sample, "dataset/periodontal/mapping.txt" provides a mapping from fastq files to their labels.
@@ -111,23 +110,31 @@ labeling scheme (disease versus healthy).
 
 <h1> Output example </h1>
 
+<h2>Biomarker detection</h2>
+DiTaxa provides a taxonomic tree for significant discriminative biomarkers, where identified taxa to the positive and negative class are colored according to their phenotype (red for positive class and blue for negative class). The DiTaxa implementation for taxonomic tree generation uses a Phylophlan-based backend.
+
+<img src="https://user-images.githubusercontent.com/8551117/40692994-568c1960-63b5-11e8-999d-ee69917943f5.png"/>
+
+<h2>Biomarker excel file</h2>
+
+
+<h2>Heatmap of Biomarkers</h2>
+
+DiTaxa provides a heatmap of top biomarkers occurrences in samples, where the rows denote markers and the columns are samples is generated. Such a heatmap allows biologists to obtain a detailed overview of markers' occurrences across samples. The heatmap shows number of distinctive sequences hit by each biomarker in different samples and stars in the heatmap denote hitting unique sequences, which cannot be analyzed by OTU clustering approaches. 
+
+<img src="https://user-images.githubusercontent.com/8551117/40692895-b01a2a68-63b4-11e8-95d2-fc3727471bca.png"/>
+
+<h2>T-sne visualization of data using extracted markers</h2>
 
 
 
 <h2>Bootstrapping for sample size selection</h2>
+We use bootstrapping to investigate sufficiency and consistency of NPE representation, when only a small portion of the sequences are used. This has two important implications, first, sub-sampling reduces the preprocessing run-time, second, it shows that even a shallow 16S rRNA sequencing is enough for the phenotype prediction. We use a resampling framework to find a proper sampling size. The DiTaxa implementation uses a defualt parameter setting based on bootstrapping on several datasets. The bootstrapping library is located at "DiTaxa/bootstrapping/bootstrapping.py" if further investigation is needed.
+
 <img src="https://user-images.githubusercontent.com/8551117/40692939-f8b2785c-63b4-11e8-9194-c944775bbdf6.png">
 
+
 <h2>Phenotype classification</h2>
+
 Supporting Random Forest, SVM, Cross-entropy classifier, Neural Netwrok
-
-<h2>Biomarker detection</h2>
-
-<img src="https://user-images.githubusercontent.com/8551117/40692994-568c1960-63b5-11e8-999d-ee69917943f5.png"/>
-
-
-<h2>Heatmap creation</h2>
-
-<img src="https://user-images.githubusercontent.com/8551117/40692895-b01a2a68-63b4-11e8-95d2-fc3727471bca.png"/>
-
-
 
