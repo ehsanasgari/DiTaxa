@@ -77,6 +77,8 @@ python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outd
 
 Using the above mentioned command all the steps will be done sequentially and output will be organized in subdirectories.
 
+<h3> Main parameters and biomarker detection </h3>
+
 --indir: The input directory containing all fasta or fastq files. (e.g.: datasets/periodontal/)<br/>
 --ext: Sequence file extensions (fasta or fastq) (e.g.: fastq)<br/>
 --outdir: The output directory (e.g.: /mounts/data/ditaxa/results/test_dental_out/)<br/>
@@ -88,11 +90,11 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<br/>
 --excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
 
+<h3> Phenotype prediction </h3>
 For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
-
 --classify: which predictive model to use: choices=[False: default, 'RF': random forest, 'SVM': support vector machines, 'DNN': deep multi-layer perceptron, 'LR': logistic regression] <br/>
 
-Neural network parameters:
+<b>Deep neural network parameters</b>
 --arch: The comma separated definition of neural network layers connected to eahc other, you do not need to specify the input and output layers, values between 0 and 1 will be considered as dropouts, e.g., 1024,0.2,512'<br/>
 --batchsize<br/>
 --gpu_id: which GPU to use<br/>
