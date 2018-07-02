@@ -347,10 +347,10 @@ class DNN(object):
 
 
 def test():
-    X=FileUtility.load_sparse_csr('../MicroPheno_datasets/body-sites/k-mer_representations_labels/6-mers_rate_5000.npz').toarray()
-    Y=FileUtility.load_list('../MicroPheno_datasets/body-sites/k-mer_representations_labels/labels_phen.txt')
+    X=FileUtility.load_sparse_csr('../body-sites/npe_rate_5000.npz').toarray()
+    Y=FileUtility.load_list('../body-sites/npe_representations_labels/labels_phen.txt')
     DNN=DNNMutliclass16S(X,Y,model_arch=[512,0.2,256,0.2,128,0.1,64])
-    DNN.cross_validation('../MicroPheno_datasets/body-sites/nn', gpu_dev='2', n_fold=3, epochs=300, batch_size=10, model_strct='mlp')
+    DNN.cross_validation('../body-sites/nn', gpu_dev='2', n_fold=3, epochs=300, batch_size=10, model_strct='mlp')
 
 if __name__=='__main__':
     test()

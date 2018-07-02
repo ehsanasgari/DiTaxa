@@ -90,7 +90,7 @@ Using the above mentioned command all the steps will be done sequentially and ou
 
 <h1> Running Example </h1>
 
-An example of periodontal disease dataset (Jorth et al, 2015) is provided. You may run the following command after installation:
+An example of periodontal disease dataset (Jorth et al, 2015) is provided (a relatively small dataset). In order to see how DiTaxa runs, you may run the following command after installation:
 
 ```
 python3 ditaxa.py --indir dataset/periodontal/
@@ -118,7 +118,7 @@ labeling scheme (disease versus healthy).
 <img src="https://user-images.githubusercontent.com/8551117/40692939-f8b2785c-63b4-11e8-9194-c944775bbdf6.png">
 
 <h2>Phenotype classification</h2>
-Supporting Random Forest, SVM, Cross-entropy classifier, Neural netwrok
+Supporting Random Forest, SVM, Cross-entropy classifier, Neural Netwrok
 
 <h2>Biomarker detection</h2>
 
