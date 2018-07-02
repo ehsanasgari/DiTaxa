@@ -88,13 +88,9 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<br/>
 --excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
 
-<h1> Example </h1>
+<h1> Running Example </h1>
 
-We have provided periodontal disease dataset for the test purpose.
-
-
-
-You may run the following command after installation:
+An example of periodontal disease dataset (Jorth et al, 2015) is provided. You may run the following command after installation:
 
 ```
 python3 ditaxa.py --indir dataset/periodontal/
@@ -104,9 +100,14 @@ python3 ditaxa.py --indir dataset/periodontal/
  --cores 20
  --fast2label dataset/periodontal/mapping.txt
  --phenomap diseased:1,healthy:0
+ --phenoname DvsH
  --override 1
 
 ```
+
+<h1> Output Example </h1>
+
+
 
 
 <h2>Bootstrapping for sample size selection</h2>

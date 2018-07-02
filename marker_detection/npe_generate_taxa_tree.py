@@ -177,8 +177,11 @@ class NPEMarkerAnlaysis:
         :return:
         '''
         df=self.get_pandas_df()
+        final_markers=df['marker'].values.tolist()
+        FileUtility.save_list(filename.replace('.xlsx','_finalmarker_list.txt').replace('final_outputs','intermediate_files/npe_marker_files'),final_markers)
         writer = pd.ExcelWriter(filename)
         df.to_excel(writer,settingname)
+
 
     def generate_tree(self, path, name):
 

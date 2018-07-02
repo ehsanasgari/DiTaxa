@@ -96,6 +96,7 @@ def plot_scatter(ax, X, Y, x_label, y_label, title,legend_hide=True, legend_loc=
 
 
 def plot_pca_tsne_nn(X_pca, X_tsne, X_tsne_NN, Y, filename=False,  legend_size=7, label_dic=False, color_idx=2, loc=[(4,1),(4,1),(4,1)]):
+    plt.plot([1,2,3])
     myplot=figure(figsize=(12, 12))
     ax=subplot(221)
     plot_scatter(ax, X_pca, Y, 'PCA_1', 'PCA_0', '(i) PCA over 6-mer representations',legend_hide=True, legend_loc=loc[0][0], legend_col=loc[0][1], legend_size=legend_size, label_dict=label_dic, color_schemes_idx=color_idx)

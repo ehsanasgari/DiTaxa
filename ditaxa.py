@@ -70,7 +70,6 @@ def checkArgs(args):
     parser.add_argument('--excel', action='store', dest='excel', default=1, type=int,
                         help='to generate excel output')
 
-
     parsedArgs = parser.parse_args()
 
     if (not os.access(parsedArgs.input_dir, os.F_OK)):
