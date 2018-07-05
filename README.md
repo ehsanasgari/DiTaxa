@@ -60,7 +60,10 @@ DiTaxa is implemented in Python3.x and uses Scikit-Learn and Keras frameworks fo
 ```
 pip install -r requirements.txt
 ```
-
+DiTaxa for segmentation of the sequences by default uses Google SentencePiece backend. So please make sure that you have correctly installed SentencePiece:
+```
+https://github.com/google/sentencepiece/tree/master/python
+```
 
 <h2>Local ezCloud blast and GraPhlAn setup</h2>
 
