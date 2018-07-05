@@ -35,7 +35,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from classifier.classical_classifiers import RFClassifier,SVM, LogRegression
-from classifier.DNN import DNN
+#from classifier.DNN import DNN
 
 class DiTaxaWorkflow:
     '''
