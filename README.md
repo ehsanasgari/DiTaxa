@@ -68,7 +68,11 @@ https://github.com/google/sentencepiece/tree/master/python
 <h2>Local ezCloud blast and GraPhlAn setup</h2>
 
 The local blast files are already compiled and exist in directory "db".
-Please make sure that NCBI BLASTN is already installed in your system.
+Please make sure that NCBI BLASTN is already installed in your system:
+```
+ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
+```
+
 If blastn is not added to the path, you can alternatively add the path to
 "db/blastn_config.txt" file.
 
