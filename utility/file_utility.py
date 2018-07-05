@@ -163,6 +163,15 @@ class FileUtility(object):
             os.makedirs(directory)
 
     @staticmethod
+    def exists(file_path):
+        return os.path.exists(file_path)
+
+    @staticmethod
+    def remove(file_path):
+        os.remove(file_path)
+
+
+    @staticmethod
     def save_list(filename, list_names):
         FileUtility.ensure_dir(filename)
         f = codecs.open(filename, 'w', 'utf-8')
@@ -218,11 +227,4 @@ class FileUtility(object):
                 corpus[str(cur_record.id)]=(str(cur_record.seq).lower(),str(cur_record.description))
         return corpus
 
-    @staticmethod
-    def exists(file_path):
-        return os.path.exists(file_path)
-
-    @staticmethod
-    def remove(file_path):
-        os.remove(file_path)
 
