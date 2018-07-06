@@ -17,7 +17,9 @@ Asgari E., Münch P. C., Lesker T. R., McHardy A. C. &#9733;, and Mofrad M. R. K
 bioRxiv (2018): 334722.
 
 
-<strong>Contact/Developer</strong>: Ehsaneddin Asgari (<span style="color: #0000ff;">asgari [at] berkeley [dot] edu</span>)
+<strong>Developer</strong>: Ehsaneddin Asgari (<span style="color: #0000ff;">asgari [at] berkeley [dot] edu</span>)
+<br/>
+Please feel free to report any technical issue by sending an email or reporting an issue here.
 <br/>
 <strong>Project page:</strong> <a href="http://llp.berkeley.edu/ditaxa">http://llp.berkeley.edu/ditaxa</a>
 <br/>
