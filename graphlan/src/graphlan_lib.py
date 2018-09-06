@@ -19,7 +19,7 @@ import matplotlib
 matplotlib.use('Agg')
 matplotlib.rcParams['svg.fonttype'] = 'none'
 from pylab import *
-from pyphlan import PpaTree
+from pyphlan.pyphlan import PpaTree
 
 
 clade_attr = ( ( 'clade_marker_size',                float, 20.0      ),
@@ -90,7 +90,7 @@ leg_attr = ( ( 'annotation_background_color',      str,   "w"  ),
              ( 'keys',                             str,   "?"  ) )
 
 lev_sep = '.'
-legal_options = set(zip(*clade_attr+ext_attr+int_attr+structural_attr+global_graphical_attr+branch_attr+leg_attr)[0]) | set(['class'])
+legal_options = set(list(zip(*clade_attr+ext_attr+int_attr+structural_attr+global_graphical_attr+branch_attr+leg_attr))[0]) | set(['class'])
 
 def random_keys(used_keys):
     n = 1
@@ -1039,7 +1039,7 @@ class CircTree(PpaTree):
             for p in ['ring_internal_separator_thickness','ring_external_separator_thickness']:
                 if p in v and float(v[p]) > 0.0:
                     if l not in self._ext_bottoms.keys():
-                        print '[e] External ring #'+str(l), 'defined, but not used. Please check your annotations file'
+                        print ('[e] External ring #'+str(l), 'defined, but not used. Please check your annotations file')
                         continue
 
                     bot = offset + self._ext_bottoms[l]
@@ -1109,7 +1109,7 @@ class CircTree(PpaTree):
                 height = round(self._tot_offset * len(labels) * charsize * self.class_legend_marker_size * 10.) / 10.
                 plt.figure(figsize=(width, height))
             else:
-                print '[w] External legend not created, no annotated labels!'
+                print ('[w] External legend not created, no annotated labels!')
 
         if labels:
             plt.figlegend(handles, labels, loc, labelspacing=0.1, frameon=False,

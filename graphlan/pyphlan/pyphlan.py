@@ -662,7 +662,7 @@ class PpaTree:
             #self.tree.reroot_at_edge( list(longest)[-1], update_splits=True )
 
 
-    def reorder_tree( self ):
+    def reorder_tree( self , clade):
         self._ord_terms = []
         def reorder_tree_rec( clade ):
             if clade.is_terminal():

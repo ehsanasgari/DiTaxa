@@ -260,9 +260,12 @@ class NPEMarkerAnlaysis:
         FileUtility.save_list(path_g+name+'_taxonomy.txt',taxonomy)
         FileUtility.save_list(path_g+name+'_annot.txt',annot)
 
-        subprocess.call("python2.7 graphlan/graphlan_annotate.py --annot "+path_g+name+'_annot.txt'+" "+path_g+name+'_taxonomy.txt'+"  "+path_g+name+'.xml', shell=True)
-        subprocess.call("python2.7 graphlan/graphlan.py "+path_g+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
-        FileUtility.remove(path+name+'_legend.pdf')
+        subprocess.call("python3 graphlan/graphlan_annotate.py --annot "+path_g+name+'_annot.txt'+" "+path_g+name+'_taxonomy.txt'+"  "+path_g+name+'.xml', shell=True)
+        subprocess.call("python3 graphlan/graphlan.py "+path_g+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
+        try:
+            FileUtility.remove(path+name+'_legend.pdf')
+        except:
+            print('')
 
     def purify_tax_color(self, dict_color):
         new_dict_color=dict()

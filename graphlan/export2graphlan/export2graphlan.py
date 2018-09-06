@@ -210,13 +210,13 @@ def read_params():
 
     # check that min_clade_size is less than max_clade_size
     if args.min_clade_size > args.max_clade_size:
-        print "[W] min_clade_size cannot be greater than max_clade_size, assigning their default values"
+        print ("[W] min_clade_size cannot be greater than max_clade_size, assigning their default values")
         args.min_clade_size = 20.
         args.max_clade_size = 200.
 
     # check that min_font_size is less than max_font_size
     if args.min_font_size > args.max_font_size:
-        print "[W] min_font_size cannot be greater than max_font_size, assigning their default values"
+        print ("[W] min_font_size cannot be greater than max_font_size, assigning their default values")
         args.min_font_size = 8
         args.max_font_size = 12
 
@@ -479,7 +479,7 @@ def main():
 
     # check overlapping between internal and external annotations
     if set(annotations_list) & set(external_annotations_list):
-        print '[W] Some annotation levels are present in both internal and external params. The shared levels has been removed from the internal list.'
+        print ('[W] Some annotation levels are present in both internal and external params. The shared levels has been removed from the internal list.')
         annotations_list = list(set(annotations_list) - set(external_annotations_list))
 
     if args.lefse_input:
@@ -490,7 +490,7 @@ def main():
                 lefse_input = DataMatrix(StringIO(biom), args)
             except Exception as e:
                 lin = True
-                print 'Exception:', e
+                print ('Exception:', e)
         else:
             if args.internal_levels:
                 aaa = {}
@@ -530,7 +530,7 @@ def main():
 
             # check for duplicate taxa entries
             if len(taxa) != len(set(taxa)):
-                print "There are duplicate taxa entries, please check the input file!"
+                print ("There are duplicate taxa entries, please check the input file!")
                 exit(1)
 
             # check if there are abundances to extract
@@ -542,7 +542,7 @@ def main():
             else:
                 abundances = dict()
                 lin = False
-                print "abundances: empty"
+                print ("abundances: empty")
     else: # no lefse_input provided
         lin = True
 
@@ -550,7 +550,7 @@ def main():
         # if the lefse_output is in biom format... I don't think it's possible!
         if get_file_type(args.lefse_output) in 'biom':
             lout = True
-            print "Seriously?? LEfSe output file is not expected to be in biom format!"
+            print ("Seriously?? LEfSe output file is not expected to be in biom format!")
         else:
             lst = []
 
@@ -611,7 +611,7 @@ def main():
 
     # no lefse_output and no lefse_input provided
     if lin and lout:
-        print "You must provide at least one input file!"
+        print ("You must provide at least one input file!")
         exit(1)
 
     # write the tree
@@ -745,8 +745,8 @@ def main():
                             try:
                                 rgbs = scale_color(colors[color[bk]], fac)
                             except Exception as e:
-                                print 'Exception:', e
-                                print ' '.join(["[W] Assign to", taxonomy, "the default color:", colors[color[bk]]])
+                                print ('Exception:', e)
+                                print (' '.join(["[W] Assign to", taxonomy, "the default color:", colors[color[bk]]]))
                                 rgbs = colors[color[bk]]
 
                             annot_file.write(''.join(['\t'.join([clean_taxonomy, 'clade_marker_color', rgbs]), '\n']))
@@ -761,7 +761,8 @@ def main():
                                                             '\t'.join([clean_taxonomy, 'annotation', annotation]),
                                                             '\t'.join([clean_taxonomy, 'annotation_font_size', str(font_size)]), '\n']))
     except Exception as e:
-        print 'Exception:', e
+        print ('Exception:', e)
+
 
 
 if __name__ == '__main__':
