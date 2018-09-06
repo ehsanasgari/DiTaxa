@@ -122,7 +122,7 @@ def checkArgs(args):
         if not len(parsedArgs.heatmap.split(':'))==2:
             return err + "\nThe heatmap inputs is incorrect!"
 
-    if not os.access(parsedArgs.blastn):
+    if not os.access(parsedArgs.blastn, os.F_OK):
         print('The blast path is incorrect..')
         exit()
 
