@@ -42,7 +42,7 @@ class DiTaxaWorkflow:
         DiTaxaWorkflow
     '''
 
-    def __init__(self, file_directory, file_extenstion, output_directory, dbname, vocab_size, seg_train_depth ,rep_sampling_depth, blastn_path,, num_p=1,onlyfiles=[], override=1):
+    def __init__(self, file_directory, file_extenstion, output_directory, dbname, vocab_size, seg_train_depth ,rep_sampling_depth, blastn_path, num_p=1,onlyfiles=[], override=1):
         '''
         :param file_directory: the samples directory
         :param file_extenstion: the file extension fastq or fasta
