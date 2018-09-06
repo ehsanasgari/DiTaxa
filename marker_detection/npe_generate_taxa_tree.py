@@ -37,10 +37,9 @@ from multiprocessing import Pool
 
 class NPEMarkerAnlaysis:
 
-    def __init__(self,fasta_file, matrix_path, feature_file_path, phenotypes, phenotype_mapping,selected_samples, p_value_threshold=0.01, remove_redundants=False, num_p=4):
-        path=FileUtility.load_list('db/blastn_config.txt')[0]
-        if len(path)>0:
-            os.environ['PATH'] += ':'+path
+    def __init__(self,fasta_file, matrix_path, feature_file_path, phenotypes, phenotype_mapping,selected_samples, p_value_threshold=0.01, remove_redundants=False, num_p=4, blastn_path=''):
+        if len(blastn_path)>0:
+            os.environ['PATH'] += ':'+blastn_path
         self.num_p=num_p
         self.seq_IDS=FileUtility.read_fasta_sequences_ids(fasta_file)
         self.remove_redundants=remove_redundants

@@ -42,7 +42,7 @@ class DiTaxaWorkflow:
         DiTaxaWorkflow
     '''
 
-    def __init__(self, file_directory, file_extenstion, output_directory, dbname, vocab_size, seg_train_depth ,rep_sampling_depth, num_p=1,onlyfiles=[], override=1):
+    def __init__(self, file_directory, file_extenstion, output_directory, dbname, vocab_size, seg_train_depth ,rep_sampling_depth, blastn_path,, num_p=1,onlyfiles=[], override=1):
         '''
         :param file_directory: the samples directory
         :param file_extenstion: the file extension fastq or fasta
@@ -64,7 +64,7 @@ class DiTaxaWorkflow:
         self.num_p=num_p
         self.output_directory=output_directory
         self.output_directory_inter=(output_directory[0:-1] if output_directory[-1]=='/' else output_directory)+'/intermediate_files/'
-
+        self.blastn_path=blastn_path
 
         DiTaxaWorkflow.ensure_dir(self.output_directory)
         if not os.path.exists(self.output_directory+'logfile.txt'):
@@ -173,7 +173,7 @@ class DiTaxaWorkflow:
         FileUtility.ensure_dir(self.output_directory+'final_outputs/save_states/')
         if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory+'final_outputs/save_states/'+phenoname+'.pickle'):
             start = time.time()
-            Final_OBJ=NPEMarkerAnlaysis(fasta_file, matrix_path, feature_file_path, phenotypes, label_mapper, selected_samples, p_value_threshold=p_value_threshold, remove_redundants=remove_redundants,num_p=self.num_p)
+            Final_OBJ=NPEMarkerAnlaysis(fasta_file, matrix_path, feature_file_path, phenotypes, label_mapper, selected_samples, p_value_threshold=p_value_threshold, remove_redundants=remove_redundants,num_p=self.num_p, blastn_path=self.blastn_path)
             end = time.time()
             spent = end-start
             DiTaxaWorkflow.ensure_dir(self.output_directory+'final_outputs/')

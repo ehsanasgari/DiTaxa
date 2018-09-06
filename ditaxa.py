@@ -54,6 +54,10 @@ def checkArgs(args):
     parser.add_argument('--fast2label', action='store', dest='fast2label', default=False, type=str,
                         help='tabular mapping between fatsa/fastq file names and their labels')
 
+    # blast path #################################################################################################
+    parser.add_argument('--blastn', action='store', dest='blastn', default=False, type=str,
+                        help='path to the bin directory of blastn; get the latest from ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/')
+
     # label values ##################################################################################
     parser.add_argument('--phenomap', action='store', dest='phenomap', default=None, type=str,
                         help='pair of comma separated label:[0 or 1]. e.g., untreated_disease:1, treated_diesease:0, healthy:0, ..')
@@ -118,8 +122,12 @@ def checkArgs(args):
         if not len(parsedArgs.heatmap.split(':'))==2:
             return err + "\nThe heatmap inputs is incorrect!"
 
+    if not os.access(parsedArgs.blastn):
+        print('The blast path is incorrect..')
+        exit()
+
     Pipeline = DiTaxaWorkflow(parsedArgs.input_dir,
-                                          parsedArgs.filetype,parsedArgs.output_dir,parsedArgs.dbname,50000,5000,-1,num_p=parsedArgs.cores, override=parsedArgs.override)
+                                          parsedArgs.filetype,parsedArgs.output_dir,parsedArgs.dbname, 50000,5000,-1, parsedArgs.blastn, num_p=parsedArgs.cores, override=parsedArgs.override)
     Pipeline.train_npe()
     Pipeline.representation_npe()
     labels={line.split()[0].split('/')[-1]:line.split()[1] for line in FileUtility.load_list(parsedArgs.fast2label)}
