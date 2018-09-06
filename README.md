@@ -66,22 +66,12 @@ DiTaxa for segmentation of the sequences by default uses Google SentencePiece ba
 ```
 https://github.com/google/sentencepiece/tree/master/python
 ```
-
-<h2>Local ezCloud blast and GraPhlAn setup</h2>
-
-The local blast files are already compiled and exist in directory "db".
-Please make sure that NCBI BLASTN is already installed in your system:
-```
-ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
-```
-
-If blastn is not added to the path, you can alternatively add the path to
-"db/blastn_config.txt" file.
-
 <h1> User Manual </h1>
 
 ```
 python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --fast2label mapping_file_from_name_to_phenotype --phenomap mapping_labels_to_binary_1_or_0_phenotype
+--blastn /mounts/data/proj/asgari/dissertation/deepbio/taxonomy/ncbi-blast-2.5.0+/bin/
+
 ```
 
 Using the above mentioned command all the steps will be done sequentially and output will be organized in subdirectories.
@@ -98,6 +88,8 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --override: 1 to override the existing files, 0 to only generate the missing files<br/>
 --heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<br/>
 --excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
+--blastn:  NCBI BLASTN path in your system, you can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
+
 
 <h3> Phenotype prediction </h3>
 For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
@@ -124,6 +116,7 @@ python3 ditaxa.py --indir dataset/periodontal/
  --phenomap diseased:1,healthy:0
  --phenoname DvsH
  --override 1
+ --blastn /mounts/data/proj/asgari/dissertation/deepbio/taxonomy/ncbi-blast-2.5.0+/bin/
 ```
 
 You can see that "dataset/periodontal/" contains fastq files for each sample, "dataset/periodontal/mapping.txt" provides a mapping from fastq files to their labels.
