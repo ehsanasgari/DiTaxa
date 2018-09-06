@@ -1,1 +1,1 @@
-/mounts/data/proj/asgari/dissertation/datasets/deepbio/taxonomy/ncbi-blast-2.5.0+/bin/
+/Users/ehsan/Documents/ncbi-blast-2.7.1+/bin/
