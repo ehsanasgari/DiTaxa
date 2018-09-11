@@ -58,14 +58,27 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 <h1>Installation</h1>
 
-DiTaxa is implemented in Python3.x and uses Scikit-Learn and Keras frameworks for machine learning. To install the dependencies use the following command:
+DiTaxa is implemented in Python3.6.x, which can be installed using Conda:
 ```
+conda install python=3.6.5
+```
+
+To install the dependencies use the following command:
+```
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
-DiTaxa for segmentation of the sequences by default uses Google SentencePiece backend. So please make sure that you have correctly installed SentencePiece:
+
+or:
+```
+conda install --yes --file requirements.txt
+```
+
+DiTaxa for segmentation of the sequences by default uses Google SentencePiece backend. Please make sure that you have correctly installed SentencePiece:
 ```
 https://github.com/google/sentencepiece/tree/master/python
 ```
+
 <h1> User Manual </h1>
 
 ```
@@ -104,7 +117,7 @@ For phenotype classification functionality, evaluation a 10XFold cross-validatio
 
 <h1> Running Example </h1>
 
-An example of periodontal disease dataset (Jorth et al, 2015) is provided (a relatively small dataset). In order to see how DiTaxa runs, you may run the following command after installation:
+An example of periodontal disease dataset (Jorth et al, 2015) is provided (a relatively small dataset). In order to see how DiTaxa runs, you may run the following command after installation, but please fix the blastn path first (you can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/):
 
 ```
 python3 ditaxa.py --indir dataset/periodontal/
