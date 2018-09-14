@@ -134,15 +134,11 @@ The "indir", e.g. «dataset/periodontal/» contains fastq files for each sample,
 
 After running this command the output files will be generated in 'results_dental' as described bellow.
 
-<h1> Output example </h1>
+<h2> Output example </h2>
 The auotomatically generated output of the example is as follows:
 
 ![ditaxaout](https://user-images.githubusercontent.com/8551117/42161908-1c2d9d72-7dfd-11e8-86eb-68af5055c5ab.png)
 
-Sample automatically generated outputs are at:
-```
-dataset/periodontal/periodontal_results
-```
 
 <h2>Biomarker detection</h2>
 DiTaxa provides a taxonomic tree for significant discriminative biomarkers, where identified taxa to the positive and negative class are colored according to their phenotype (red for positive class and blue for negative class). The DiTaxa implementation for taxonomic tree generation uses a Phylophlan-based backend.
