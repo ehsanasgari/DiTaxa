@@ -130,7 +130,7 @@ python3 ditaxa.py --indir dataset/periodontal/
 ```
 
 <h2> Example Dataset </h2>
-The "dataset/periodontal/" contains fastq files for each sample, "dataset/periodontal/mapping.txt" provides a mapping from fastq files to their labels. "--phenomap diseased:1,healthy:0" determines which labels to be considered as positive class and which as negative class. "phenoname", e.g. «DvsH» defines the name of this labeling scheme (disease versus healthy).
+The "indir", e.g. «dataset/periodontal/» contains fastq files for each sample, "fast2label", e.g. «dataset/periodontal/mapping.txt» provides a mapping from fastq files to their labels. "phenomap", e.g. «diseased:1,healthy:0» determines which labels to be considered as positive class and which as negative class. "phenoname", e.g. «DvsH» defines the name of this labeling scheme (disease versus healthy).
 
 After running this command the output files will be generated in 'results_dental' as described bellow.
 
