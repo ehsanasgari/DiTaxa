@@ -112,26 +112,27 @@ For phenotype classification functionality, evaluation a 10XFold cross-validatio
 --epochs: Number of epochs<br/>
 
 
-<h1> Running Example </h1>
+<h1> Working Example </h1>
 
-An example of periodontal disease dataset (Jorth et al, 2015) is provided (a relatively small dataset). In order to see how DiTaxa runs, you may run the following command after installation, but please fix the blastn path first (you can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/):
+An example of periodontal disease dataset (Jorth et al, 2015) is provided (a relatively small dataset). In order to see how DiTaxa runs, you may run the following command after installation. You need to replace BLASTN_PATH with the latest version of blast for your operating system, which you can get from: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/):
 
 ```
 python3 ditaxa.py --indir dataset/periodontal/
  --fast2label dataset/periodontal/mapping.txt
  --ext fastq
- --outdir ../results_dental/
+ --outdir results_dental/
  --dbname periodontal
  --cores 20
  --phenomap diseased:1,healthy:0
  --phenoname DvsH
  --override 1
- --blastn /mounts/data/proj/asgari/dissertation/deepbio/taxonomy/ncbi-blast-2.5.0+/bin/
+ --blastn BLASTN_PATH
 ```
 
-You can see that "dataset/periodontal/" contains fastq files for each sample, "dataset/periodontal/mapping.txt" provides a mapping from fastq files to their labels.
-"--phenomap diseased:1,healthy:0" determines which labels to be considered as positive class and which as negative class. "phenoname", i.e. DvsH defines the name of this
-labeling scheme (disease versus healthy).
+<h2> Example Dataset </h2>
+The "dataset/periodontal/" contains fastq files for each sample, "dataset/periodontal/mapping.txt" provides a mapping from fastq files to their labels. "--phenomap diseased:1,healthy:0" determines which labels to be considered as positive class and which as negative class. "phenoname", e.g. «DvsH» defines the name of this labeling scheme (disease versus healthy).
+
+After running this command the output files will be generated in 'results_dental' as described bellow.
 
 <h1> Output example </h1>
 The auotomatically generated output of the example is as follows:
