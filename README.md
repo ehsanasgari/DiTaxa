@@ -58,23 +58,20 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 <h1>Installation</h1>
 
-DiTaxa is implemented in Python3.6.x, which can be installed using Conda:
-```
-conda install python=3.6.5
-```
+DiTaxa implementation in Python3.6.x is provided (we recommend 3.6.5). You may use <a href='http://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/'>virtual environment</a>.
 
 To install the dependencies use the following command:
 ```
-pip install --upgrade pip
-pip install -r requirements.txt
+pip3 install --upgrade pip
+pip3 install -r requirements.txt
 ```
-
 or:
 ```
 conda install --yes --file requirements.txt
 ```
 
-DiTaxa for segmentation of the sequences by default uses Google SentencePiece backend. Please make sure that you have correctly installed SentencePiece:
+DiTaxa for segmentation of the sequences by default uses Google SentencePiece backend. For non-Linux environment, including macOS, Windows, and Linux (arm) please make sure that you  have installed SentencePiece C++ library in advance as instructed here:
+
 ```
 https://github.com/google/sentencepiece/tree/master/python
 ```
