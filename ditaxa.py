@@ -12,7 +12,7 @@ import os.path
 import sys
 from main.DiTaxa import DiTaxaWorkflow
 from utility.file_utility import FileUtility
-
+import warnings
 
 def checkArgs(args):
     '''
@@ -158,6 +158,7 @@ def checkArgs(args):
                 return  "\nNot able to recognize the model!"
 
 if __name__ == '__main__':
+    warnings.filter('ignore')
     err = checkArgs(sys.argv)
     if err:
         print(err)
