@@ -137,6 +137,7 @@ def checkArgs(args):
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel, pos_label=pos_label,neg_label=neg_label)
     else:
         print (parsedArgs.excel)
+        exit()
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel)
 
     if parsedArgs.classify:
