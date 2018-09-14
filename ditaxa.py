@@ -136,6 +136,7 @@ def checkArgs(args):
         pos_label, neg_label =parsedArgs.heatmap.split(':')
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel, pos_label=pos_label,neg_label=neg_label)
     else:
+        print (parsedArgs.excel)
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel)
 
     if parsedArgs.classify:
