@@ -133,11 +133,11 @@ def checkArgs(args):
     labels={line.split()[0].split('/')[-1]:line.split()[1] for line in FileUtility.load_list(parsedArgs.fast2label)}
 
     if parsedArgs.heatmap:
+        print (parsedArgs.excel)
+        exit()
         pos_label, neg_label =parsedArgs.heatmap.split(':')
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel, pos_label=pos_label,neg_label=neg_label)
     else:
-        print (parsedArgs.excel)
-        exit()
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel)
 
     if parsedArgs.classify:
