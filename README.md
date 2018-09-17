@@ -101,9 +101,9 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --blastn:  NCBI BLASTN /bin/ path in your system, you can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 
 <p>
-##Linux:<br/>
+<b>Linux</b><br/>
 http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-linux.tar.gz
-##MacOSx:<br/>
+<br/><b>MacOSx</b><br/>
 http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-macosx.tar.gz
 </p>
 
