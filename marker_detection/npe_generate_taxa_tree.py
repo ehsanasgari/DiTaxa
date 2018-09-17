@@ -62,7 +62,6 @@ class NPEMarkerAnlaysis:
         # N makrers
         # self.aligned_markers
         #plt.rc('text', usetex = True)
-        plt.gca().invert_yaxis()
         X_idx_1=[idx for idx, v in enumerate(self.phenotypes) if v in self.phenotype_mapping and self.phenotype_mapping[v]==1 ]
         X_idx_0=[idx for idx, v in enumerate(self.phenotypes) if v in self.phenotype_mapping and self.phenotype_mapping[v]==0 ]
 
@@ -119,7 +118,7 @@ class NPEMarkerAnlaysis:
         for idx,r in enumerate(rows):
             column_sorted=np.insert(column_sorted, r+idx, np.array([np.NaN]*column_sorted.shape[1]), 0)
             y_borders.append(r+idx)
-            y_labels.insert(r+idx,'$\\uparrow$')
+            y_labels.insert(r+idx,'↑')
             taxonomy.insert(r+idx,taxonomy[r+idx])
             map_y={k:((v+1) if k>=r else v) for k,v in map_y.items() }
         #keys=list(map_y.keys())
@@ -127,6 +126,7 @@ class NPEMarkerAnlaysis:
         #for k in keys:
         #    print(k,map_y[k])
         rows_reverted=column_sorted[::-1,]
+
 
         fig, ax = plt.subplots(figsize=(40,110))
         sheat=sns.heatmap(rows_reverted, cbar=True, ax=ax, cmap='coolwarm',yticklabels=y_labels[::-1], linecolor='black')
@@ -136,22 +136,23 @@ class NPEMarkerAnlaysis:
         ax.hlines(y_borders, *ax.get_xlim(), colors=['black'],linewidth=2)
         ax.vlines(get_borders(labels), *ax.get_ylim(), label=['u','h'], color='black',linewidth=5)
 
-        plt.text(0.4,rows_reverted.shape[0]+1,labels[0].replace('_','-'), color='purple', fontsize=30, fontweight='bold')
+        plt.text(0.4,-0.5,labels[0].replace('_','-'), color='purple', fontsize=30, fontweight='bold')
         for x in get_borders(labels):
-            plt.text(x+0.4,rows_reverted.shape[0]+1,labels[x].replace('_','-'), color='purple', fontsize=30, fontweight='bold')
+            plt.text(x+0.4,-0.5,labels[x].replace('_','-'), color='purple', fontsize=30, fontweight='bold')
 
         for x,y in single_hits:
-            plt.text(y+0.2,map_y[x]+0.2,'*', color='white', fontsize=40, fontweight='bold')
+            plt.text(y+0.2,rows_reverted.shape[0]-map_y[x]-0.2,'*', color='white', fontsize=40, fontweight='bold')
+            #plt.text(y+0.2,map_y[x]+0.2,'*', color='white', fontsize=40, fontweight='bold')
 
         if 'ZZZ' in taxonomy[0]:
-            plt.text(0.5,0.1,taxonomy[0].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=25,fontweight='bold')
+            plt.text(0.5,rows_reverted.shape[0]-0.1,taxonomy[0].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=25,fontweight='bold')
         else:
-            plt.text(0.5,0.1,taxonomy[0].replace('_','-'), rotation=0, color='white', fontsize=18, fontweight='bold')
+            plt.text(0.5,rows_reverted.shape[0]-0.1,taxonomy[0].replace('_','-'), rotation=0, color='white', fontsize=18, fontweight='bold')
         for x in y_borders:
             if 'ZZZ' in taxonomy[x]:
-                plt.text(0.5,x+0.1,taxonomy[x].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=25,fontweight='bold')
+                plt.text(0.5,rows_reverted.shape[0]-x-0.1,taxonomy[x].replace('_','-').replace('ZZZ',''), rotation=0, color='orangered', fontsize=25,fontweight='bold')
             else:
-                plt.text(0.5,x+0.1,taxonomy[x].replace('_','-'), rotation=0, color='white', fontsize=18, fontweight='bold')
+                plt.text(0.5,rows_reverted.shape[0]-x-0.1,taxonomy[x].replace('_','-'), rotation=0, color='white', fontsize=18, fontweight='bold')
 
         ax.axhline(y=0, color='black',linewidth=5)
         ax.axvline(x=0, color='black',linewidth=5)
@@ -159,13 +160,18 @@ class NPEMarkerAnlaysis:
         ax.axvline(x=rows_reverted.shape[1], color='black',linewidth=5)
 
         #sns.clustermap(df, metric="correlation", method="single",
-
+        #plt.gca().invert_yaxis()
+        #ax.invert_yaxis()
         plt.xlabel('Samples', color='purple', fontsize=40)
         plt.ylabel('Sorted markers by taxonomy', color='purple', fontsize=40)
         ax.grid(True)
         plt.xticks([])
         plt.tight_layout()
         #plt.yticks([])
+        # for x in range(0,rows_reverted.shape[0]):
+        #     ax.axhline(y=x, color='black',linewidth=1)
+        # for y in range(0,rows_reverted.shape[1]):
+        #     ax.axvline(x=y, color='black',linewidth=1)
         plt.savefig(filename+'.pdf', dpi=400 , bbox_inches='tight',pad_inches=1)
         plt.show()
         #https://seaborn.pydata.org/tutorial/aesthetics.html
@@ -181,6 +187,7 @@ class NPEMarkerAnlaysis:
         FileUtility.save_list(filename.replace('.xlsx','_finalmarker_list.txt').replace('final_outputs','intermediate_files/npe_marker_files'),final_markers)
         writer = pd.ExcelWriter(filename)
         df.to_excel(writer,settingname)
+        writer.save()
 
 
     def generate_tree(self, path, name):

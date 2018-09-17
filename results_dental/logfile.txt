@@ -1,0 +1,139 @@
+Segmentation inference unique_50000_v_5000_s 215.155859708786 seconds , using 20 cores
+Generating the NPE representations at npe_representation/periodontal_uniquepiece_-1  94.72396230697632 seconds , using 20cores
+biomarker extraction DvsH  47.69367980957031 seconds , using 20 cores
+blasting extraction DvsH  76.51330375671387 seconds, using 20cores
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+✔ Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+✔ Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+✔ Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
+Segmentation results directory exists. Thus, the step was bypassed
+Representation are already created. Thus, this is step is skipped!
+ Biomarker are already extracted. Thus, the statistical test was bypassed
+The aligned markers already existed and are loaded!
