@@ -132,13 +132,13 @@ python3 ditaxa.py --indir dataset/periodontal/
 <h2> Example Dataset </h2>
 You may use this example to prepare your input files:
 
-The "indir": e.g. «dataset/periodontal/» contains fastq files for each sample.
-The "fast2label"" e.g. «dataset/periodontal/mapping.txt» provides a mapping from fastq files to their labels.
-The "phenomap", e.g. «diseased:1,healthy:0» determining which labels to be considered as positive class and which as negative class.
-The "override", 1 will override already existing files in the directory
+The "indir": e.g. «dataset/periodontal/» contains fastq files for each sample.<br/>
+The "fast2label"" e.g. «dataset/periodontal/mapping.txt» provides a mapping from fastq files to their labels.<br/>
+The "phenomap", e.g. «diseased:1,healthy:0» determining which labels to be considered as positive class and which as negative class.<br/>
+The "override", 1 will override already existing files in the directory.<br/>
 The "blastn", path to the "bin" directory of blast existing on your system.
 You can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
-
+<br/>
 After running this command the output files will be generated in 'results_dental' as described bellow.
 
 <h2> Output example </h2>
