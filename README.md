@@ -98,8 +98,14 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --override: 1 to override the existing files, 0 to only generate the missing files<br/>
 --heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<br/>
 --excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
---blastn:  NCBI BLASTN path in your system, you can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
+--blastn:  NCBI BLASTN /bin/ path in your system, you can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 
+<p>
+##Linux:<br/>
+http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-linux.tar.gz
+##MacOSx:<br/>
+http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-macosx.tar.gz
+</p>
 
 <h3> Phenotype prediction </h3>
 For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
