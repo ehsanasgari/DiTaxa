@@ -65,7 +65,7 @@ To install the dependencies use the following command:
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
 ```
-or:
+or if you use conda:
 ```
 conda install --yes --file requirements.txt
 ```
