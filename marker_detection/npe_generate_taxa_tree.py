@@ -61,7 +61,7 @@ class NPEMarkerAnlaysis:
         # self.update_matrix
         # N makrers
         # self.aligned_markers
-        plt.rc('text', usetex = True)
+        #plt.rc('text', usetex = True)
         X_idx_1=[idx for idx, v in enumerate(self.phenotypes) if v in self.phenotype_mapping and self.phenotype_mapping[v]==1 ]
         X_idx_0=[idx for idx, v in enumerate(self.phenotypes) if v in self.phenotype_mapping and self.phenotype_mapping[v]==0 ]
 
@@ -443,8 +443,8 @@ class NPEMarkerAnlaysis:
         FileUtility.save_list(path+name+'_taxonomy.txt',taxonomy)
         FileUtility.save_list(path+name+'_annot.txt',annot)
 
-        subprocess.call("python2.7 graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
-        subprocess.call("python2.7 graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
+        subprocess.call("python3 graphlan/graphlan_annotate.py --annot "+path+name+'_annot.txt'+" "+path+name+'_taxonomy.txt'+"  "+path+name+'.xml', shell=True)
+        subprocess.call("python3 graphlan/graphlan.py "+path+name+'.xml'+" "+path+name+'.pdf --dpi 1000 --size 15 --external_legends', shell=True)
 
     def refine_ez_taxonomy(self, record):
         record=record.split(';')

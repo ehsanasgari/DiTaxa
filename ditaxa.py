@@ -67,7 +67,7 @@ def checkArgs(args):
                         help='Phenotype setting name, if not given the labeling scheme will be used.')
 
     # generate heatmap ###############################################################################
-    parser.add_argument('--heatmap', action='store', dest='heatmap', default=None, type=str,
+    parser.add_argument('--heatmap', action='store', dest='heatmap', default="positive_samples:negative_samples", type=str,
                         help='to generate heatmap of top 100 markers: positive_title:negative_title')
 
     # generate excel file  ###############################################################################
@@ -132,10 +132,7 @@ def checkArgs(args):
     Pipeline.representation_npe()
     labels={line.split()[0].split('/')[-1]:line.split()[1] for line in FileUtility.load_list(parsedArgs.fast2label)}
 
-    print ('Salam2...')
     if parsedArgs.heatmap:
-        print ('Salam...', parsedArgs.excel)
-        exit()
         pos_label, neg_label =parsedArgs.heatmap.split(':')
         Pipeline.biomarker_extraction(labels,label_dict,phenoname, excel=parsedArgs.excel, pos_label=pos_label,neg_label=neg_label)
     else:
@@ -159,7 +156,7 @@ def checkArgs(args):
                 return  "\nNot able to recognize the model!"
 
 if __name__ == '__main__':
-    warnings.filter('ignore')
+    warnings.filterwarnings('ignore')
     err = checkArgs(sys.argv)
     if err:
         print(err)

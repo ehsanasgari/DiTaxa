@@ -30,7 +30,7 @@ def create_mat_plot(mat, axis_names, title, filename, xlab, ylab, cmap='inferno'
     :param filename: where to be saved
     :return:
     '''
-    plt.rc('text', usetex=True)
+    #plt.rc('text', usetex=True)
     if len(axis_names)==0:
         ax = sns.heatmap(mat,annot=annot, cmap=cmap,fmt="d")
     else:
@@ -60,7 +60,7 @@ def create_mat_plot(mat, axis_names, title, filename, xlab, ylab, cmap='inferno'
     plt.clf()
 
 def plot_scatter(ax, X, Y, x_label, y_label, title,legend_hide=True, legend_loc=4, label_dict=False, legend_size=7, legend_col=1, color_schemes_idx=1):
-    plt.rc('text', usetex=True)
+    #plt.rc('text', usetex=True)
     global color_schemes
 
     target=list(set(Y))
