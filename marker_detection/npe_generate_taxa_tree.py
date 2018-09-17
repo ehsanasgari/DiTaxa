@@ -62,6 +62,7 @@ class NPEMarkerAnlaysis:
         # N makrers
         # self.aligned_markers
         #plt.rc('text', usetex = True)
+        plt.gca().invert_yaxis()
         X_idx_1=[idx for idx, v in enumerate(self.phenotypes) if v in self.phenotype_mapping and self.phenotype_mapping[v]==1 ]
         X_idx_0=[idx for idx, v in enumerate(self.phenotypes) if v in self.phenotype_mapping and self.phenotype_mapping[v]==0 ]
 
