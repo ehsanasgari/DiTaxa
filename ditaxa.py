@@ -55,7 +55,7 @@ def checkArgs(args):
                         help='tabular mapping between fatsa/fastq file names and their labels')
 
     # blast path #################################################################################################
-    parser.add_argument('--blastn', action='store', dest='blastn', default=False, type=str,
+    parser.add_argument('--blastn', action='store', dest='blastn', default="ncbi-blast/bin/", type=str,
                         help='path to the bin directory of blastn; get the latest from ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/')
 
     # label values ##################################################################################
