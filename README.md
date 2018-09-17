@@ -142,7 +142,8 @@ The "blastn", path to the "bin" directory of blast existing on your system.
 You can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 <br/>
 
-After running this command the output files will be generated in 'results_dental' as described bellow.
+After running this command the output files will be generated in 'results_dental' as described bellow. The example output files are provided in the './output_example/'
+directory.
 
 <h2> Output example </h2>
 The automatically generated output of the example is as follows:
