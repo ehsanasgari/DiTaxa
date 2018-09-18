@@ -1,18 +1,21 @@
+{% set version = "1.0" %}
+{% set sha256 = "1467d36957e3dafc06060f46059194e8426608866493a0e33b00b6bb7ba55264" %}
+
 package:
-  name: ditaxa
-  version: "1.0"
+  name: DiTaxa
+  version: {{ version }}
 
 source:
-  git_rev: v1.0
-  git_url: git@github.com:ehsanasgari/DiTaxa.git
+  url: http://deepbio.info/microbiome/ditaxa/DiTaxa_v{{ version }}.zip
+  sha256: {{ sha256 }}
 
 requirements:
   build:
-    - {{ compiler ('c')}}
     - python3
-    - setuptools
+    - zlib
   run:
     - python3
+    - zlib
 
 test:
   imports:

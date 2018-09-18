@@ -58,16 +58,37 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 <h1>Installation</h1>
 
-DiTaxa implementation in Python3.6.x is provided (we recommend 3.6.5). You may use <a href='http://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/'>virtual environment</a>.
+Runing build.sh would download blast tool on your system (linux or MacOS) and move it to a default location for DiTaxa. If you already
+have this tool you don't need to run this command and will need to specify the path in running ditaxa.
 
-To install the dependencies use the following command:
+```
+bash ./build.sh
+```
+
+DiTaxa implementation in Python3.6.x is provided (we recommend 3.6.5).
+The installation instruction using <a href='http://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/'>virtual environment</a> is provided here:
+Miniconda can be downloaded from here: https://conda.io/miniconda.html.
+
+
+The first step would be creating the environment using the provided .yaml file.
+```
+conda env create --name "DiTaxa" --file env.yaml
+```
+
+The next step is to activate the created environment.
+```
+source activate DiTaxa
+```
+
+The test would be:
+```
+python3 ditaxa.py -h
+```
+
+An alternative for installing the dependencies is use the following command:
 ```
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
-```
-or if you use conda:
-```
-conda install --yes --file requirements.txt
 ```
 
 DiTaxa for segmentation of the sequences by default uses <a href='https://github.com/google/sentencepiece/tree/master/python
