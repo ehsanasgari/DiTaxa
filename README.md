@@ -70,11 +70,8 @@ or if you use conda:
 conda install --yes --file requirements.txt
 ```
 
-DiTaxa for segmentation of the sequences by default uses Google SentencePiece backend. For non-Linux environment, including macOS, Windows, and Linux (arm) please make sure that you  have installed SentencePiece C++ library in advance as instructed here:
-
-```
-https://github.com/google/sentencepiece/tree/master/python
-```
+DiTaxa for segmentation of the sequences by default uses <a href='https://github.com/google/sentencepiece/tree/master/python
+'>Google SentencePiece backend.</a>
 
 <h1> User Manual </h1>
 
