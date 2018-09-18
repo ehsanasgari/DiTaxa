@@ -56,7 +56,7 @@ class NPESegmentTrainMetagenomics:
                                total=len(fasta_files)):
             corpus = corpus + v
         pool.close()
-        print('Corpus size for training NPE is ', len(corpus))
+        print('\t✔ Corpus size for training NPE is ', len(corpus))
         if backend == 'Sentencepiece':
             FileUtility.save_list('tmp/tmp_txt', corpus)
             spm.SentencePieceTrainer.Train(
@@ -64,14 +64,14 @@ class NPESegmentTrainMetagenomics:
             FileUtility.save_list('tmp/tmp_txt', corpus[0:10])
         elif backend == 'normalbpe':
             train_npe(corpus, output_dir, vocab_size, output_dir + '_freq')
-        print(' The segmentation training took ', timeit.default_timer() - start, ' ms.')
+        print('\t✔ The segmentation training took ', timeit.default_timer() - start, ' ms.')
 
     def _get_corpus(self, file_name_sample, unqiue_reads=True):
         '''
         :param file_name_sample:
         :return:
         '''
-        random.seed(a=0)
+
         file_name = file_name_sample[0]
         sample_size = file_name_sample[1]
         corpus = []
@@ -87,6 +87,7 @@ class NPESegmentTrainMetagenomics:
         if sample_size == -1:
             return file_name, corpus
         else:
+            random.seed(0)
             return file_name, random.sample(corpus, min(sample_size, len(corpus)))
 
 

@@ -1,0 +1,25 @@
+package:
+  name: ditaxa
+  version: "1.0"
+
+source:
+  git_rev: v1.0
+  git_url: git@github.com:ehsanasgari/DiTaxa.git
+
+requirements:
+  build:
+    - {{ compiler ('c')}}
+    - python3
+    - setuptools
+  run:
+    - python3
+
+test:
+  imports:
+    - ditaxa
+
+about:
+  home: git@github.com:ehsanasgari/DiTaxa.git
+  license: Apache License V2
+  license_file: LICENSE
+  summary:  Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection

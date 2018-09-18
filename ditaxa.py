@@ -56,7 +56,7 @@ def checkArgs(args):
 
     # blast path #################################################################################################
     parser.add_argument('--blastn', action='store', dest='blastn', default="ncbi-blast/bin/", type=str,
-                        help='path to the bin directory of blastn; get the latest from ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/')
+                        help='path to the bin directory of blastn; If you run build.sh the default parameter works. Otherwise get the latest from ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/')
 
     # label values ##################################################################################
     parser.add_argument('--phenomap', action='store', dest='phenomap', default=None, type=str,

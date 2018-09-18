@@ -79,7 +79,6 @@ class DiTaxaWorkflow:
         '''
         if self.override==1 or not DiTaxaWorkflow.exists(self.output_directory_inter+'npe_segmentatation/'):
             print('\t✔ Segmentation inference started.. ')
-            DiTaxaWorkflow.blockPrint()
             start = time.time()
             G16s = NPESegmentTrainMetagenomics(self.file_directory, self.file_extenstion)
             DiTaxaWorkflow.ensure_dir(self.output_directory_inter+'npe_segmentatation/')
@@ -89,7 +88,6 @@ class DiTaxaWorkflow:
             end = time.time()
             spent = (end - start)
             self.log_file.append('Segmentation inference '+'_'.join(['unique',str(self.vocab_size),'v',str(self.seg_train_depth),'s '])+str(spent)+' seconds , using '+str(self.num_p)+' cores')
-            DiTaxaWorkflow.enablePrint()
         else:
             print('\t✔ Segmentation results directory exists. Thus, the step was bypassed')
             self.log_file.append('Segmentation results directory exists. Thus, the step was bypassed')
@@ -107,6 +105,7 @@ class DiTaxaWorkflow:
             G16s.generate_npes_all(save=self.output_directory_inter+'npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth))
             end = time.time()
             spent = end-start
+            print('\t✔ Generating the NPE representations at npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
             self.log_file.append('Generating the NPE representations at npe_representation/'+self.dbname+'_uniquepiece_'+str(self.rep_sampling_depth)+'  '+str(spent)+' seconds , using '+str(self.num_p)+'cores')
         else:
             print('\t✔ Representation are already created. Thus, this is step is skipped!')
@@ -147,6 +146,7 @@ class DiTaxaWorkflow:
 
             end = time.time()
             spent = end-start
+            print('\t✔ biomarker extraction ' + phenoname + '  ' + str(spent) + ' seconds , using ' + str(self.num_p) + ' cores')
             self.log_file.append('biomarker extraction ' + phenoname + '  ' + str(spent) + ' seconds , using ' + str(self.num_p) + ' cores')
         else:
             print('\t✔ Biomarker are already extracted. Thus, the statistical test was bypassed')
@@ -178,7 +178,8 @@ class DiTaxaWorkflow:
             spent = end-start
             DiTaxaWorkflow.ensure_dir(self.output_directory+'final_outputs/')
             FileUtility.save_obj(self.output_directory+'final_outputs/save_states/' + phenoname, Final_OBJ)
-            self.log_file.append('blasting extraction ' + phenoname + '  ' + str(spent) + ' seconds, using ' + str(self.num_p) + 'cores')
+            print('\t✔ Marker analysis and alignment ' + phenoname + '  ' + str(spent) + ' seconds, using ' + str(self.num_p) + 'cores')
+            self.log_file.append('Marker analysis and alignment ' + phenoname + '  ' + str(spent) + ' seconds, using ' + str(self.num_p) + 'cores')
         else:
             Final_OBJ=FileUtility.load_obj(self.output_directory+'final_outputs/save_states/'+phenoname+'.pickle')
             print('\t✔ The aligned markers already existed and are loaded!')
