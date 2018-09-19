@@ -97,9 +97,14 @@ http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B
 
 
 <h3> Phenotype prediction </h3>
-This functionality is not fully supported in this version and will be released in the next version. For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
+
+For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
 --classify: which predictive model to use: choices=[False: default, 'RF': random forest, 'SVM': support vector machines, 'DNN': deep multi-layer perceptron, 'LR': logistic regression] <br/>
+
 <b>Deep neural network parameters</b>
+
+Although a full script is provided, in order to simplify the core installation of DiTaxa for biomarker detection/analysis we have commented the deep neural network classifier and its dependencies. In case you are interested in using neural network prediction of the phenotype you only need to install some further dependencies (keras/tensorflow) and uncomment "import DNN" in main/DiTaxa.py.
+
 --arch: The comma separated definition of neural network layers connected to eahc other, you do not need to specify the input and output layers, values between 0 and 1 will be considered as dropouts, e.g., 1024,0.2,512'<br/>
 --batchsize<br/>
 --gpu_id: which GPU to use<br/>
