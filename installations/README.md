@@ -11,7 +11,7 @@
 </tbody>
 </table>
 
-# Installation instruction using miniconda on linux and MacOsx
+# Installation instruction using miniconda on linux and MacOSx
 
 We recommend to use a conda virtual environment for installation of DiTaxa.
 
@@ -27,7 +27,7 @@ curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 sh ./Miniconda3-latest-Linux-x86_64.sh
 ```
 
-### MacOs
+### MacOS
 ```
 cd ~
 curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
@@ -80,11 +80,14 @@ The next step would be installation of the dependencies:
 conda create --name DiTaxa --file installations/env_linux.txt
 ```
 
-### MacOs
+### MacOS
 ```
 conda create --name DiTaxa --file installations/env_macosx.txt
 
 ```
+
+### Linux and MacOS
+
 
 Then you need to activate the DiTaxa virtual environment:
 
