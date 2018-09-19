@@ -11,7 +11,7 @@
 </tbody>
 </table>
 
-# Installation instruction using miniconda on linux and MacOSx
+# Installation instruction using miniconda on Linux and MacOSx
 
 We recommend to use a conda virtual environment for installation of DiTaxa.
 
