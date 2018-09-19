@@ -64,6 +64,7 @@ requirements:
     - wheel=0.31.1=py36_0
     - xz=5.2.4=h1de35cc_4
     - zlib=1.2.11=hf3cbc9b_2
+    - pip
     - pip:
         - sentencepiece==0.1.4
   run:
@@ -120,6 +121,7 @@ requirements:
     - wheel=0.31.1=py36_0
     - xz=5.2.4=h1de35cc_4
     - zlib=1.2.11=hf3cbc9b_2
+    - pip
     - pip:
         - sentencepiece==0.1.4
 test:
