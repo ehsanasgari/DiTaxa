@@ -122,4 +122,4 @@ python3 ditaxa.py --indir dataset/periodontal/ --fast2label dataset/periodontal/
 ```
 
 This should generate the output files (the intermediate representations, the biomarkers excel file, the heatmap, and the phylogenetic tree, etc.) step by step in the results_dental/ directory.
-For more details on the input and the outputs please see <a href=''>here</a>.
+For more details on the input and the outputs please see <a href='https://github.com/ehsanasgari/DiTaxa'>here</a>.
