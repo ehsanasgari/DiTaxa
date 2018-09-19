@@ -87,7 +87,7 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --blastn:  If you have already run './build.sh' you do not need to specify this parameter and the script will download and put the
 <a href=' ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/'>NCBI BLASTN</a> /bin/ path in your system, otherwise if you already have this on your system you can specify it here.
 <p>
-You can also download blast+ from below and specify the path:
+You can also download blast+ from below and specify the path:<br/>
 <b>Linux</b><br/>
 http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-linux.tar.gz
 <br/><b>MacOSx</b><br/>
