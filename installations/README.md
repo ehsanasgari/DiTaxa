@@ -114,7 +114,7 @@ python ditaxa.py -h
 In order to run the working example you can run:
 
 ```
-sh ./run_test.sh
+bash ./run_test.sh
 ```
 
 or its content, i.e.:
