@@ -24,14 +24,14 @@ The first step is to install the latest version of conda on your system.
 ```
 cd ~
 curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-sh ./Miniconda3-latest-Linux-x86_64.sh
+bash ./Miniconda3-latest-Linux-x86_64.sh
 ```
 
 ### MacOS
 ```
 cd ~
 curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-sh ./Miniconda3-latest-MacOSX-x86_64.sh
+bash ./Miniconda3-latest-MacOSX-x86_64.sh
 ```
 
 
@@ -67,7 +67,7 @@ Run build.sh to download the latest blast alignment tool for your system (linux 
 directory that DiTaxa uses (DiTaxa/ncbi-blast/bin/). If you already have this tool in your system you can skip this part and just provide its path to the program later.
 
 ```
-sh ./build.sh
+bash ./build.sh
 ```
 
 
