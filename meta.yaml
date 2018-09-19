@@ -2,7 +2,7 @@
 {% set sha256 = "1467d36957e3dafc06060f46059194e8426608866493a0e33b00b6bb7ba55264" %}
 
 package:
-  name: DiTaxa
+  name: ditaxa
   version: {{ version }}
 
 source:
