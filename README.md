@@ -58,43 +58,11 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 <h1>Installation</h1>
 
-Runing build.sh would download blast tool on your system (linux or MacOS) and move it to a default location for DiTaxa. If you already
-have this tool you don't need to run this command and will need to specify the path in running ditaxa.
-
-```
-bash ./build.sh
-```
-
-DiTaxa implementation in Python3.6.x is provided (we recommend 3.6.5).
-The installation instruction using <a href='http://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/'>virtual environment</a> is provided here:
-Miniconda can be downloaded from here: https://conda.io/miniconda.html.
-
-
-The first step would be creating the environment using the provided .yaml file.
-```
-conda env create --name "DiTaxa" --file env.yaml
-```
-
-The next step is to activate the created environment.
-```
-source activate DiTaxa
-```
-
-The test would be:
-```
-python3 ditaxa.py -h
-```
-
-An alternative for installing the dependencies is use the following command:
-```
-pip3 install --upgrade pip
-pip3 install -r requirements.txt
-```
-
-DiTaxa for segmentation of the sequences by default uses <a href='https://github.com/google/sentencepiece/tree/master/python
-'>Google SentencePiece backend.</a>
+For the detailed installation using conda virtual machine please look at the <a href='installations/README.MD'> installation guideline </a>.
 
 <h1> User Manual </h1>
+
+A sample run for DiTaxa can be as follows:
 
 ```
 python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --fast2label mapping_file_from_name_to_phenotype --phenomap mapping_labels_to_binary_1_or_0_phenotype
@@ -116,10 +84,10 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --override: 1 to override the existing files, 0 to only generate the missing files<br/>
 --heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<br/>
 --excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
---blastn:  NCBI BLASTN /bin/ path in your system, you can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
-
+--blastn:  If you have already run './build.sh' you do not need to specify this parameter and the script will download and put the
+<a href=' ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/'>NCBI BLASTN</a> /bin/ path in your system, otherwise if you already have this on your system you can specify it here.
 <p>
-If you run build.sh you don't need to download it manually and the default parameter in blastn works. Otherwise you can download blast+ from below and specify the path:
+You can also download blast+ from below and specify the path:
 <b>Linux</b><br/>
 http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-linux.tar.gz
 <br/><b>MacOSx</b><br/>
@@ -129,9 +97,8 @@ http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B
 
 
 <h3> Phenotype prediction </h3>
-For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
+This functionality is not fully supported in this version and will be released in the next version. For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
 --classify: which predictive model to use: choices=[False: default, 'RF': random forest, 'SVM': support vector machines, 'DNN': deep multi-layer perceptron, 'LR': logistic regression] <br/>
-
 <b>Deep neural network parameters</b>
 --arch: The comma separated definition of neural network layers connected to eahc other, you do not need to specify the input and output layers, values between 0 and 1 will be considered as dropouts, e.g., 1024,0.2,512'<br/>
 --batchsize<br/>
@@ -157,6 +124,11 @@ python3 ditaxa.py --indir dataset/periodontal/
  --blastn BLASTN_PATH
 ```
 
+Alternatively you can run:
+```
+sh ./run_test.sh
+```
+
 <h2> Example Dataset </h2>
 You may use this example to prepare your input files:
 
@@ -166,7 +138,7 @@ The "phenomap", e.g. «diseased:1,healthy:0» determining which labels to be con
 The "override", 1 will override already existing files in the directory.<br/>
 The "heatmap" e.g. «PeriodontalSamples:HealthySamples» determines the names for plotting positive and negative pheotypes on the heatmap.<br/>
 The "blastn", path to the "bin" directory of blast existing on your system.
-You can get the latest version from here: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
+(optional: only if you don't run build.sh you need to specify this)
 <br/>
 
 After running this command the output files will be generated in 'results_dental' as described bellow. The example output files are provided in the './output_example/'
