@@ -142,6 +142,7 @@ The DiTaxa implementation for taxonomic tree generation uses a Phylophlan-based 
 
 <img src="https://user-images.githubusercontent.com/8551117/40692994-568c1960-63b5-11e8-999d-ee69917943f5.png"/>
 <img src="https://user-images.githubusercontent.com/8551117/45871312-7bcef800-bd8d-11e8-8276-25f2919929cd.png"/>
+STDP here means the state-of-the-art OTU based approach compared to DiTaxa.
 
 <h3>Heatmap of Biomarkers</h3>
 
