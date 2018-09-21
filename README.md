@@ -137,11 +137,11 @@ Alternatively you can run:
 bash ./run_test.sh
 ```
 
-<h2> Example Dataset </h2>
+<h2> Example Dataset and parameter explanation</h2>
 You may use this example to prepare your input files:
 
 The "indir": e.g. «dataset/periodontal/» contains fastq files for each 16S rRNA samples.<hr/>
-The "fast2label"" e.g. «dataset/periodontal/mapping.txt» provides a file containing mapping from fastq files to their labels in a tabular format:<hr/>
+The "fast2label"" e.g. «dataset/periodontal/mapping.txt» provides a file containing mapping from fastq files to their labels in a tabular format:
 ```
 d1.fastq    diseased
 d2.fastq    diseased
@@ -164,10 +164,12 @@ h8.fastq    healthy
 h9.fastq    healthy
 h10.fastq    healthy
 ```
-The "phenomap", e.g. «diseased:1,healthy:0» determining which labels to be considered as positive class and which as negative class as a string with no space in the following format:<hr/>
+<hr/>
+The "phenomap", e.g. «diseased:1,healthy:0» determining which labels to be considered as positive class and which as negative class as a string with no space in the following format:
 ```
 diseased:1,healthy:0
 ```
+<hr/>
 The "override", 1 will override already existing files in the directory.<hr/>
 The "heatmap" e.g. «PeriodontalSamples:HealthySamples» determines the names for plotting positive and negative pheotypes on the heatmap.<hr/>
 The "blastn", (optional: only if you don't run build.sh you need to specify this) path to the "bin" directory of blast existing on your system.
