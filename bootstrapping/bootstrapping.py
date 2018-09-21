@@ -240,7 +240,7 @@ class BootStrapping(object):
         matplotlib.rcParams['mathtext.it'] = 'Bitstream Vera Sans:italic'
         matplotlib.rcParams['mathtext.bf'] = 'Bitstream Vera Sans:bold'
         matplotlib.pyplot.title(r'ABC123 vs $\mathrm{ABC123}^{123}$')
-        plt.rc('text', usetex=True)
+        #plt.rc('text', usetex=True)
 
         ax = subplot(121)
         k_mers = list(self.N_axis.keys())

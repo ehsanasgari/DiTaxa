@@ -59,58 +59,7 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 <h1>Installation</h1>
 
-For the detailed installation using conda virtual environment and test with the working example please refer to the <a href='https://github.com/ehsanasgari/DiTaxa/tree/master/installations'> installation guideline </a>.
-
-<h1> User Manual </h1>
-
-The parameteres for running DiTaxa are as follows:
-
-```
-python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --fast2label mapping_file_from_name_to_phenotype --phenomap mapping_labels_to_binary_1_or_0_phenotype
---blastn /mounts/data/proj/asgari/dissertation/deepbio/taxonomy/ncbi-blast-2.5.0+/bin/
-
-```
-
-Using the above mentioned command all the steps will be done sequentially and output will be organized in subdirectories.
-
-<h3> Main parameters and biomarker detection </h3>
-
---indir: The input directory containing all fasta or fastq files. (e.g.: datasets/periodontal/)<br/>
---ext: Sequence file extensions (fasta or fastq) (e.g.: fastq)<br/>
---outdir: The output directory (e.g.: /mounts/data/ditaxa/results/test_dental_out/)<br/>
---cores: Number of cores (e.g.: 40)<br/>
---fast2label: tabular mapping file between file names and the labels<br/>
---phenomap: mapping from label to binary phenotypes<br/>
---phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0. Please note that a single project may have several phenotype mapping schemes (untreated diseased versus all or untreated versus healthy or etc.)<br/>
---override: 1 to override the existing files, 0 to only generate the missing files<br/>
---heatmap: generates occurrence heatmap for the top 100 markers (e.g:  positive_title:negative_title).<br/>
---excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
---blastn:  If you have already run './build.sh' you do not need to specify this parameter and the script will download it and put the
-<a href=' ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/'>NCBI BLASTN</a> /bin/ path in your system. Otherwise, if you already have this on your system you can specify it here.
-<p>
-You can also download blast+ from below and specify the path:<br/>
-<b>Linux</b><br/>
-http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-linux.tar.gz
-<br/><b>MacOSx</b><br/>
-http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-macosx.tar.gz
-</p>
-
-
-
-<h3> Phenotype prediction </h3>
-
-For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
---classify: which predictive model to use: choices=[False: default, 'RF': random forest, 'SVM': support vector machines, 'DNN': deep multi-layer perceptron, 'LR': logistic regression] <br/>
-
-<b>Deep neural network parameters</b>
-
-Although a full script is provided, in order to simplify the core installation of DiTaxa for biomarker detection/analysis we have commented the deep neural network classifier and its dependencies. In case you are interested in using neural network prediction of the phenotype you only need to install some further dependencies (keras/tensorflow) and uncomment "import DNN" in main/DiTaxa.py.
-
---arch: The comma separated definition of neural network layers connected to eahc other, you do not need to specify the input and output layers, values between 0 and 1 will be considered as dropouts, e.g., 1024,0.2,512'<br/>
---batchsize<br/>
---gpu_id: which GPU to use<br/>
---epochs: Number of epochs<br/>
-
+For the detailed installation using conda virtual environment and testing the working example please refer to the <a href='https://github.com/ehsanasgari/DiTaxa/tree/master/installations'> installation guideline </a>.
 
 <h1> Working Example </h1>
 
@@ -194,14 +143,64 @@ DiTaxa provides a taxonomic tree for significant discriminative biomarkers, wher
 
 <h2>Heatmap of Biomarkers</h2>
 
-DiTaxa provides a heatmap of top biomarkers occurrences in samples, where the rows denote markers and the columns are samples is generated. Such a heatmap allows biologists to obtain a detailed overview of markers' occurrences across samples. The heatmap shows number of distinctive sequences hit by each biomarker in different samples and stars in the heatmap denote hitting unique sequences, which cannot be analyzed by OTU clustering approaches. 
+DiTaxa provides a heatmap of top biomarkers occurrences in samples, where the rows denote markers and the columns are samples is generated. Such a heatmap allows biologists to obtain a detailed overview of markers' occurrences across samples. The heatmap shows number of distinctive sequences hit by each biomarker in different samples and stars in the heatmap denote hitting unique sequences, which cannot be analyzed by OTU clustering approaches.
 
 <img src="https://user-images.githubusercontent.com/8551117/40692895-b01a2a68-63b4-11e8-95d2-fc3727471bca.png"/>
 
 In addition, DiTaxa provides a detailed excel file of biomarker sequnces and their taxonomy annotations along with their p-values. T-sne visualization of data using all NPEs and selected markers will be also generated by default.
 
 
-<h2>Bootstrapping for sample size selection</h2>
+
+
+<h1> Detailed User Manual </h1>
+
+After installation using the <a href='https://github.com/ehsanasgari/DiTaxa/tree/master/installations'> installation guideline </a>.you may use DiTaxa The parameteres for running DiTaxa are as follows:
+
+```
+python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --fast2label mapping_file_from_name_to_phenotype --phenomap mapping_labels_to_binary_1_or_0_phenotype
+--blastn /mounts/data/proj/asgari/dissertation/deepbio/taxonomy/ncbi-blast-2.5.0+/bin/
+
+```
+
+Using the above mentioned command all the steps will be done sequentially and output will be organized in subdirectories.
+
+<h3> Main parameters for biomarker detection/analysis </h3>
+
+--indir: The input directory containing all fasta or fastq files. (e.g.: datasets/periodontal/)<br/>
+--ext: Sequence file extensions (fasta or fastq) (e.g.: fastq)<br/>
+--outdir: The output directory (e.g.: /mounts/data/ditaxa/results/test_dental_out/)<br/>
+--cores: Number of cores (e.g.: 40)<br/>
+--fast2label: tabular mapping file between file names and the labels<br/>
+--phenomap: mapping from label to binary phenotypes<br/>
+--phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0. Please note that a single project may have several phenotype mapping schemes (untreated diseased versus all or untreated versus healthy or etc.)<br/>
+--override: 1 to override the existing files, 0 to only generate the missing files<br/>
+--heatmap: generates occurrence heatmap for the top 100 markers (e.g:  positive_title:negative_title).<br/>
+--excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
+--blastn:  If you have already run './build.sh' you do not need to specify this parameter and the script will download it and put the
+<a href=' ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/'>NCBI BLASTN</a> /bin/ path in your system. Otherwise, if you already have this on your system you can specify it here.
+<p>
+You can also download blast+ from below and specify the path:<br/>
+<b>Linux</b><br/>
+http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-linux.tar.gz
+<br/><b>MacOSx</b><br/>
+http://ftp.ncbi.nlm.nih.gov/blast/executables/blast%2B/2.7.1/ncbi-blast-2.7.1%2B-x64-macosx.tar.gz
+</p>
+
+<h3> Phenotype prediction </h3>
+
+For phenotype classification functionality, evaluation a 10XFold cross-validation framework:
+--classify: which predictive model to use: choices=[False: default, 'RF': random forest, 'SVM': support vector machines, 'DNN': deep multi-layer perceptron, 'LR': logistic regression] <br/>
+
+<b>Deep neural network parameters</b>
+
+Although a full script is provided, in order to simplify the core installation of DiTaxa for biomarker detection/analysis we have commented the deep neural network classifier and its dependencies. In case you are interested in using neural network prediction of the phenotype you only need to install some further dependencies (keras/tensorflow) and uncomment "import DNN" in main/DiTaxa.py.
+
+--arch: The comma separated definition of neural network layers connected to eahc other, you do not need to specify the input and output layers, values between 0 and 1 will be considered as dropouts, e.g., 1024,0.2,512'<br/>
+--batchsize<br/>
+--gpu_id: which GPU to use<br/>
+--epochs: Number of epochs<br/>
+
+<h3>Bootstrapping for sample size selection</h3>
 We use bootstrapping to investigate sufficiency and consistency of NPE representation, when only a small portion of the sequences are used. This has two important implications, first, sub-sampling reduces the preprocessing run-time, second, it shows that even a shallow 16S rRNA sequencing is enough for the phenotype prediction. We use a resampling framework to find a proper sampling size. The DiTaxa implementation uses a defualt parameter setting based on bootstrapping on several datasets. The bootstrapping library is located at "DiTaxa/bootstrapping/bootstrapping.py" if further investigation is needed.
 
 <img src="https://user-images.githubusercontent.com/8551117/40692939-f8b2785c-63b4-11e8-9194-c944775bbdf6.png">
