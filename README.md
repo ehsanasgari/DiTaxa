@@ -59,7 +59,7 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 <h1>Installation</h1>
 
-For the detailed installation using conda virtual environment please refer to the <a href='https://github.com/ehsanasgari/DiTaxa/tree/master/installations'> installation guideline </a>.
+For the detailed installation using conda virtual environment and test with the working example please refer to the <a href='https://github.com/ehsanasgari/DiTaxa/tree/master/installations'> installation guideline </a>.
 
 <h1> User Manual </h1>
 
