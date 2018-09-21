@@ -13,8 +13,7 @@
 
 # Installation instruction using miniconda on Linux and MacOSx
 
-We recommend to use a conda virtual environment for installation of DiTaxa.
-
+Here we have provided the detailed installation instructions of DiTaxa on Linux 64 and MacOSx 64 using conda virtual environment.
 
 ## (1) Miniconda installation
 
