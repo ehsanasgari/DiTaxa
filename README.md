@@ -166,9 +166,11 @@ h10.fastq    healthy
 ```
 <hr/>
 The "phenomap", e.g. «diseased:1,healthy:0» determining which labels to be considered as positive class and which as negative class as a string with no space in the following format:
+
 ```
 diseased:1,healthy:0
 ```
+
 <hr/>
 The "override", 1 will override already existing files in the directory.<hr/>
 The "heatmap" e.g. «PeriodontalSamples:HealthySamples» determines the names for plotting positive and negative pheotypes on the heatmap.<hr/>
