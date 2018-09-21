@@ -59,11 +59,11 @@ Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content
 
 <h1>Installation</h1>
 
-For the detailed installation using conda virtual machine please look at the <a href='https://github.com/ehsanasgari/DiTaxa/tree/master/installations'> installation guideline </a>.
+For the detailed installation using conda virtual environment please refer to the <a href='https://github.com/ehsanasgari/DiTaxa/tree/master/installations'> installation guideline </a>.
 
 <h1> User Manual </h1>
 
-A sample run for DiTaxa can be as follows:
+The parameteres for running DiTaxa are as follows:
 
 ```
 python3 ditaxa.py --indir address_of_samples --ext extension_of_the_files --outdir output_directory --dbname database_name --cores 20 --fast2label mapping_file_from_name_to_phenotype --phenomap mapping_labels_to_binary_1_or_0_phenotype
@@ -83,10 +83,10 @@ Using the above mentioned command all the steps will be done sequentially and ou
 --phenomap: mapping from label to binary phenotypes<br/>
 --phenoname: name of the phenotype mapping, if not given the labels and their value will be used for identification: label1@1#label2@1...#label3@0. Please note that a single project may have several phenotype mapping schemes (untreated diseased versus all or untreated versus healthy or etc.)<br/>
 --override: 1 to override the existing files, 0 to only generate the missing files<br/>
---heatmap: generates occurrence heatmap for top 100 markers (e.g:  positive_title:negative_title).<br/>
+--heatmap: generates occurrence heatmap for the top 100 markers (e.g:  positive_title:negative_title).<br/>
 --excel: 1 or 0, the default is 1 to generate a detailed list of markers, their taxonomic assignment, and their p-values<br/>
---blastn:  If you have already run './build.sh' you do not need to specify this parameter and the script will download and put the
-<a href=' ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/'>NCBI BLASTN</a> /bin/ path in your system, otherwise if you already have this on your system you can specify it here.
+--blastn:  If you have already run './build.sh' you do not need to specify this parameter and the script will download it and put the
+<a href=' ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/'>NCBI BLASTN</a> /bin/ path in your system. Otherwise, if you already have this on your system you can specify it here.
 <p>
 You can also download blast+ from below and specify the path:<br/>
 <b>Linux</b><br/>
@@ -114,7 +114,9 @@ Although a full script is provided, in order to simplify the core installation o
 
 <h1> Working Example </h1>
 
-An example of periodontal disease dataset (Jorth et al, 2015) is provided (a relatively small dataset). In order to see how DiTaxa runs, you may run the following command after installation. You need to replace BLASTN_PATH with the latest version of blast for your operating system, which you can get from: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/):
+An example of periodontal disease dataset (Jorth et al, 2015) is provided in the repo. In order to see how DiTaxa runs, you may run the following command after <a href='https://github.com/ehsanasgari/DiTaxa/tree/master/installations'>installation</a>.
+<br/>
+You need to replace BLASTN_PATH with the latest version of blast for your operating system, which you can get from: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/):
 
 ```
 python3 ditaxa.py --indir dataset/periodontal/
@@ -127,24 +129,48 @@ python3 ditaxa.py --indir dataset/periodontal/
  --heatmap PeriodontalSamples:HealthySamples
  --phenoname DvsH
  --override 1
- --blastn BLASTN_PATH
+ (optional)--blastn BLASTN_PATH
 ```
 
 Alternatively you can run:
 ```
-sh ./run_test.sh
+bash ./run_test.sh
 ```
 
 <h2> Example Dataset </h2>
 You may use this example to prepare your input files:
 
-The "indir": e.g. «dataset/periodontal/» contains fastq files for each sample.<br/>
-The "fast2label"" e.g. «dataset/periodontal/mapping.txt» provides a mapping from fastq files to their labels.<br/>
-The "phenomap", e.g. «diseased:1,healthy:0» determining which labels to be considered as positive class and which as negative class.<br/>
-The "override", 1 will override already existing files in the directory.<br/>
-The "heatmap" e.g. «PeriodontalSamples:HealthySamples» determines the names for plotting positive and negative pheotypes on the heatmap.<br/>
-The "blastn", path to the "bin" directory of blast existing on your system.
-(optional: only if you don't run build.sh you need to specify this)
+The "indir": e.g. «dataset/periodontal/» contains fastq files for each 16S rRNA samples.<hr/>
+The "fast2label"" e.g. «dataset/periodontal/mapping.txt» provides a file containing mapping from fastq files to their labels in a tabular format:<hr/>
+```
+d1.fastq    diseased
+d2.fastq    diseased
+d3.fastq    diseased
+d4.fastq    diseased
+d5.fastq    diseased
+d6.fastq    diseased
+d7.fastq    diseased
+d8.fastq    diseased
+d9.fastq    diseased
+d10.fastq    diseased
+h1.fastq    healthy
+h2.fastq    healthy
+h3.fastq    healthy
+h4.fastq    healthy
+h5.fastq    healthy
+h6.fastq    healthy
+h7.fastq    healthy
+h8.fastq    healthy
+h9.fastq    healthy
+h10.fastq    healthy
+```
+The "phenomap", e.g. «diseased:1,healthy:0» determining which labels to be considered as positive class and which as negative class as a string with no space in the following format:<hr/>
+```
+diseased:1,healthy:0
+```
+The "override", 1 will override already existing files in the directory.<hr/>
+The "heatmap" e.g. «PeriodontalSamples:HealthySamples» determines the names for plotting positive and negative pheotypes on the heatmap.<hr/>
+The "blastn", (optional: only if you don't run build.sh you need to specify this) path to the "bin" directory of blast existing on your system.
 <br/>
 
 After running this command the output files will be generated in 'results_dental' as described bellow. The example output files are provided in the './output_example/'
