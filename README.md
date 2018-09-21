@@ -141,7 +141,7 @@ DiTaxa provides a taxonomic tree for significant discriminative biomarkers, wher
 The DiTaxa implementation for taxonomic tree generation uses a Phylophlan-based backend. Other than PDF files, DiTaxa provides the raw graphlan outputs to facilitate further annotations.
 
 <img src="https://user-images.githubusercontent.com/8551117/40692994-568c1960-63b5-11e8-999d-ee69917943f5.png"/>
-
+<img src="https://user-images.githubusercontent.com/8551117/45871312-7bcef800-bd8d-11e8-8276-25f2919929cd.png"/>
 
 <h3>Heatmap of Biomarkers</h3>
 
