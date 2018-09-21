@@ -122,9 +122,8 @@ diseased:1,healthy:0
 <hr/>
 The "override", 1 will override already existing files in the directory.<hr/>
 The "heatmap" e.g. «PeriodontalSamples:HealthySamples» determines the names for plotting positive and negative pheotypes on the heatmap.<hr/>
-The "blastn", (optional: only if you don't run build.sh you need to specify this)
-This is the path to the "bin" directory of blast existing on your system. If you do not run ./build.sh in the installation,
-you need to replace BLASTN_PATH with the latest version of blast for your operating system from: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/).
+The "blastn", optional: only if you don't run build.sh you need to specify this:
+This is the path to the "bin" directory of blast existing on your system. In this case, you may get the latest version of blast for your operating system from: ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/).
 <hr/>
 
 <br/>
