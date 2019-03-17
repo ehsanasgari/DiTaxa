@@ -38,7 +38,7 @@ Please feel free to report any technical issue by sending an email or reporting 
 
 </table>
 
-Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content/early/2018/05/30/334722">bioarXiv</a> version  <a href="https://www.biorxiv.org/highwire/citation/101986/bibtext"><img class="alignnone wp-image-142" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/bibtex-icon.png" alt="" width="44" height="44" /></a> <a href="https://www.biorxiv.org/highwire/citation/101986/mendeley"><img class="alignnone wp-image-143" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Apps-Mendeley-icon-150x150.png" alt="" width="47" height="41" /></a>
+Please cite the <a style="color: #800000;" href="https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/bty954/5221016?redirectedFrom=fulltext">Bioinformatics</a> paper  <a href="https://www.biorxiv.org/highwire/citation/101986/bibtext"><img class="alignnone wp-image-142" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/bibtex-icon.png" alt="" width="44" height="44" /></a> <a href="https://www.biorxiv.org/highwire/citation/101986/mendeley"><img class="alignnone wp-image-143" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Apps-Mendeley-icon-150x150.png" alt="" width="47" height="41" /></a>
 
 ```
 @article{10.1093/bioinformatics/bty954,
