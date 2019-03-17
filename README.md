@@ -12,10 +12,7 @@
 </table>
 
 
-Asgari E., Münch P. C., Lesker T. R., McHardy A. C. &#9733;, and Mofrad M. R. K. &#9733;,<br/>
-<b>Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection.</b><br/>
-bioRxiv (2018): 334722.
-
+Ehsaneddin Asgari, Philipp C Münch, Till R Lesker, Alice C McHardy, Mohammad R K Mofrad; DiTaxa: nucleotide-pair encoding of 16S rRNA for host phenotype and biomarker detection, Bioinformatics, , bty954, https://doi.org/10.1093/bioinformatics/bty954
 
 <strong>Developer</strong>: Ehsaneddin Asgari (<span style="color: #0000ff;">asgari [at] berkeley [dot] edu</span>)
 <br/>
@@ -44,13 +41,14 @@ Please feel free to report any technical issue by sending an email or reporting 
 Please cite the <a style="color: #800000;" href="https://www.biorxiv.org/content/early/2018/05/30/334722">bioarXiv</a> version  <a href="https://www.biorxiv.org/highwire/citation/101986/bibtext"><img class="alignnone wp-image-142" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/bibtex-icon.png" alt="" width="44" height="44" /></a> <a href="https://www.biorxiv.org/highwire/citation/101986/mendeley"><img class="alignnone wp-image-143" src="http://llp.berkeley.edu/wp-content/uploads/2018/01/Apps-Mendeley-icon-150x150.png" alt="" width="47" height="41" /></a>
 
 ```
-@article{asgari2018nucleotide,
-  title={Nucleotide-pair encoding of 16S rRNA sequences for host phenotype and biomarker detection},
-  author={Asgari, Ehsaneddin and M{\"u}nch, Philipp C and Lesker, Till R and McHardy, Alice Carolyn and Mofrad, Mohammad RK},
-  journal={bioRxiv},
-  pages={334722},
-  year={2018},
-  publisher={Cold Spring Harbor Laboratory}
+@article{10.1093/bioinformatics/bty954,
+    author = {Asgari, Ehsaneddin and Münch, Philipp C and Lesker, Till R and McHardy, Alice C and Mofrad, Mohammad R K},
+    title = "{DiTaxa: nucleotide-pair encoding of 16S rRNA for host phenotype and biomarker detection}",
+    year = {2018},
+    month = {11},
+    doi = {10.1093/bioinformatics/bty954},
+    url = {https://dx.doi.org/10.1093/bioinformatics/bty954},
+    eprint = {http://oup.prod.sis.lan/bioinformatics/advance-article-pdf/doi/10.1093/bioinformatics/bty954/27452903/bty954.pdf},
 }
 
 ```
